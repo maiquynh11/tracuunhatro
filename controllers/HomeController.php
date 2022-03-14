@@ -9,6 +9,12 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Tienich;
+use app\models\Dmdientich;
+use app\models\Dmgia;
+use app\models\Nhatro;
+use yii\data\ActiveDataProvider;
+use yii\data\Pagination;
 
 class HomeController extends Controller
 {
@@ -61,7 +67,17 @@ class HomeController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $tienich = Tienich::find()->all();
+        $dmgia = Dmgia::find()->all();
+        $dmdientich = Dmdientich::find()->all();
+        $nhatro = Nhatro::find()->all();
+        $dataProvider = new ActiveDataProvider([       
+            'query' => Nhatro::find()->all(),
+            'pagination' => [
+                'pageSize' => 2,
+            ],
+        ]);
+        return $this->render('index', ['tienich' => $tienich, 'dmgia' => $dmgia, 'dmdientich' => $dmdientich, 'nhatro' => $nhatro,  'dataProvider' => $dataProvider]);
     }
 
     /**

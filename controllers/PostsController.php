@@ -9,20 +9,19 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Nhatro;
 
 class PostsController extends Controller 
 {
-    public function actionIndex() 
-    {
+    public function actionIndex() {
         return $this->render('index');
     }
-
-    public function actionView() 
-    {
-        return $this->render('view');
+    public function actionView($id) {  
+       $nhatro = Nhatro::find()->all();
+       $model = Nhatro::findOne(['id' => $id]);
+       return $this->render('view', ['model' => $model]);
     }
-    public function actionCreate() 
-    {
-        return $this->render('create');
+    public function actionCreate() {
+        
     }
 }

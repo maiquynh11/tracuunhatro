@@ -51,8 +51,6 @@ AppAsset::register($this);
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <div class="gach"></div>
-
                             <a class="nav-link" href="<?=Yii::$app->homeUrl?>home">
                                 <i class="fa-solid fa-house-chimney-window icon-img"></i>
                                 <span class="sr-only">(current)</span></a>
@@ -65,7 +63,6 @@ AppAsset::register($this);
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0  ml-auto">
-
                         <a href="<?=Yii::$app->homeUrl?>posts/post">
                             <div class="btn btn_post">
                                 <i class="fas fa-plus-circle mr-2"></i>Đăng tin
@@ -73,7 +70,12 @@ AppAsset::register($this);
                         </a>
                         <a href="<?=Yii::$app->homeUrl?>home/login">
                             <div class="btn my-2 my-sm-0 btn_login" type="submit">
-                                <i class="fa fa-user mr-2"></i>Login
+                                Đăng nhập
+                            </div>
+                        </a>
+                        <a href="<?=Yii::$app->homeUrl?>home/signup" class="ml-2">
+                            <div class="btn my-2 my-sm-0 btn_signup" type="submit">
+                                </i>Đăng ký
                             </div>
                         </a>
                     </form>
@@ -82,7 +84,10 @@ AppAsset::register($this);
         </nav>
     </header>
     <main>
-        <?= $content ?>
+        <div class="container-fluid">
+
+            <?= $content ?>
+        </div>
     </main>
     <footer class="footer mt-auto py-3 text-muted">
         <div class="container">

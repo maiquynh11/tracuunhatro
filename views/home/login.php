@@ -22,7 +22,6 @@
                 <br><small>Bạn chưa có tài khoản
                     ?</small><a href="<?=Yii::$app->homeUrl?>home/logout" class="signup">Đăng ký</a>
             </div>
-
         </div>
         <div class="col-6 form-signup">
             <h4 class="signup-title">ĐĂNG KÝ</h4>

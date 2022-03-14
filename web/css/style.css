@@ -1,12 +1,13 @@
 :root {
-  --main-color: #02bfdb;
+  --main-color: rgb(26, 148, 255);
   --title-color: #046582;
-  --detail-color: #a30000;
+  --detail-color: rgb(225, 45, 45);
+  --green-color: #28871c;
 }
 body {
-  font-family: "Helvetica", sans-serif, FontAwesome;
+  font-family: "Mallory Book", sans-serif, FontAwesome;
   font-size: 14px;
-  /* line-height: 22px; */
+  line-height: 25px;
   box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
@@ -14,16 +15,12 @@ body {
   color: #373737;
 }
 @font-face {
-  font-family: "Helvetica";
-  src: url("font/Helvetica/helvetica-neue-regular.ttf");
+  font-family: "Mallory Book";
+  src: url("../font/Mallory-Dfonts.org/Mallory/Mallory Book.ttf");
 }
 @font-face {
-  font-family: "Helvetica-Medium";
-  src: url("../font/Helvetica/helvetica-neue-medium.ttf");
-}
-@font-face {
-  font-family: "Helvetica-Bold";
-  src: url("../font/Helvetica/helvetica-neue-bold.ttf");
+  font-family: "Mallory Bold";
+  src: url("../font/Mallory-Dfonts.org/Mallory/Mallory Bold.ttf");
 }
 .nav-item {
   margin-right: 7px;
@@ -33,38 +30,17 @@ body {
 .navbar-nav {
   margin-left: 40px;
 }
-nav .navbar-collapse .nav-item::after {
-  content: "";
-  width: 100%;
-  height: 3px;
-  transition: all 0.5s;
-}
-nav .navbar-collapse .nav-item.active::after {
-  position: absolute;
-  display: block;
-  background-color: #02bfdb;
-  width: 100%;
-  height: 3px;
-  top: 49px;
-}
-nav .navbar-collapse .nav-item:hover::after {
-  position: absolute;
-  display: block;
-  background-position: bottom;
-  background-color: #02bfdb;
-  width: 100%;
-  height: 3px;
-  top: 49px;
-}
-nav .navbar-collapse .nav-item:hover {
-  transition: all 3s;
-}
 /* MAIN */
 .btn_post,
-.btn_login {
-  padding: 10px 19px !important;
-  font-family: "Helvetica-Bold";
+.btn_login,
+.btn_signup {
+  padding: 13px 25px !important;
+  font-family: "Mallory Bold";
   font-size: 13px;
+}
+.btn_signup,
+.btn_login {
+  border: 1px solid var(--main-color);
 }
 .btn_post {
   /* border: 1px solid var(--detail-color); */
@@ -77,7 +53,7 @@ nav .navbar-collapse .nav-item:hover {
   background-color: var(--detail-color);
   transition-duration: 0.2s;
 }
-.btn_login,
+
 .btn_search {
   background-color: var(--main-color) !important;
   color: white !important;
@@ -180,8 +156,8 @@ li {
 }
 .district-name {
   padding-top: 10px;
-  color: var(--title-color);
-  font-family: "Helvetica-Bold";
+  /* color: var(--title-color); */
+  font-family: "Mallory Bold";
 }
 #district-carousel .owl-carousel .owl-stage-outer {
   padding-top: 20px;
@@ -218,10 +194,10 @@ li {
 }
 .text-title {
   padding-top: 20px;
-  font-size: 18px;
-  font-family: "Helvetica-Bold" !important;
+  font-size: 17px;
+  font-family: "Mallory Bold" !important;
   line-height: 1;
-  color: var(--title-color);
+  /* color: var(--title-color); */
 }
 .form_ma {
   margin: 4px;
@@ -253,10 +229,14 @@ option[value=""][disabled] {
   text-align: center;
 }
 .body-title {
-  font-family: "Helvetica-Bold";
+  font-family: "Mallory Bold";
   font-size: 17px;
   margin-bottom: 5px;
+  padding-top: 15px;
   color: #373737 !important;
+}
+.content-box {
+  padding-top: 15px;
 }
 .body-text {
   font-size: 13px;
@@ -266,17 +246,12 @@ option[value=""][disabled] {
   padding-left: 15px;
 }
 .checked {
-  color: var(--main-color);
+  color: var(--detail-color);
 }
 .check {
   color: #d2d2d2;
 }
-.post-rate {
-  display: inline-flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: flex-end;
-}
+
 .post-view {
   padding: 0 10px;
 }
@@ -291,7 +266,7 @@ option[value=""][disabled] {
 }
 .text-bold {
   font-size: 24px;
-  font-family: "Helvetica-Bold";
+  font-family: "Mallory Bold";
   line-height: 1;
   color: rgb(41, 41, 41);
 }
@@ -299,8 +274,9 @@ option[value=""][disabled] {
   background-color: white;
   border-radius: 10px;
 }
-.slide-item:hover {
-  box-shadow: 1px 1px 5px 4px #eeeeee;
+.slide-item {
+  /* border: 2px solid #eeeeee;
+  border-radius: 5px; */
 }
 .item-border {
   width: 100%;
@@ -321,25 +297,47 @@ option[value=""][disabled] {
   color: #002171;
   text-decoration: none;
 }
+.post-text-user {
+  background-color: #eeeeee;
+}
 .post-price {
-  padding: 0 15px 10px 15px;
+  /* padding: 0 15px 10px 15px; */
   font-size: 20px;
-  font-family: "Helvetica-Bold";
+  font-family: "Mallory Bold";
   color: var(--detail-color);
 }
-.aaa {
-  margin: 0 !important;
+.content-cmt {
+  /* position: relative; */
+  /* display: inline-block; */
+}
+.left-gr {
+  position: relative;
+  top: 10px;
+  left: 50%;
+  /* left: 0; */
+}
+.comment {
+  padding-top: -50px;
 }
 .post-area {
   padding-left: 30px;
 }
 .time-user {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
+  flex-wrap: wrap;
+}
+.text-time {
+  position: absolute;
+  top: 16px;
+  font-size: 11px;
+}
+.flex-items {
+  align-items: flex-start;
+  flex-direction: column;
 }
 .icon-img {
-  color: var(--main-color);
+  /* color: var(--green-color); */
+  opacity: 0.7;
   padding: 5px 8px 5px 0;
 }
 .btn-filter {
@@ -354,14 +352,16 @@ option[value=""][disabled] {
 }
 .uti-title {
   font-size: 12px;
-  font-family: "Helvetica-Bold";
+  font-family: "Mallory Bold";
   color: var(--detail-color);
 }
 .post-user {
-  font-family: "Helvetica-Bold";
+  font-family: "Mallory Bold";
 }
 .post-contact {
   padding-top: 15px;
+  padding-left: 15px;
+  background-color: white;
 }
 /* FILER */
 .content-filter,
@@ -383,8 +383,8 @@ option[value=""][disabled] {
 }
 .avatar-cmt {
   vertical-align: middle;
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
 }
 .avatar {
@@ -400,9 +400,7 @@ option[value=""][disabled] {
   transition-duration: 0.4s;
   cursor: pointer;
 }
-.time-user {
-  border-bottom: 1px solid #eeeeee;
-}
+
 .write-cmt {
   display: block;
   background-color: #eeeeee;
@@ -412,10 +410,10 @@ option[value=""][disabled] {
 .cmt-user {
   padding: 10px 0px 10px 0;
 }
-.left-gr {
+/* .left-gr {
   margin-left: 245px;
   margin-top: -18px;
-}
+} */
 .card-body {
   border: none;
 }
@@ -432,7 +430,6 @@ option[value=""][disabled] {
 .form-signup {
   background-color: white;
 }
-
 .form-group {
   display: flex;
   flex-direction: column;
@@ -443,7 +440,7 @@ option[value=""][disabled] {
 }
 .login-title,
 .signup-title {
-  font-family: "Helvetica-Bold";
+  font-family: "Mallory Bold";
   text-align: center;
   padding: 15px;
 }
@@ -457,4 +454,193 @@ option[value=""][disabled] {
 .card_post-new {
   margin-top: 15px;
   border: 1px solid #eeeeee;
+}
+.post-map,
+.rate-box {
+  margin-top: 15px;
+  padding-left: 15px;
+  padding-top: 15px;
+  background-color: white;
+}
+.map-box {
+  padding-top: 15px;
+}
+
+@font-face {
+  font-family: "Helvetica-Bold";
+  src: url("../font/Mallory-Dfonts.org/Mallory/Mallory Compact Bold.ttf");
+}
+.size-text,
+.utilities-text,
+.price-text,
+.area-text {
+  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid #eeeeee;
+  /* width: 70%; */
+}
+.utilities-title,
+.size-title,
+.price-title,
+.area-title {
+  font-size: 13px;
+  font-family: "Helvetica-Bold";
+  /* color: var(--main-color); */
+  /* color: gray; */
+  color: #757575;
+}
+.utilities-title:hover,
+.size-title:hover,
+.price-title:hover {
+  text-decoration: none;
+}
+filter-check {
+  margin-top: 10px;
+}
+.price-text a:hover,
+.size-text a:hover {
+  color: var(--main-color);
+  text-decoration: none;
+}
+/* .price-text {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex;
+} */
+.icon-money {
+  margin: 3px;
+}
+/* BAIDANG */
+.slide-img img {
+  height: 500px;
+  width: 100%;
+}
+.infor-post,
+.utilities-room,
+.detail-post,
+.comment-box {
+  border-bottom: 1px solid #eeeeee;
+}
+.post-title {
+  font-family: "Helvetica-Bold";
+  font-size: 25px;
+  color: var(--detail-color);
+  padding-top: 15px;
+}
+.utilities-detail {
+  padding: 15px;
+}
+/* filter */
+.filter-check {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  padding-top: 15px;
+  /* margin-bottom: 10px; */
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.filter-check input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.filter-check:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.filter-check input:checked ~ .checkmark {
+  background-color: var(--main-color);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.filter-check input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.filter-check .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+/* .price-check {
+  padding-top: 10px;
+} */
+#sidebar {
+  /* color: #fff; */
+  transition: all 0.3s;
+}
+
+#sidebar.active {
+  margin-left: -250px;
+}
+
+#sidebar ul li a {
+  padding: 10px;
+  font-size: 1.1em;
+  display: block;
+}
+
+#sidebar ul li a:hover {
+  /* color: #7386d5; */
+  background: #fff;
+}
+#sidebar ul li {
+  border-bottom: 1px solid #eeeeee;
+}
+#sidebar ul li:hover > a,
+a[aria-expanded="true"] {
+  background: var(--main-color);
+  text-decoration: none;
+}
+#sidebar ul li:hover > a > span {
+  color: white;
+}
+.price-text:hover {
+  background-color: #f7f7f7;
+}
+a[data-toggle="collapse"] {
+  position: relative;
+}
+
+.dropdown-toggle::after {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
 }
