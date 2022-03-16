@@ -12,6 +12,9 @@ use app\models\ContactForm;
 use app\models\Tienich;
 use app\models\Dmdientich;
 use app\models\Dmgia;
+use app\models\Dmkhuvuc;
+use app\models\HomeSearchForm;
+use app\models\FilterBoxForm;
 use app\models\Nhatro;
 use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
@@ -67,17 +70,25 @@ class HomeController extends Controller
      */
     public function actionIndex()
     {
-        $tienich = Tienich::find()->all();
         $dmgia = Dmgia::find()->all();
         $dmdientich = Dmdientich::find()->all();
-        $nhatro = Nhatro::find()->all();
-        $dataProvider = new ActiveDataProvider([       
-            'query' => Nhatro::find()->all(),
-            'pagination' => [
-                'pageSize' => 2,
-            ],
-        ]);
-        return $this->render('index', ['tienich' => $tienich, 'dmgia' => $dmgia, 'dmdientich' => $dmdientich, 'nhatro' => $nhatro,  'dataProvider' => $dataProvider]);
+        $tienich = Tienich::find()->all();
+
+        $listNewPost = Nhatro::find()->all();
+        $homeSearchForm = new HomeSearchForm();
+        $filterBoxForm = new FilterBoxForm();
+        $queryNhatro = Nhatro::find();
+        $listDmgia = Dmgia::find()->all();
+        $listTienich = Tienich::find()->all();
+        $listDmkhuvuc = Dmkhuvuc::find()->all();
+        $listDmdientich = Dmdientich::find()->all();
+        $homeSearchForm->load(Yii::$app->request->get());
+        if (isset($homeSearchForm->query)) {
+            $queryNhatro->andFilterWhere(['ilike', 'tieude', $homeSearchForm->query])->andFilterWhere(['ilike', 'gia', $homeSearchForm->query]);
+        }
+        $listNhatro = $queryNhatro->all();
+
+        return $this->render('index', compact("homeSearchForm", "listNewPost", "filterBoxForm", "listDmgia", "listTienich", "listDmdientich", "listDmkhuvuc", "listNhatro", "dmgia", "dmdientich", "tienich"));
     }
 
     /**
@@ -107,7 +118,7 @@ class HomeController extends Controller
      *
      * @return Response
      */
-    public function actionLogout() 
+    public function actionLogout()
     {
         Yii::$app->user->logout();
 

@@ -32,15 +32,17 @@ AppAsset::register($this);
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="font/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.css">
     <link rel="stylesheet" href="font/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <?php $this->head() ?>
 </head>
 
 <body>
     <?php $this->beginBody() ?>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
-                <a class="navbar-brand" href="<?=Yii::$app->homeUrl?>home">
+                <a class="navbar-brand" href="<?= Yii::$app->homeUrl ?>home">
                     <img src="img/logo.png" width="100%">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -51,7 +53,7 @@ AppAsset::register($this);
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link" href="<?=Yii::$app->homeUrl?>home">
+                            <a class="nav-link" href="<?= Yii::$app->homeUrl ?>home">
                                 <i class="fa-solid fa-house-chimney-window icon-img"></i>
                                 <span class="sr-only">(current)</span></a>
                         </li>
@@ -63,29 +65,28 @@ AppAsset::register($this);
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0  ml-auto">
-                        <a href="<?=Yii::$app->homeUrl?>posts/post">
+                        <a href="<?= Yii::$app->homeUrl ?>posts/post">
                             <div class="btn btn_post">
                                 <i class="fas fa-plus-circle mr-2"></i>Đăng tin
                             </div>
                         </a>
-                        <a href="<?=Yii::$app->homeUrl?>home/login">
+                        <a href="<?= Yii::$app->homeUrl ?>home/login">
                             <div class="btn my-2 my-sm-0 btn_login" type="submit">
                                 Đăng nhập
                             </div>
                         </a>
-                        <a href="<?=Yii::$app->homeUrl?>home/signup" class="ml-2">
+                        <!-- <a href="" class="ml-2">
                             <div class="btn my-2 my-sm-0 btn_signup" type="submit">
                                 </i>Đăng ký
                             </div>
-                        </a>
+                        </a> -->
                     </form>
                 </div>
             </div>
         </nav>
     </header>
     <main>
-        <div class="container-fluid">
-
+        <div class="">
             <?= $content ?>
         </div>
     </main>
@@ -146,6 +147,26 @@ AppAsset::register($this);
         $('#sidebarCollapse').on('click', function() {
             $('#sidebar').toggleClass('active');
         });
+    });
+    </script>
+    <script>
+    var swiper = new Swiper(".mySwiper", {
+        loop: true,
+        spaceBetween: 10,
+        slidesPerView: 4,
+        freeMode: true,
+        watchSlidesProgress: true,
+    });
+    var swiper2 = new Swiper(".mySwiper2", {
+        loop: true,
+        spaceBetween: 10,
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        thumbs: {
+            swiper: swiper,
+        },
     });
     </script>
     <?php $this->endBody() ?>
