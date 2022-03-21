@@ -15,23 +15,23 @@ use yii\helpers\ArrayHelper;
     </div>
     <div class="banner-form">
         <?php $bannerForm = ActiveForm::begin(['method' => 'get']) ?>
-        <ul class="banner-form_find d-lg-flex d-lg-row flex-nowrap text-center">
-            <li class="form_ma">
+        <div class="flex-box banner-form_find d-lg-flex d-lg-row flex-nowrap text-center">
+            <div class="flex-item form_ma">
                 <?= $bannerForm->field($homeSearchForm, 'dmkhuvuc_id')->dropdownList(ArrayHelper::map($listDmkhuvuc, 'id', 'khuvuc'))->label(false) ?>
-            </li>
-            <li class="form_ma">
+            </div>
+            <div class="flex-item form_ma">
                 <!-- <label>Danh mục giá</label> -->
                 <?= $bannerForm->field($homeSearchForm, 'dmgia_id')->dropdownlist(ArrayHelper::map($listDmgia, 'id', 'mucgia'))->label(false) ?>
-            </li>
-            <li class="form_ma">
+            </div>
+            <div class="flex-item form_ma">
                 <!-- <label>Danh mục giá</label> -->
                 <?= $bannerForm->field($homeSearchForm, 'dmgia_id')->dropdownlist(ArrayHelper::map($listDmgia, 'id', 'mucgia'))->label(false) ?>
-            </li>
-            <li class="form_ma">
+            </div>
+            <div class="flex-item form_ma">
                 <!-- <label>Danh mục diện tích</label> -->
                 <?= $bannerForm->field($homeSearchForm, 'dmdientich_id')->dropdownList(ArrayHelper::map($listDmdientich, 'id', 'dientich'))->label(false) ?>
-            </li>
-        </ul>
+            </div>
+        </div>
         <div class="search-input_form  active-cyan">
             <?= $bannerForm->field($homeSearchForm, 'query')->textInput(['maxlength' => '255', 'class' => 'search-input', 'placeholder' => 'Search'])->label(false) ?>
         </div>
@@ -58,7 +58,8 @@ use yii\helpers\ArrayHelper;
                         <div class="col-6 p-0">
                             <div class="district-name pl-2"><?= $khuvuc->khuvuc ?>
                             </div>
-                            <small class="pl-2"><span style="color: var(--detail-color)">1200 </span>bài đăng
+                            <small class="pl-2"><span style="color: var(--detail-color)">1200 </span>bài
+                                đăng
                             </small>
                         </div>
                     </div>
@@ -223,7 +224,7 @@ use yii\helpers\ArrayHelper;
                                     </li>
                                 </ul>
                             </li>
-                            <li>
+                            <li class="border-0">
                                 <a href="#utilities-dropdown" data-toggle="collapse" aria-expanded="false"
                                     class="dropdown-toggle">
                                     <span class="utilities-title">TIỆN ÍCH</span>
@@ -236,9 +237,6 @@ use yii\helpers\ArrayHelper;
                                     </li>
                                 </ul>
                             </li>
-                            <div class="text-center pt-4 pb-4">
-                                <button type="submmit" class="btn btn-filter">Áp dụng</button>
-                            </div>
                         </ul>
                         <?php ActiveForm::end(); ?>
                     </div>

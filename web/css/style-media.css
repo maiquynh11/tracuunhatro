@@ -3,7 +3,7 @@
 @media screen and (max-width: 1200px) {
 }
 @media screen and (max-width: 992px) {
-  .banner-form {
+  /* .banner-form {
     height: 350px !important;
   }
   .search-input {
@@ -11,9 +11,25 @@
   }
   .btn-search {
     top: 300px !important;
-  }
+  } */
 }
 @media screen and (max-width: 768px) {
+  .banner-form {
+    display: block;
+    position: relative !important;
+  }
+  .flex-item {
+    width: 50% !important;
+  }
 }
 @media screen and (max-width: 576px) {
+  /* .search-input_form {
+    top: 300px !important;
+  }
+  .district {
+    margin-top: 300px !important;
+  }
+  .btn-search {
+    top: 275px !important;
+  } */
 }

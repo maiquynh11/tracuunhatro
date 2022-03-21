@@ -1,10 +1,11 @@
 :root {
   --main-color: rgb(26, 148, 255);
   --title-color: #046582;
-  --detail-color: rgb(225, 45, 45);
+  --detail-color: rgb(255, 66, 78);
   --green-color: #28871c;
   --text-color: #373737;
   --border-color: #e0e0e0;
+  --yellow-color: rgb(253, 216, 54);
 }
 body {
   font-family: "Mallory Book", sans-serif, FontAwesome;
@@ -13,7 +14,7 @@ body {
   box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
-  background-color: #f5f5f5 !important;
+  background-color: white !important;
   color: #373737;
 }
 @font-face {
@@ -119,7 +120,7 @@ body {
 }
 .search-input {
   margin: auto;
-  border: 1px solid var(--title-color);
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   padding: 15px;
 }
@@ -135,12 +136,17 @@ body {
   background-color: var(--detail-color);
   color: white;
   outline: none !important;
-  /* border: 1px solid var(--detail-color); */
-  /* box-shadow: 0px 3px 5px 3px var(--title-color); */
+  box-shadow: 0px 5px 5px 3px var(--border-color);
 }
 .btn-search:hover {
-  background-color: var(--title-color);
-  color: white;
+  color: var(--border-color);
+}
+.flex-box {
+  display: flex;
+  flex-direction: row;
+}
+.flex-item {
+  width: 50% !important;
 }
 .keyword {
   width: 250px;
@@ -272,10 +278,10 @@ option[value=""][disabled] {
   padding-left: 15px;
 }
 .checked {
-  color: var(--detail-color);
+  color: var(--yellow-color);
 }
 .check {
-  color: #d2d2d2;
+  color: var(--border-color);
 }
 
 .post-view {
@@ -298,7 +304,8 @@ option[value=""][disabled] {
 }
 .content-post,
 .post-map {
-  border: 1px solid var(--border-color);
+  /* border: 1px solid var(--border-color); */
+  box-shadow: 2px 1px 3px 1px var(--border-color);
 }
 .slide-item {
   /* border: 2px solid #eeeeee;
@@ -330,7 +337,7 @@ option[value=""][disabled] {
 }
 .post-price {
   /* padding: 0 15px 10px 15px; */
-  font-size: 16px;
+  font-size: 15px;
   font-family: "Mallory Bold";
   color: var(--detail-color);
 }
@@ -404,6 +411,7 @@ option[value=""][disabled] {
 .content-filter,
 .post-new {
   border: 1px solid var(--border-color);
+  /* box-shadow: -4px -3px 20px 0px var(--border-color); */
 }
 .sidebar-user {
   background-color: var(--main-color);

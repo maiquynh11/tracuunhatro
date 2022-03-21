@@ -53,9 +53,9 @@ AppAsset::register($this);
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link" href="<?= Yii::$app->homeUrl ?>home">
-                                <i class="fa-solid fa-house-chimney-window icon-img"></i>
-                                <span class="sr-only">(current)</span></a>
+                            <!-- <a class="nav-link" href="<?= Yii::$app->homeUrl ?>home">Home
+                                <span class="sr-only">(current)</span>
+                            </a> -->
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Danh mục bài đăng</a>

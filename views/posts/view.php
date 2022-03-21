@@ -135,34 +135,34 @@
                         <div class="detail-post">
                             <p class="text-title">Mô tả</p>
                             <p><?= $model->mota ?></p>
-                        </div>
-                        <div class="comment-box">
-                            <p class="text-title">Bình luận</p>
-                            <div class="card card-body mt-1 card-cmt">
-                                <div class="group-cmt">
-                                    <div class="input-group">
-                                        <div class="pr-2">
-                                            <img src="../img/car.jpg" alt="" class="avatar-cmt">
+                            <div>
+                                <p class="text-title border-title">Bình luận</p>
+                                <div class=" card card-body mt-1 card-cmt">
+                                    <div class="group-cmt">
+                                        <div class="input-group">
+                                            <div class="pr-2">
+                                                <img src="../img/car.jpg" alt="" class="avatar-cmt">
+                                            </div>
+                                            <input type="search" class="form-control rounded w-50"
+                                                placeholder="Viết bình luận" aria-label="Search"
+                                                aria-describedby="search-addon" />
                                         </div>
-                                        <input type="search" class="form-control rounded w-50"
-                                            placeholder="Viết bình luận" aria-label="Search"
-                                            aria-describedby="search-addon" />
-                                    </div>
-                                    <div class="d-flex cmt-user">
-                                        <div class="pr-2">
-                                            <img src="../img/car.jpg" alt="" class="avatar-cmt">
-                                        </div>
-                                        <div class="write-cmt">
-                                            <div class="p-1">sdcsdfđFull nội thất, decor như hình,...và
-                                                nhiều ưu
-                                                đãi
-                                                mùa
-                                                dịchFull
-                                                nội thất, decor như hình,...và nhiều ưu đãi mùa dịchFull nội
-                                                thất,
-                                                decor
-                                                như
-                                                hình,...và nhiều ưu đãi mùa dịch</div>
+                                        <div class="d-flex cmt-user">
+                                            <div class="pr-2">
+                                                <img src="../img/car.jpg" alt="" class="avatar-cmt">
+                                            </div>
+                                            <div class="write-cmt">
+                                                <div class="p-1">sdcsdfđFull nội thất, decor như hình,...và
+                                                    nhiều ưu
+                                                    đãi
+                                                    mùa
+                                                    dịchFull
+                                                    nội thất, decor như hình,...và nhiều ưu đãi mùa dịchFull nội
+                                                    thất,
+                                                    decor
+                                                    như
+                                                    hình,...và nhiều ưu đãi mùa dịch</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
