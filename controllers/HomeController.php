@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
+use app\models\SignupForm;
 use app\models\ContactForm;
 use app\models\Tienich;
 use app\models\Dmdientich;
@@ -84,7 +85,7 @@ class HomeController extends Controller
         $listDmdientich = Dmdientich::find()->all();
         $homeSearchForm->load(Yii::$app->request->get());
         if (isset($homeSearchForm->query)) {
-            $queryNhatro->andFilterWhere(['ilike', 'tieude', $homeSearchForm->query])->andFilterWhere(['ilike', 'gia', $homeSearchForm->query]);
+            $queryNhatro->orWhere(['ilike', 'tieude', $homeSearchForm->query])->orWhere(['ilike', 'gia', $homeSearchForm->query])->orWhere(['ilike', 'diachi', $homeSearchForm->query]);
         }
         $listNhatro = $queryNhatro->all();
 
@@ -96,6 +97,18 @@ class HomeController extends Controller
      *
      * @return Response|string
      */
+    public function actionSignup()
+    {
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
+            Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
+            return $this->redirect('login');
+        }
+
+        return $this->render('signup', [
+            'model' => $model,
+        ]);
+    }
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {

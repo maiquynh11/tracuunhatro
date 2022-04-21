@@ -8,31 +8,48 @@ use yii\helpers\ArrayHelper;
 ?>
 <div class="banner position-relative">
     <div class="banner_icon">
-        <img src="img/logo.png" width="100%" alt="">
+    <img src="img/banner.png" width="100%" alt="">
     </div>
-    <div class="banner_text">
-        <!-- <p>Giúp bạn nhanh chóng tìm được nhà trọ phù hợp nhẩt</p> -->
+    <div class="banner_text pt-3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="289" height="15" viewBox="0 0 289 15">
+  <text id="Kênh_thông_tin_hàng_đầu_về_phòng_trọ_" data-name="Kênh thông tin hàng đầu về phòng trọ " transform="translate(289 11)" fill="#caebf1" font-size="13" font-family="CourierNewPSMT, Courier New"><tspan x="-288.647" y="0">Kênh thông tin hàng đầu về phòng trọ </tspan></text>
+</svg>
+
+
     </div>
     <div class="banner-form">
-        <?php $bannerForm = ActiveForm::begin(['method' => 'get']) ?>
-        <div class="flex-box banner-form_find d-lg-flex d-lg-row flex-nowrap text-center">
-            <div class="flex-item form_ma">
-                <?= $bannerForm->field($homeSearchForm, 'dmkhuvuc_id')->dropdownList(ArrayHelper::map($listDmkhuvuc, 'id', 'khuvuc'))->label(false) ?>
+        <?php $bannerForm = ActiveForm::begin(['method' => 'get', 'id' => 'formFilterTop']) ?>
+        <div class="flex-box banner-form_find">
+            <div class="flex-item text-center">
+                <i class="fa-solid fa-location-dot"></i>
+                <div class="banner-form-title">Khu vực</div>
+                <div class="form_ma">
+                    <?= $bannerForm->field($homeSearchForm, 'dmkhuvuc_id')->dropdownList(ArrayHelper::map($listDmkhuvuc, 'id', 'khuvuc'))->label(false) ?>
+                </div>       
             </div>
-            <div class="flex-item form_ma">
-                <!-- <label>Danh mục giá</label> -->
-                <?= $bannerForm->field($homeSearchForm, 'dmgia_id')->dropdownlist(ArrayHelper::map($listDmgia, 'id', 'mucgia'))->label(false) ?>
+            <div class="flex-item text-center">
+            <i class="fa-solid fa-magnifying-glass-dollar"></i>
+                <div class="banner-form-title">Mức giá</div>
+                <div class="form_ma">
+                    <?= $bannerForm->field($homeSearchForm, 'dmgia_id')->dropdownlist(ArrayHelper::map($listDmgia, 'id', 'mucgia'))->label(false) ?>
+                </div>
             </div>
-            <div class="flex-item form_ma">
-                <!-- <label>Danh mục giá</label> -->
-                <?= $bannerForm->field($homeSearchForm, 'dmgia_id')->dropdownlist(ArrayHelper::map($listDmgia, 'id', 'mucgia'))->label(false) ?>
+            <div class="flex-item text-center">
+                <i class="fa-solid fa-map-location-dot"></i>
+                <div class="banner-form-title">Bản đồ</div>
+                <div class="form_ma">
+                    <?= $bannerForm->field($homeSearchForm, 'dmgia_id')->dropdownlist(ArrayHelper::map($listDmgia, 'id', 'mucgia'))->label(false) ?>
+                </div> 
             </div>
-            <div class="flex-item form_ma">
-                <!-- <label>Danh mục diện tích</label> -->
-                <?= $bannerForm->field($homeSearchForm, 'dmdientich_id')->dropdownList(ArrayHelper::map($listDmdientich, 'id', 'dientich'))->label(false) ?>
+            <div class="flex-item text-center">
+                <i class="fa-solid fa-layer-group"></i>
+                <div class="banner-form-title">Diện tích</div>
+                <div class="form_ma">
+                    <?= $bannerForm->field($homeSearchForm, 'dmdientich_id')->dropdownList(ArrayHelper::map($listDmdientich, 'id', 'dientich'))->label(false) ?>
+                </div>
             </div>
         </div>
-        <div class="search-input_form  active-cyan">
+        <div class="search-input_form active-cyan">
             <?= $bannerForm->field($homeSearchForm, 'query')->textInput(['maxlength' => '255', 'class' => 'search-input', 'placeholder' => 'Search'])->label(false) ?>
         </div>
         <button type="submmit" class="btn btn-search">Tra
@@ -40,40 +57,45 @@ use yii\helpers\ArrayHelper;
         <?php ActiveForm::end(); ?>
     </div>
 </div>
-<div class="container-fluid">
-    <div class="district container">
-        <div class="district-title text-title text-center pb-2">
-            <p class="pt-3">KHU VỰC</p>
+<div class="district container">
+    <div class="district-title text-title text-center pb-2">
+        <div class="pt-5">KHU VỰC</div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="29" height="9" viewBox="0 0 29 9">
+                <g id="Group_8" data-name="Group 8" transform="translate(-206 -473.982)">
+                    <path id="Path_13" data-name="Path 13" d="M0,0H9V8.982H0Z" transform="translate(206 474)" fill="#1a94ff"/>
+                    <path id="Path_14" data-name="Path 14" d="M0,0H9V8.982H0Z" transform="translate(226 474)" fill="#f2f265"/>
+                    <rect id="Rectangle_17" data-name="Rectangle 17" width="9" height="9" transform="translate(216 473.982)" fill="#ff424e"/>
+                </g>
+            </svg>
         </div>
-        <div id="district-carousel">
-            <div class="owl-carousel owl-theme">
-                <?php foreach ($listDmkhuvuc as $khuvuc) : ?>
-                <div class="carousel-items">
-                    <div class="row">
-                        <div class="col-6 p-0">
-                            <div class="img-circle">
-                                <img src="img/room.jpg" alt="">
-                            </div>
-                        </div>
-                        <div class="col-6 p-0">
-                            <div class="district-name pl-2"><?= $khuvuc->khuvuc ?>
-                            </div>
-                            <small class="pl-2"><span style="color: var(--detail-color)">1200 </span>bài
-                                đăng
-                            </small>
+    <div id="district-carousel">
+        <div class="owl-carousel owl-theme">
+            <?php foreach ($listDmkhuvuc as $khuvuc) : ?>
+            <div class="carousel-items">
+                <div class="row">
+                    <div class="col-6 p-0">
+                        <div class="img-circle">
+                            <img src="img/room.jpg" alt="">
                         </div>
                     </div>
+                    <div class="col-6 p-0">
+                        <div class="district-name pl-2"><?= $khuvuc->khuvuc ?>
+                        </div>
+                        <small class="pl-2"><span style="color: var(--detail-color)">1200 </span>bài
+                            đăng
+                        </small>
+                    </div>
                 </div>
-                <?php endforeach; ?>
             </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </div>
-<div class="content container pt-3">
+<div class="content container pt-3" id="content">
     <div class="row">
         <div class="content-post col-md-8 bg-white">
             <div class="content-text">
-                <p class="text-title">DANH SÁCH TIN ĐĂNG</p>
+                <p class="text-title">DANH SÁCH TIN ĐĂNG</p>           
             </div>
             <div class="post-arrange">
                 <span class="font-font-weight-bold"><i class="fa-solid fa-arrow-up-wide-short icon-img"></i>Sắp
@@ -98,7 +120,7 @@ use yii\helpers\ArrayHelper;
                                             <img src="../img/car.jpg" alt="" class="avatar-cmt">
                                         </div>
                                         <div class="flex-items position-relative">
-                                            <div class="pl-2 font-weight-bold">Mai Quỳnh</div>
+                                            <div class="pl-2 text-bold pt-1">Mai Quỳnh</div>
                                             <span class="text-time pl-2">2<span>&nbspgiờ trước</span></span>
                                         </div>
                                     </div>
@@ -183,64 +205,112 @@ use yii\helpers\ArrayHelper;
         <div class="content-right col-md-4">
             <div class="content-filter bg-white">
                 <p class="text-title pl-3">BỘ LỌC NÂNG CAO</p>
-                <div class="filter-pad">
-                    <div id="sidebar">
-                        <?php $filterForm = ActiveForm::begin(['method' => 'get']) ?>
-                        <ul class="list-unstyled components">
-                            <li>
-                                <a href="#area-dropdown" data-toggle="collapse" aria-expanded="false"
-                                    class="dropdown-toggle">
-                                    <span class="area-title">KHU VỰC</span></a>
-                                <ul class="collapse list-unstyled pl-4 pr-2" id="area-dropdown">
-                                    <li class="area-text">
-                                        <label class="">
-                                            <?= $filterForm->field($filterBoxForm, 'dmkhuvuc_id', ['options' => ['class' => 'pb-3']])->checkboxList(ArrayHelper::map($listDmkhuvuc, 'id', 'khuvuc',), ['options' => ['class' => '']])->label(false) ?>
-                                        </label>
-                                    </li>
-
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#price-dropdown" data-toggle="collapse" aria-expanded="false"
-                                    class="dropdown-toggle">
-                                    <span class="price-title">MỨC GIÁ</span></a>
-                                <ul class="collapse list-unstyled pl-4 pr-2" id="price-dropdown">
-                                    <li class="price-text">
-                                        <label class="">
-                                            <?= $filterForm->field($filterBoxForm, 'dmgia_id', ['options' => ['class' => 'pb-3']])->checkboxList(ArrayHelper::map($listDmgia, 'id', 'mucgia',), ['options' => ['class' => '']])->label(false) ?>
-                                        </label>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#size-dropdown" data-toggle="collapse" aria-expanded="false"
-                                    class="dropdown-toggle">
-                                    <span class="size-title">DIỆN TÍCH</span></a>
-                                <ul class="collapse list-unstyled pl-4 pr-2" id="size-dropdown">
-                                    <li class="size-text">
-                                        <label class="">
-                                            <?= $filterForm->field($filterBoxForm, 'dmdientich_id', ['options' => ['class' => 'pb-3']])->checkboxList(ArrayHelper::map($listDmdientich, 'id', 'dientich',), ['options' => ['class' => '']])->label(false) ?>
-                                        </label>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="border-0">
-                                <a href="#utilities-dropdown" data-toggle="collapse" aria-expanded="false"
-                                    class="dropdown-toggle">
-                                    <span class="utilities-title">TIỆN ÍCH</span>
-                                </a>
-                                <ul class="collapse list-unstyled pl-4 pr-2" id="utilities-dropdown">
-                                    <li class="utilities-text">
-                                        <label class="">
-                                            <?= $filterForm->field($filterBoxForm, 'tienich_id', ['options' => ['class' => 'pb-3']])->checkboxList(ArrayHelper::map($listTienich, 'id', 'ten',), ['options' => ['class' => '']])->label(false) ?>
-                                        </label>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <?php ActiveForm::end(); ?>
+                <form id="formFilterSidebar1">
+                    <div class="filter-pad">
+                        <div id="sidebar">                      
+                            <ul class="list-unstyled components">          
+                                <li>
+                                    <a href="#area-dropdown" data-toggle="collapse" aria-expanded="false"
+                                        class="dropdown-toggle">
+                                        <span class="area-title">KHU VỰC</span>
+                                    </a>
+                                    <ul class="collapse list-unstyled pl-4 pr-2" id="area-dropdown">
+                                        <li class="area-text">                                 
+                                           <div class="row">
+                                                <?php foreach($listDmkhuvuc as $kv) {?>                                           
+                                                   <div class="col-6">
+                                                        <input class="ele-click-to-filter1" type="checkbox"?>  
+                                                            <?= $kv['khuvuc']; ?>  
+                                                   </div>
+                                                    <?php
+                                                    }
+                                                    ?>  
+                                           </div> 
+                                        </li>
+                                    </ul>     
+                                </li>
+                            </ul>                   
+                        </div>
                     </div>
-                </div>
+                </form>
+                <form id="formFilterSidebar2">
+                    <div class="filter-pad">
+                        <div id="sidebar">                      
+                            <ul class="list-unstyled components">          
+                                <li>
+                                    <a href="#size-dropdown" data-toggle="collapse" aria-expanded="false"
+                                        class="dropdown-toggle">
+                                        <span class="size-title">DIỆN TÍCH</span>
+                                    </a>
+                                    <ul class="collapse list-unstyled pl-4 pr-2" id="size-dropdown">
+                                        <li class="size-text">                                 
+                                            <?php foreach($listDmdientich as $dt) {?>                                           
+                                               <div>
+                                                    <input class="ele-click-to-filter2" type="radio"?>  
+                                                        <?= $dt['dientich']; ?>  
+                                               </div>
+                                                <?php
+                                                }
+                                                ?>   
+                                        </li>
+                                    </ul>     
+                                </li>
+                            </ul>                   
+                        </div>
+                    </div>
+                </form>
+                <form id="formFilterSidebar3">
+                    <div class="filter-pad">
+                        <div id="sidebar">                      
+                            <ul class="list-unstyled components">          
+                                <li>
+                                    <a href="#price-dropdown" data-toggle="collapse" aria-expanded="false"
+                                        class="dropdown-toggle">
+                                        <span class="price-title">MỨC GIÁ</span>
+                                    </a>
+                                    <ul class="collapse list-unstyled pl-4 pr-2" id="price-dropdown">
+                                        <li class="price-text">                                 
+                                            <?php foreach($listDmgia as $gia) {?>                                           
+                                               <div>
+                                                    <input class="ele-click-to-filter3" type="radio"?>  
+                                                        <?= $gia['mucgia']; ?>  
+                                               </div>
+                                                <?php
+                                                }
+                                                ?>   
+                                        </li>
+                                    </ul>     
+                                </li>
+                            </ul>                   
+                        </div>
+                    </div>
+                </form>
+                <form id="formFilterSidebar4">
+                    <div class="filter-pad">
+                        <div id="sidebar">                      
+                            <ul class="list-unstyled components">          
+                                <li>
+                                    <a href="#utilities-dropdown" data-toggle="collapse" aria-expanded="false"
+                                        class="dropdown-toggle">
+                                        <span class="utilities-title">TIỆN ÍCH</span>
+                                    </a>
+                                    <ul class="collapse list-unstyled pl-4 pr-2" id="utilities-dropdown">
+                                        <li class="utilities-text">                                 
+                                            <?php foreach($listTienich as $ti) {?>                                           
+                                               <div>
+                                                    <input class="ele-click-to-filter4" type="checkbox"?>  
+                                                        <?= $dt['tienich']; ?>  
+                                               </div>
+                                                <?php
+                                                }
+                                                ?>   
+                                        </li>
+                                    </ul>     
+                                </li>
+                            </ul>                   
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="post-new mt-3 pl-3 pr-3" style="background-color: white;">
                 <p class="text-title">TIN MỚI</p>
@@ -252,10 +322,10 @@ use yii\helpers\ArrayHelper;
                             <div class="d-flex">
                                 <div class="flex-items">
                                     <img src="../img/car.jpg" alt="" class="avatar-cmt-new">
-                                    <span class="pl-1">maiquynh</span>
+                                    <span class="pl-1 text-bold">maiquynh</span>
                                 </div>
                                 <small>
-                                    <i class="fa-solid fa-clock icon-img ml-3"></i>2 phút trước
+                                    <i class="fa-solid fa-clock icon-img ml-2 mt-1"></i><span>2 phút trước</span>
                                 </small>
                             </div>
                             <div class="post-new_kc body-title pt-1">
@@ -271,25 +341,44 @@ use yii\helpers\ArrayHelper;
         </div>
     </div>
 </div>
-
 <script>
-function change() {
-    let results = Array.from(document.querySelectorAll('item-border > div'));
-    // Hide all results
-    results.forEach(function(result) {
-        result.style.display = 'none';
-    });
-    // Filter results to only those that meet ALL requirements:
-    Array.from(document.querySelectorAll('.custom-control input[rel]:checked'), function(input) {
-        const attrib = input.getAttribute('id');
-        results = results.filter(function(result) {
-            return result.classList.contains(attrib);
+    $(document).ready(function() {
+        var homeUrl = '<?= Yii::$app->homeUrl ?>home';
+
+        function getAllParamWithForm() {
+            let result = '';
+            $('form').each(function(id, form) {
+                let param = $(form).serialize();
+                result += '&' + param;
+            });
+            return result;
+        }
+        $('.ele-click-to-filter1').each(function(idx, ele) {
+            let $this = $(ele);
+            $this.on('click', function() {
+                ////
+                window.location.href = homeUrl + '?' + getAllParamWithForm();
+            });
         });
-    });
-    // Show those filtered results:
-    results.forEach(function(result) {
-        result.style.display = 'block';
-    });
-}
-change();
+        $('.ele-click-to-filter2').each(function(idx, ele) {
+            let $this = $(ele);
+            $this.on('click', function() {
+                ////
+                window.location.href = homeUrl + '?' + getAllParamWithForm();
+            });
+        });
+        $('.ele-click-to-filter3').each(function(idx, ele) {
+            let $this = $(ele);
+            $this.on('click', function() {
+                ////
+                window.location.href = homeUrl + '?' + getAllParamWithForm();
+            });
+        }); $('.ele-click-to-filter4').each(function(idx, ele) {
+            let $this = $(ele);
+            $this.on('click', function() {
+                ////
+                window.location.href = homeUrl + '?' + getAllParamWithForm();
+            });
+        });
+    })
 </script>

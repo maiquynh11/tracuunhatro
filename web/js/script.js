@@ -1,13 +1,13 @@
-// var coll = document.getElementsByClassName("collapsible");
-// var i;
-// for (i = 0; i < coll.length; i++) {
-//   coll[i].addEventListener("click", function () {
-//     this.classList.toggle("actives");
-//     var content = this.nextElementSibling;
-//     if (content.style.maxHeight) {
-//       content.style.maxHeight = null;
-//     } else {
-//       content.style.maxHeight = content.scrollHeight + "px";
-//     }
-//   });
-// }
+$(function() {   
+    const $leaveComment = $('#leave-comment');
+    const $cancelComment = $('#cancel-comment');
+    const $submitComment = $('#submit-comment');
+
+    $leaveComment.click(function() {
+        $leaveComment.attr('rows', '2').closest('.create-comment').addClass('focused');
+    });
+    $cancelComment.click(() => {
+        $leaveComment.attr('rows', 1)
+        $cancelComment.closest('.create-comment').removeClass('focused');
+    });
+});

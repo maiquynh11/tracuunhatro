@@ -21,6 +21,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/fontawesome.min.css"
@@ -40,10 +41,10 @@ AppAsset::register($this);
 <body>
     <?php $this->beginBody() ?>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white ">
             <div class="container">
-                <a class="navbar-brand" href="<?= Yii::$app->homeUrl ?>home">
-                    <img src="img/logo.png" width="100%">
+                <a class="navbar-brand pt-0" href="<?= Yii::$app->homeUrl ?>home">
+                <img src="../img/lg1.png" alt="" width="100%">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -58,7 +59,10 @@ AppAsset::register($this);
                             </a> -->
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Danh mục bài đăng</a>
+                            <a class="nav-link" href="#">Bài đăng</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Tin mới</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Bản đồ</a>
@@ -86,9 +90,9 @@ AppAsset::register($this);
         </nav>
     </header>
     <main>
-        <div class="">
+       
             <?= $content ?>
-        </div>
+       
     </main>
     <footer class="footer mt-auto py-3 text-muted">
         <div class="container">
@@ -96,7 +100,7 @@ AppAsset::register($this);
             <p class="float-right"><?= Yii::powered() ?></p>
         </div>
     </footer>
-    <script src="font/OwlCarousel2-2.3.4/dist/JQuery3.3.1.js"></script>
+    <!-- <script src="font/OwlCarousel2-2.3.4/dist/JQuery3.3.1.js"></script> -->
     <script src="font/OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">

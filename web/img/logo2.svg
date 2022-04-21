@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="78" height="25" viewBox="0 0 78 25">
+  <g id="Group_4" data-name="Group 4" transform="translate(-111 -124)">
+    <text id="nhatro" transform="translate(111 148)" fill="#fff" font-size="20" font-family="Blanka-Regular, Blanka"><tspan x="0" y="0">nh</tspan><tspan y="0" fill="#fed835">a</tspan><tspan y="0">tro</tspan></text>
+    <g id="Group_3" data-name="Group 3" transform="translate(-5 -14)">
+      <path id="Path_6" data-name="Path 6" d="M0,0H.813V.844H0Z" transform="translate(148.378 158.156)" fill="#fff"/>
+      <path id="Path_3" data-name="Path 3" d="M-.657,0H.155V.844H-.657Z" transform="translate(149.91 158.156)" fill="#fff"/>
+      <path id="Path_4" data-name="Path 4" d="M0-.944H.813v.775H0Z" transform="translate(148.378 160)" fill="#fff"/>
+      <path id="Path_5" data-name="Path 5" d="M-.541-.944H.272v.775H-.541Z" transform="translate(149.794 160)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

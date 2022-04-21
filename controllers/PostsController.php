@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Nhatro;
+use app\models\Binhluan;
 
 class PostsController extends Controller 
 {
@@ -24,4 +25,12 @@ class PostsController extends Controller
     public function actionCreate() {
         
     }
+    public function actionShow() {
+        $post=$this->loadPost();
+        $this->render('show',array(
+            'post'=>$post,
+            'comments'=>$post->comments,
+        ));
+    }
+     
 }
