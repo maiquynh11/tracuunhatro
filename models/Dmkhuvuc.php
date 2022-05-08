@@ -46,4 +46,7 @@ class Dmkhuvuc extends \yii\db\ActiveRecord
             'khuvuc' => 'Khuvuc',
         ];
     }
+    public function getNhatro() {
+        return $this->hasMany(Nhatro::class, ['nhatro_id', 'id' ]);
+    }
 }

@@ -20,18 +20,18 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Tienich', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php   echo $this->render('_search', ['model' => $searchModel]); ?>
-
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+
             'id',
             'ma',
             'ten',
-            [
-                'class' => 'yii\grid\ActionColumn',
+            ['class' => 'yii\grid\ActionColumn',
                  'buttons' => [
                     'view' => function($url, $model) {
                          return Html::a('', $url, ['class' => 'fa-solid fa-eye']);
@@ -42,13 +42,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     'delete' => function($url, $model) {
                         return Html::a('', $url, [
                             'class' => 'fa-solid fa-trash', 
-                            'data-confirm' => 'Bạn có chắc chắn muốn xóa "' .$model->ten .'" không ? ',
+                            'data-confirm' => 'Bạn có chắc chắn muốn xóa "' .$model->ma.'" không ? ',
                             'data-method' => 'post',
                         ]);
                     }   
-                 ]
-                
-            ],
+                ]]
         ],
     ]); ?>
 

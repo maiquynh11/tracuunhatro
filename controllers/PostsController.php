@@ -14,6 +14,7 @@ use app\models\Binhluan;
 
 class PostsController extends Controller 
 {
+    
     public function actionIndex() {
         return $this->render('index');
     }

@@ -1,31 +1,34 @@
 <?php
 
+use app\models\Dmkhuvuc;
+use app\models\VNhatroDmdoituong;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Nhatro */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Nhatros', 'url' => ['index']];
+$this->title = $model->ma;
+$this->params['breadcrumbs'][] = ['label' => 'Quản lý tin đăng', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+$khuvucs = Dmkhuvuc::find()->where(['khuvuc' => $model->id]);
 ?>
 <div class="nhatro-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
+   <div class="d-flex justify-content-between p-2">
+        <h5>Mã bài đăng: <?= Html::encode($this->title) ?></h5>
+        <div class="btn-view">
+            <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => 'Bạn có chắc muốn xóa bài đăng ?',
+                    'method' => 'post',
+                ],
+            ]) ?>
+        </div>    
+   </div>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -33,16 +36,41 @@ $this->params['breadcrumbs'][] = $this->title;
             'ma',
             'dientich',
             'diachi',
-            'lat',
-            'lng',
-            'geom',
             'tieude',
             'mota',
             'lienhe',
             'gia',
-            'doituong_id',
-            'thanhvien_id',
-            'tienich_id',
+            [
+                'attribute' => 'dmkhuvuc_id',
+                'format' => 'html',
+                'value' =>  $khuvucs
+            ],
+            [
+                'attribute' => 'dmdoituong_id',
+                'content' => function($model) {
+                    $listDmDoituong = VNhatroDmdoituong::find()->where(['nhatro_id' => $model->id])->all();
+                    $result = "";
+                    foreach ($listDmDoituong as $dmDoituong) {
+                        $result .= $dmDoituong->ten . '</br>';
+                    }
+                    return Html::tag('span', $result, []);
+                },
+            ],
+            [
+                'attribute' => 'status',
+                'format' => 'html',
+                'value' => function() use ($model) {
+                    return Html::tag('span', $model->status ? 'Đã duyệt' : 'Đang chờ duyệt', [
+                        'class' => $model->status ? 'badge badge-success' : 'badge badge-danger',                     
+                    ]);
+                }
+            ],
+            // 'doituong_id',
+            // 'thanhvien_id',
+            // 'tienich_id',
+            // 'lat',
+            // 'lng',
+            // 'geom',
         ],
     ]) ?>
 

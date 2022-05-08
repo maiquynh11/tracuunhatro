@@ -15,27 +15,32 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+   <div class="row">
+        <div class="col-6"><?= $form->field($model, 'id') ?></div>
+    
+        <div class="col-6"><?= $form->field($model, 'ma') ?></div>
+    
+        <div class="col-6"><?= $form->field($model, 'dientich') ?></div>
+    
+        <div class="col-6"><?= $form->field($model, 'diachi') ?></div>
+    
+        <div class="col-6"><?php echo $form->field($model, 'tieude') ?></div>
+    
+        <div class="col-6"><?php echo $form->field($model, 'gia') ?></div>
+   </div>
 
-    <?= $form->field($model, 'ma') ?>
 
-    <?= $form->field($model, 'dientich') ?>
-
-    <?= $form->field($model, 'diachi') ?>
-
-    <?= $form->field($model, 'lat') ?>
+    <?php // echo $form->field($model, 'lat') ?>
 
     <?php // echo $form->field($model, 'lng') ?>
 
     <?php // echo $form->field($model, 'geom') ?>
 
-    <?php // echo $form->field($model, 'tieude') ?>
 
     <?php // echo $form->field($model, 'mota') ?>
 
     <?php // echo $form->field($model, 'lienhe') ?>
 
-    <?php // echo $form->field($model, 'gia') ?>
 
     <?php // echo $form->field($model, 'doituong_id') ?>
 

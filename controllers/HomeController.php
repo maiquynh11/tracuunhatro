@@ -30,8 +30,13 @@ class HomeController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'only' => ['logout', 'signup'],
                 'rules' => [
+                    [
+                        'actions' => ['signup'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
                     [
                         'actions' => ['logout'],
                         'allow' => true,
@@ -89,7 +94,7 @@ class HomeController extends Controller
         }
         $listNhatro = $queryNhatro->all();
 
-        return $this->render('index', compact("homeSearchForm", "listNewPost", "filterBoxForm", "listDmgia", "listTienich", "listDmdientich", "listDmkhuvuc", "listNhatro", "dmgia", "dmdientich", "tienich"));
+        return $this->render('index', compact("homeSearchForm", "listNewPost", "filterBoxForm", "listDmgia", "listTienich", "listDmdientich", "listDmkhuvuc", "listNhatro"));
     }
 
     /**
@@ -101,10 +106,8 @@ class HomeController extends Controller
     {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
             return $this->redirect('login');
         }
-
         return $this->render('signup', [
             'model' => $model,
         ]);
@@ -114,12 +117,13 @@ class HomeController extends Controller
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->login()) {
+                return $this->goBack();
+            }
         }
-
+        
         $model->password = '';
         return $this->render('login', [
             'model' => $model,

@@ -7,21 +7,27 @@ use Yii;
 /**
  * This is the model class for table "nhatro".
  *
- * @property int $id
+ * @property string $id
  * @property string|null $ma
+ * @property string|null $tieude
+ * @property string|null $gia
  * @property string|null $dientich
  * @property string|null $diachi
- * @property float|null $lat
- * @property float|null $lng
- * @property string|null $geom
- * @property string|null $tieude
- * @property string|null $mota
  * @property string|null $lienhe
- * @property string|null $gia
- * @property int|null $doituong_id
- * @property int|null $thanhvien_id
- * @property int|null $tienich_id
+ * @property string|null $doituong_id
+ * @property string|null $thanhvien_id
+ * @property string|null $dmgia_id
+ * @property string|null $dmkhuvuc_id
+ * @property string|null $tienich_id
+ * @property string|null $mota
+ * @property float|null $lat
+ * @property float|null $geom
+ * @property float|null $lng
+ * @property string|null $created_time
+ * @property string|null $update_time
+ * @property int|null $status
  */
+
 class Nhatro extends \yii\db\ActiveRecord
 {
     /**
@@ -38,11 +44,12 @@ class Nhatro extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['diachi', 'geom', 'tieude', 'mota', 'lienhe'], 'string'],
-            [['lat', 'lng'], 'number'],
-            [['doituong_id', 'thanhvien_id', 'tienich_id'], 'default', 'value' => null],
-            [['doituong_id', 'thanhvien_id', 'tienich_id'], 'integer'],
-            [['ma', 'dientich', 'gia'], 'string', 'max' => 255],
+            [['mota'], 'string'],
+            [['lat', 'geom', 'lng'], 'number'],
+            [['created_at', 'update_at'], 'safe'],
+            [['status'], 'default', 'value' => null],
+            [['status'], 'integer'],
+            [['ma', 'tieude', 'gia', 'dientich', 'diachi', 'lienhe', 'user_id','dmkhuvuc_id'], 'string', 'max' => 255],
         ];
     }
 
@@ -54,21 +61,23 @@ class Nhatro extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'ma' => 'Ma',
-            'dientich' => 'Dientich',
-            'diachi' => 'Diachi',
+            'tieude' => 'Tiêu đề',
+            'gia' => 'Giá',
+            'dientich' => 'Diện tích',
+            'diachi' => 'Địa chỉ',
+            'lienhe' => 'Liên hệ',
+            'thanhvien_id' => 'Thành viên',   
+            'dmkhuvuc_id' => 'Khu vực',
+            'mota' => 'Mô tả',
             'lat' => 'Lat',
-            'lng' => 'Lng',
             'geom' => 'Geom',
-            'tieude' => 'Tieude',
-            'mota' => 'Mota',
-            'lienhe' => 'Lienhe',
-            'gia' => 'Gia',
-            'doituong_id' => 'Doituong ID',
-            'thanhvien_id' => 'Thanhvien ID',
-            'tienich_id' => 'Tienich ID',
+            'lng' => 'Lng',
+            'created_at' => 'Ngày tạo',
+            'update_at' => 'Update Time',
+            'status' => 'Trạng thái',
         ];
     }
-    public function activeCheckbox() {
-      
+    public function getDmkhuvuc() {
+        return $this->hasOne(Dmkhuvuc::class, ['id', 'dmkhuvuc_id']);
     }
 }

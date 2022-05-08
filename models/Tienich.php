@@ -27,11 +27,7 @@ class Tienich extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id'], 'required'],
-            [['id'], 'default', 'value' => null],
-            [['id'], 'integer'],
             [['ma', 'ten'], 'string', 'max' => 255],
-            [['id'], 'unique'],
         ];
     }
 

@@ -1,0 +1,95 @@
+
+#sidebar_post a, 
+#sidebar_post a:hover,
+#sidebar_post a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+#sidebar_post .line {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed #ddd;
+    margin: 40px 0;
+}
+#sidebar_post .wrapper {
+    overflow: hidden;
+}
+#sidebar_post {
+   
+    background: rgb(26, 148, 255);
+    color: #fff;
+    transition: all 0.3s;
+}
+#sidebar_post .sidebar-header {
+    padding: 20px;
+    background: #6d7fcc;
+}
+
+#sidebar_post ul.components {
+    border-bottom: 1px solid #47748b;
+}
+
+#sidebar_post ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar_post ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+
+#sidebar_post ul li a:hover {
+    color: #7386D5;
+    background: #fff;
+}
+#sidebar_post ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+   background: #6d7fcc;
+}
+@media (max-width: 768px) {
+    #sidebar_post {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+}
+.sidebar_post-header {
+    display: flex;
+    background-color: #006db3;
+}
+.post_acc,
+.avatar-user {
+    padding-top: 10px;
+    padding-right: 8px;
+    padding-bottom: 10px;
+}
+.avatar-user img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+.post_acc-name {
+    font-weight: bold;
+    font-size: 15px;
+}
+.post_acc-mail {
+    font-size: 12px;
+}
+.tienich-index {
+    overflow: hidden;
+
+}
+.navct {
+ position: fixed;
+}
+.dientichs {
+    width: 30px !important;
+}

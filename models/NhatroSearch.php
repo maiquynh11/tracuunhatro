@@ -17,7 +17,7 @@ class NhatroSearch extends Nhatro
     public function rules()
     {
         return [
-            [['id', 'doituong_id', 'thanhvien_id', 'tienich_id'], 'integer'],
+            [['id', 'user_id'], 'integer'],
             [['ma', 'dientich', 'diachi', 'geom', 'tieude', 'mota', 'lienhe', 'gia'], 'safe'],
             [['lat', 'lng'], 'number'],
         ];
@@ -62,9 +62,8 @@ class NhatroSearch extends Nhatro
             'id' => $this->id,
             'lat' => $this->lat,
             'lng' => $this->lng,
-            'doituong_id' => $this->doituong_id,
-            'thanhvien_id' => $this->thanhvien_id,
-            'tienich_id' => $this->tienich_id,
+            'user_id' => $this->user_id,
+
         ]);
 
         $query->andFilterWhere(['ilike', 'ma', $this->ma])

@@ -54,11 +54,12 @@ class TienichController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
-    {   
-         return $this->render('view', [
+    {
+        return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
+
     /**
      * Creates a new Tienich model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -67,7 +68,7 @@ class TienichController extends Controller
     public function actionCreate()
     {
         $model = new Tienich();
-
+        $tienich = Tienich::find()->all();
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);

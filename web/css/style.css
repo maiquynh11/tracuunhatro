@@ -6,6 +6,7 @@
   --text-color: #373737;
   --border-color: #e0e0e0;
   --yellow-color: rgb(253, 216, 54);
+  --nav-color: #9e9e9e
 }
 body {
   font-family: "Mallory Book", sans-serif, FontAwesome;
@@ -33,19 +34,15 @@ body {
   font-family: "Ole-Regular";
   src: url("../font/Ole/Ole-Regular.ttf");
 }
-.nav-item {
+.navbar .nav-item {
   margin-right: 20px;
   margin-left: 15px;
   position: relative;
 }
-/* .navbar-nav {
-  margin-left: 40px;
-} */
-.navbar-nav a {
+.navbar-home a {
   color: #373737  !important;
   font-weight: bold;
 }
-/* MAIN */
 .btn_post,
 .btn_login,
 .btn_signup {
@@ -55,12 +52,37 @@ body {
 }
 .btn_signup,
 .btn_login {
-  border: 1px solid var(--main-color); 
-  /* background-color: white; */
-
+  border: 2px solid var(--main-color);
+  color: black;
+}
+.btn_login:hover {
+  background-color: var(--main-color);
+  transition-duration: 0.2s;
+}
+.btn_login-acc {
+  border: 2px solid var(--main-color);
+  color: gray;
+  padding: 2px 5px;
+  font-size: 13px;
+}
+.btn_login-acc .dropdown-toggle {
+  font-size: 13px;
+  font-weight: bold;
+}
+.btn_login-acc .dropdown-toggle::after {
+  display: none;
+}
+.btn_login-acc:hover .dropdown-menu{
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+}
+.dropdown-menu 
+.btn_login:hover .nav-link{
+  color: white;
+  transition-duration: 0.2s;
 }
 .btn_post {
-  /* border: 1px solid var(--detail-color); */
   background-color: var(--detail-color);
   color: white;
   margin-right: 10px;
@@ -82,21 +104,25 @@ body {
   box-shadow: 0 0 26px rgba(0, 0, 0, 0.13);
 }
 .login-button {
-  padding: 10px 0;
+  padding: 10px 0;  
+}
+.btn_login .nav-link {
+  color: black;
+  padding: 0;
+  text-align: center;
+}
+.form-inline label {
+  color: black;
 }
 .form-groups {
   text-align: center;
 }
-/* login */
-
 .site-signup h5 {
   position: relative;
-  margin-top: 30px;
   margin-bottom: 20px;
   text-align: center;
   font-weight: bold;
 }
-/* banner */
 .banner {
   position: relative;
   background: url("../img/aa.jpg");
@@ -133,13 +159,12 @@ body {
 .banner-form {
   top: 280px;
   background-color: white;
-  /* opacity: 0.9; */
   border-radius: 10px;
   padding: 15px;
   height: 245px;
   width: 60%;
   box-shadow: -10px -10px 15px rgba(70,70,70,0.12),
-            10px 10px 15px rgba(70,70,70,0.12);
+               10px 10px 15px rgba(70,70,70,0.12);
 }
 .banner-form-title {
   font-size: 12px;
@@ -161,7 +186,6 @@ body {
 }
 .search-input {
   margin: auto;
-  /* border: 1px solid gray; */
   border: none;
   border-radius: 5px;
   padding: 15px;
@@ -218,6 +242,8 @@ li {
 .img-circle img {
   border-radius: 50%;
   background-size: cover;
+  width: 50px;
+  height: 100px;
 }
 .img-circle img:hover {
   opacity: 0.9;
@@ -228,8 +254,11 @@ li {
 .btn_prev,
 .btn_next {
   position: absolute;
-  top: 28%;
-  background: none;
+  top: 24%;
+  background: var(--main-color);
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
   border: none;
   outline: none;
   color: var(--main-color);
@@ -239,6 +268,9 @@ li {
 }
 .btn_next {
   right: -30px;
+}
+.btn_prev, .btn_next i {
+  color: white;
 }
 .btn_prev:hover,
 .btn_next:hover {
@@ -250,7 +282,6 @@ li {
   font-size: 17px;
   font-family: "Mallory Bold" !important;
   line-height: 1;
-  /* color: var(--title-color); */
 }
 .flex-box {
   display: flex;
@@ -270,14 +301,6 @@ li {
   font-size: 18px;
   color: var(--detail-color);
 }
-/* .form_ma::after {
-  position: absolute;
-  top: 55px;
-  content: "|";
-  font-size: 25px;
-  color: var(--main-color);
-  padding: 0 205px;
-} */
 .form_ma .form-control {
   /* border-color: gray; */
   border: none;
@@ -340,7 +363,6 @@ option[value=""][disabled] {
 .check {
   color: var(--border-color);
 }
-
 .post-view {
   padding: 0 10px;
 }
@@ -363,10 +385,6 @@ option[value=""][disabled] {
 .post-map {
   /* border: 1px solid var(--border-color); */
   box-shadow: 0px 0px 4px 0px var(--border-color);
-}
-.slide-item {
-  /* border: 2px solid #eeeeee;
-  border-radius: 5px; */
 }
 .item-border {
   width: 100%;
@@ -397,10 +415,6 @@ option[value=""][disabled] {
   font-size: 15px;
   font-family: "Mallory Bold";
   color: var(--detail-color);
-}
-.content-cmt {
-  /* position: relative; */
-  /* display: inline-block; */
 }
 .left-gr {
   position: relative;
@@ -502,13 +516,11 @@ option[value=""][disabled] {
 .sidebar-title {
   padding: 15px;
 }
-
 .sidebar-title:hover {
   background-color: antiquewhite;
   transition-duration: 0.4s;
   cursor: pointer;
 }
-
 .write-cmt {
   display: block;
   background-color: #eeeeee;
@@ -598,7 +610,6 @@ option[value=""][disabled] {
 .area-title:active {
   color: white;
 }
-
 .filter-check {
   margin-top: 10px;
 }
@@ -668,24 +679,20 @@ option[value=""][disabled] {
   width: 25px;
   background-color: #eee;
 }
-
 /* On mouse-over, add a grey background color */
 .filter-check:hover input ~ .checkmark {
   background-color: #ccc;
 }
-
 /* When the checkbox is checked, add a blue background */
 .filter-check input:checked ~ .checkmark {
   background-color: var(--main-color);
 }
-
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
   content: "";
   position: absolute;
   display: none;
 }
-
 /* Show the checkmark when checked */
 .filter-check input:checked ~ .checkmark:after {
   display: block;
@@ -736,11 +743,11 @@ a[aria-expanded="true"] {
 #sidebar ul li:hover > a > span {
   color: white;
 }
-a[data-toggle="collapse"] {
+#sidebar a[data-toggle="collapse"] {
   position: relative;
 }
 
-.dropdown-toggle::after {
+#sidebar .dropdown-toggle::after {
   display: block;
   position: absolute;
   top: 50%;
@@ -778,51 +785,42 @@ a[data-toggle="collapse"] {
   -webkit-align-items: center;
   align-items: center;
 }
-
 .swiper-slide img {
   display: block;
   width: 100%;
   object-fit: cover;
 }
-
 body {
   background: #000;
   color: #000;
 }
-
 .swiper {
   width: 100%;
   height: 300px;
   margin-left: auto;
   margin-right: auto;
 }
-
 .swiper-slide {
   background-size: cover;
   background-position: center;
 }
-
 .mySwiper2 {
   height: 80%;
   width: 100%;
 }
-
 .mySwiper {
   height: 20%;
   box-sizing: border-box;
   padding: 10px 0;
 }
-
 .mySwiper .swiper-slide {
   width: 25%;
   height: 95px;
   opacity: 0.4;
 }
-
 .mySwiper .swiper-slide-thumb-active {
   opacity: 1;
 }
-
 .swiper-slide img {
   display: block;
   width: 100%;

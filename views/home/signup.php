@@ -10,19 +10,17 @@ use yii\bootstrap4\ActiveForm;
 $this->title = 'ĐĂNG KÝ';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-signup bg-img">
-    <h5><?= Html::encode($this->title) ?></h5>
+<div class="site-signup container p-5">
     <div class="row justify-content-center ">
         <div class="col-lg-5 signup-box">
+            <h5><?= Html::encode($this->title) ?></h5>
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
             <div class="row">
                 <div class="col-md-6">
                     <?= $form->field($model, 'firstname')->textInput(['autofocus' => true]) ?>
-
                 </div>
                 <div class="col-md-6">
                     <?= $form->field($model, 'lastname')->textInput(['autofocus' => true]) ?>
-
                 </div>
             </div>
             <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
@@ -38,7 +36,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 <span>Bạn đã có tài khoản ?</span>
                 <?= Html::a('Đăng nhập', ['home/login']) ?>
             </div>
-
             <?php ActiveForm::end(); ?>
         </div>
     </div>

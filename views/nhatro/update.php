@@ -5,17 +5,18 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Nhatro */
 
-$this->title = 'Update Nhatro: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Nhatros', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Cập nhật bài đăng: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Quản lý tin đăng', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->ma, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = 'Cập nhật tin đăng';
 ?>
 <div class="nhatro-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h6><?= Html::encode($this->title) ?></h6>
 
     <?= $this->render('_form', [
         'model' => $model,
+        'listDmkhuvuc' => $listDmkhuvuc,
     ]) ?>
 
 </div>

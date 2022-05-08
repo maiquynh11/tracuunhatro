@@ -11,19 +11,15 @@ $this->title = 'ĐĂNG NHẬP';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login container p-5">
-    <h5 class="text-center font-weight-bold"><?= Html::encode($this->title) ?></h5>
     <div class="row mt-4 justify-content-center">
         <div class="col-lg-5 login-box">
+        <h5 class="text-center font-weight-bold"><?= Html::encode($this->title) ?></h5>
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-
             <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
             <?= $form->field($model, 'password')->passwordInput() ?>
-
             <div class="form-groups">
                 <span>Quên mật khẩu ?</span>
-                <?= Html::a('reset it', ['site/request-password-reset']) ?>.    
-                
+                <?= Html::a('Reset it', ['site/request-password-reset']) ?>
             </div>
             <div class="form-groups">
                 <span> Bạn chưa có tài khoản ?</span>

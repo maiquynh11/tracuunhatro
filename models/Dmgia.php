@@ -46,7 +46,4 @@ class Dmgia extends \yii\db\ActiveRecord
             'mucgia' => 'Mucgia',
         ];
     }
-    public function getNhatro() {
-        return $this->hasMany(Order::class, ['nhatro_id' => 'id']);
-    }
 }

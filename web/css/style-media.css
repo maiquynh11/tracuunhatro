@@ -3,51 +3,92 @@
 @media screen and (max-width: 1200px) {
   .banner-form {
     top: 200px !important;
-    height: 300px !important;
+    height: 350px !important;
+    width: 80% !important;
+  }
+  .banner_icon {
+    top: 70px !important;
+  }
+  .banner_text {
+    top: 120px !important
   }
   .flex-item {
     width: 50% !important;
   }
+  .flex-item i {
+    display: none !important;
+  }
   .search-input_form {
     width: 100% !important;
-    top: 200px !important;
+    top: 250px !important;
     padding: 0 30px;
   }
   .btn-search {
-    top: 280px !important;
+    top: 330px !important;
+  }
+  .form-control {
+    width: 100% !important;
   }
 }
 @media screen and (max-width: 992px) {
-  /* .banner-form {
-    height: 350px !important;
-  }
-  .search-input {
-    top: 200px !important;
-  }
-  .btn-search {
-    top: 300px !important;
-  } */
-}
-@media only screen and (max-width: 768px) {
-  .banner-form {
-    /* position:  relative !important; */
-    top: 200px !important;
-    height: 400px !important;
-  }
   .search-input_form {
     width: 100% !important;
-    top: 300px !important;
-    padding: 0 30px;
+    top: 155px !important;
+    padding: 0 20px !important;
+    /* margin: 0 10px 0 10px; */
   }
-  .btn-search {
-    top: 400px !important;
+  .district {
+    margin-top: 0 !important;
+  }
+  .post-user {
+    padding: 10px 0;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .banner {
+    min-height: 500px !important;
+  }
+  .banner-form {
+    /* position:  relative !important; */
+    top: 150px !important;
+    height: 250px !important;
+    width: 80% !important
+  }
+  .banner_icon {
+    top: 50px !important;
+  }
+  .banner_text {
+    top: 80px !important
+  }
+  .banner_icon img {
+    width: 70% !important
   }
   .banner-form-title, .flex-item i {
     display: none !important;
   }
+  .search-input_form {
+    width: 100% !important;
+    top: 155px !important;
+    padding: 0 20px !important;
+    /* margin: 0 10px 0 10px; */
+  }
+  .btn-search {
+    top: 230px !important;
+    padding: 8px 10px !important;
+    margin: 0 !important;
+  }
+  .form-control {
+    width: 100% !important;
+  }
+  .form_ma {
+    margin: 0 10px !important;
+  }
 
 }
 @media screen and (max-width: 576px) {
+  body {
+    font-size: 12px !important;
+  }
   .banner-form {
     height: 380px !important;
   }
@@ -71,6 +112,24 @@
     margin: 0 !important;
   }
   .district {
-    margin-top: 180px !important;
+    margin-top: 40px !important;
   }
+  .img-circle img {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .img-circle {
+    margin: 15px;
+
+  }
+  .post-qtt {
+    display: none;
+  }
+  .district-name {
+    text-align: center !important;
+  }
+  .item-border, .slide-item {
+    padding: 15px !important;
+  }
+  
 }

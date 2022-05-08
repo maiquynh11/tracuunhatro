@@ -6,6 +6,8 @@
 use app\assets\AppAsset;
 use app\widgets\Alert;
 use yii\bootstrap4\Breadcrumbs;
+use yii\bootstrap4\Button;
+use yii\bootstrap4\ButtonDropdown;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
@@ -52,7 +54,7 @@ AppAsset::register($this);
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav navbar-home">
                         <li class="nav-item active">
                             <!-- <a class="nav-link" href="<?= Yii::$app->homeUrl ?>home">Home
                                 <span class="sr-only">(current)</span>
@@ -69,21 +71,45 @@ AppAsset::register($this);
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0  ml-auto">
-                        <a href="<?= Yii::$app->homeUrl ?>posts/post">
-                            <div class="btn btn_post">
-                                <i class="fas fa-plus-circle mr-2"></i>Đăng tin
-                            </div>
-                        </a>
-                        <a href="<?= Yii::$app->homeUrl ?>home/login">
-                            <div class="btn my-2 my-sm-0 btn_login" type="submit">
-                                Đăng nhập
-                            </div>
-                        </a>
-                        <!-- <a href="" class="ml-2">
-                            <div class="btn my-2 my-sm-0 btn_signup" type="submit">
-                                </i>Đăng ký
-                            </div>
-                        </a> -->
+                        <div class="">              
+                             <?php
+                                    if(Yii::$app->user->isGuest) {
+                                        echo Html::a('Đăng tin', ['/home/login'], ['class'=>'btn btn_post']);
+                                    }
+                                    else {
+                                        echo Html::a('Đăng tin', ['/nhatro/index'], ['class'=>'btn btn_post']);
+                                    }
+                                ?>
+                        </div>
+                        <?php   
+                            if (Yii::$app->user->isGuest) {                              
+                                echo Html::a('Đăng nhập', ['/home/login'], ['class'=>'btn btn_login']);
+                            } 
+                            else {
+                                echo ButtonDropdown::widget([
+                                    'label' =>  Yii::$app->user->identity->getDisplayName(),
+                                    'dropdown' => [
+                                        'items' => [
+                                            [
+                                                'label' => 'Đăng xuất',
+                                                'url' => ['/home/logout'],
+                                                'linkOptions' => [
+                                                    'data-method' => 'post'
+                                                ],
+                                            ],
+                                            [
+                                                'label' => 'Thông tin tài khoản',
+                                                'url' => ['/home/logout'],
+                                                'linkOptions' => [
+                                                    'data-method' => 'post'
+                                                ],
+                                            ]
+                                        ]
+                                    ],
+                                    'options' => ['class'=> 'btn btn_login-acc ']
+                                ]);
+                            }
+                        ?>                     
                     </form>
                 </div>
             </div>
@@ -95,9 +121,7 @@ AppAsset::register($this);
        
     </main>
     <footer class="footer mt-auto py-3 text-muted">
-        <div class="container">
-            <p class="float-left">&copy; My Company <?= date('Y') ?></p>
-            <p class="float-right"><?= Yii::powered() ?></p>
+      
         </div>
     </footer>
     <!-- <script src="font/OwlCarousel2-2.3.4/dist/JQuery3.3.1.js"></script> -->

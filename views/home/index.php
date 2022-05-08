@@ -73,15 +73,15 @@ use yii\helpers\ArrayHelper;
             <?php foreach ($listDmkhuvuc as $khuvuc) : ?>
             <div class="carousel-items">
                 <div class="row">
-                    <div class="col-6 p-0">
+                    <div class="col-md-6 col-12 p-0">
                         <div class="img-circle">
                             <img src="img/room.jpg" alt="">
                         </div>
                     </div>
-                    <div class="col-6 p-0">
+                    <div class="col-md-6 col-12 p-0">
                         <div class="district-name pl-2"><?= $khuvuc->khuvuc ?>
                         </div>
-                        <small class="pl-2"><span style="color: var(--detail-color)">1200 </span>bài
+                        <small class="pl-2 post-qtt"><span style="color: var(--detail-color)">1200 </span>bài
                             đăng
                         </small>
                     </div>
@@ -113,7 +113,7 @@ use yii\helpers\ArrayHelper;
                     </div>
                     <div class="post-text col-md-8 p-0">
                         <div class="">
-                            <div class="row pb-2">
+                            <div class="row pb-2 post-user">
                                 <div class="col-8">
                                     <div class="time-user ">
                                         <div class="flex-items">
@@ -202,6 +202,25 @@ use yii\helpers\ArrayHelper;
             </div>
             <?php endforeach; ?>
         </div>
+        <!-- <div class="filter__tab">
+            <button class="tab__link" onclick="openCity(event, 'khuvuc')">Khu vực</button>
+            <button class="tab__link" onclick="openCity(event, 'dientich')">Diện tích</button>
+            <button class="tab__link" onclick="openCity(event, 'mucgia')">Mức giá</button>
+            <button class="tab__link" onclick="openCity(event, 'tienich')">Tiện ích</button>
+        </div>
+        <div id="khuvuc" class="filter-content active">
+            <div class="row">
+                <div class="col-6">
+                <ul class="collapse list-unstyled pl-4 pr-2" id="area-dropdown">
+                    <li class="area-text">                                 
+                        <div class="row">
+
+                        </div> 
+                    </li>
+                </ul>     
+                </div>
+            </div>
+        </div> -->
         <div class="content-right col-md-4">
             <div class="content-filter bg-white">
                 <p class="text-title pl-3">BỘ LỌC NÂNG CAO</p>
@@ -245,8 +264,8 @@ use yii\helpers\ArrayHelper;
                                     <ul class="collapse list-unstyled pl-4 pr-2" id="size-dropdown">
                                         <li class="size-text">                                 
                                             <?php foreach($listDmdientich as $dt) {?>                                           
-                                               <div>
-                                                    <input class="ele-click-to-filter2" type="radio"?>  
+                                               <div class="p-1">
+                                                    <input class="ele-click-to-filter2" type="radio" name=""?>  
                                                         <?= $dt['dientich']; ?>  
                                                </div>
                                                 <?php
@@ -271,7 +290,7 @@ use yii\helpers\ArrayHelper;
                                     <ul class="collapse list-unstyled pl-4 pr-2" id="price-dropdown">
                                         <li class="price-text">                                 
                                             <?php foreach($listDmgia as $gia) {?>                                           
-                                               <div>
+                                               <div class="p-1">
                                                     <input class="ele-click-to-filter3" type="radio"?>  
                                                         <?= $gia['mucgia']; ?>  
                                                </div>
@@ -297,9 +316,9 @@ use yii\helpers\ArrayHelper;
                                     <ul class="collapse list-unstyled pl-4 pr-2" id="utilities-dropdown">
                                         <li class="utilities-text">                                 
                                             <?php foreach($listTienich as $ti) {?>                                           
-                                               <div>
+                                               <div class="p-1">
                                                     <input class="ele-click-to-filter4" type="checkbox"?>  
-                                                        <?= $dt['tienich']; ?>  
+                                                        <?= $ti['ten']; ?>  
                                                </div>
                                                 <?php
                                                 }

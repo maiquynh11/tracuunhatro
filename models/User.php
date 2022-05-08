@@ -30,13 +30,12 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
 
-
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return '{{%user}}';
+        return 'user';
     }
 
     /**
@@ -55,6 +54,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+            [['username', 'firstname', 'lastname', 'email'], 'string'],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
         ];
@@ -213,6 +213,6 @@ class User extends ActiveRecord implements IdentityInterface
     }
     public function getDisplayName() {
         $fullname = trim($this->firstname.' '.$this->lastname);
-        return $fullname ?: $this->email;
+        return $fullname;
     }
 }
