@@ -9,12 +9,17 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\Comment;
+use app\models\Dmdientich;
 use app\models\Dmgia;
 use app\models\Dmkhuvuc;
 use app\models\NhatroDmdoituong;
 use app\models\Dmdoituong;
+use app\models\Dmtienich;
+use app\models\NhatroDmtienich;
+use app\models\Tienich;
 use app\models\VNhatro;
 use app\models\VNhatroDmdoituong;
+use app\models\VNhatroDmtienich;
 use yii\data\ActiveDataProvider;
 use yii\helpers\VarDumper;
 
@@ -41,7 +46,6 @@ class NhatroController extends Controller
             ]
         );
     }
-
     /**
      * Lists all Nhatro models.
      *
@@ -49,7 +53,7 @@ class NhatroController extends Controller
      */
     public function actionIndex()
     {
-        $khuvuc = Dmkhuvuc::find()->all();
+        $listDmKhuvuc = Dmkhuvuc::find()->all();
         $searchModel = new NhatroSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
         $dataProvider = new ActiveDataProvider([
@@ -58,9 +62,8 @@ class NhatroController extends Controller
                 'pageSize' => 10,
             ],
         ]);
-       
         return $this->render('index', [
-            'khuvuc' => $khuvuc,
+            'listDmKkhuvuc' => $listDmKhuvuc,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -79,10 +82,7 @@ class NhatroController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
-
     }
-
-
     /**
      * Creates a new Nhatro model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -101,6 +101,13 @@ class NhatroController extends Controller
                     $nhatroDmDoituong->doituong_id = $dmDoituongId;
                     $nhatroDmDoituong->save();
                 }
+                $listDmTienichId = Yii::$app->request->post('list_dmtienich_id');
+                foreach ($listDmTienichId as $dmTienichId) {
+                    $nhatroDmTienich = new NhatroDmtienich();
+                    $nhatroDmTienich->nhatro_id = $model->id;
+                    $nhatroDmTienich->tienich_id = $dmTienichId;
+                    $nhatroDmTienich->save();
+                }
                 Yii::$app->session->addFlash('success', 'Đã đăng !');
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -109,12 +116,14 @@ class NhatroController extends Controller
                 return $this->render('create', ['model' => $model,]);
             }
         }
-        $listDmkhuvuc = Dmkhuvuc::find()->all();
+        $listDmKhuvuc = Dmkhuvuc::find()->all();
         $listDmDoituong = Dmdoituong::find()->all();
+        $listDmTienich = Dmtienich::find()->all();
         return $this->render('create', [
             'model' => $model, 
-            'listDmkhuvuc' => $listDmkhuvuc,
-            'listDmDoituong' => $listDmDoituong
+            'listDmKhuvuc' => $listDmKhuvuc,
+            'listDmDoituong' => $listDmDoituong,
+            'listDmTienich' => $listDmTienich,
         ]);
     }
     /**
@@ -127,16 +136,20 @@ class NhatroController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', [
+                'id' => $model->id
+            ]
+            ]);
         }
-        $listDmkhuvuc = Dmkhuvuc::find()->all();
-
+        $listDmKhuvuc = Dmkhuvuc::find()->all();
+        $listDmDoituong = Dmdoituong::find()->all();
+        $listDmTienich = Dmtienich::find()->all();
         return $this->render('update', [
             'model' => $model,
-            'listDmkhuvuc' => $listDmkhuvuc,
-            
+            'listDmKhuvuc' => $listDmKhuvuc,
+            'listDmDoituong' => $listDmDoituong,
+            'listDmTienich' => $listDmTienich,
         ]);
     }
 
@@ -152,6 +165,11 @@ class NhatroController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+    public function actionDuyet($id) {
+        return $this->render('duyet', [
+            'model' => $this->findModel($id),
+        ]);
     }
 
     /**

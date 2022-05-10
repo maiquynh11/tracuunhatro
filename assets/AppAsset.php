@@ -26,15 +26,13 @@ class AppAsset extends AssetBundle
         'font/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.css',
         'font/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css',
         'css/post.css',
-    
     ];
     public $js = [
         'js/script.js',
-        // 'font/OwlCarousel2-2.3.4/dist/JQuery3.3.1.js',
+        'js/map.js',
         'font/OwlCarousel2-2.3.4/dist/owl.carousel.min.js',
     ];
     public $depends = [
-
         'yii\web\YiiAsset',
         'yii\bootstrap4\BootstrapAsset',
     ];

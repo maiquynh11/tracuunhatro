@@ -10,7 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\SignupForm;
 use app\models\ContactForm;
-use app\models\Tienich;
+use app\models\Dmtienich;
 use app\models\Dmdientich;
 use app\models\Dmgia;
 use app\models\Dmkhuvuc;
@@ -76,16 +76,13 @@ class HomeController extends Controller
      */
     public function actionIndex()
     {
-        $dmgia = Dmgia::find()->all();
-        $dmdientich = Dmdientich::find()->all();
-        $tienich = Tienich::find()->all();
 
         $listNewPost = Nhatro::find()->all();
         $homeSearchForm = new HomeSearchForm();
         $filterBoxForm = new FilterBoxForm();
         $queryNhatro = Nhatro::find();
         $listDmgia = Dmgia::find()->all();
-        $listTienich = Tienich::find()->all();
+        $listDmtienich = Dmtienich::find()->all();
         $listDmkhuvuc = Dmkhuvuc::find()->all();
         $listDmdientich = Dmdientich::find()->all();
         $homeSearchForm->load(Yii::$app->request->get());
@@ -94,7 +91,7 @@ class HomeController extends Controller
         }
         $listNhatro = $queryNhatro->all();
 
-        return $this->render('index', compact("homeSearchForm", "listNewPost", "filterBoxForm", "listDmgia", "listTienich", "listDmdientich", "listDmkhuvuc", "listNhatro"));
+        return $this->render('index', compact("homeSearchForm", "listNewPost", "filterBoxForm", "listDmgia", "listDmtienich", "listDmdientich", "listDmkhuvuc", "listNhatro"));
     }
 
     /**

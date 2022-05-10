@@ -16,7 +16,9 @@ $this->params['breadcrumbs'][] = 'Cập nhật tin đăng';
 
     <?= $this->render('_form', [
         'model' => $model,
-        'listDmkhuvuc' => $listDmkhuvuc,
+        'listDmKhuvuc' => $listDmKhuvuc,
+        'listDmDoituong' => $listDmDoituong,
+        'listDmTienich' => $listDmTienich,
     ]) ?>
 
 </div>

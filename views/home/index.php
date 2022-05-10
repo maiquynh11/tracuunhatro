@@ -237,8 +237,8 @@ use yii\helpers\ArrayHelper;
                                         <li class="area-text">                                 
                                            <div class="row">
                                                 <?php foreach($listDmkhuvuc as $kv) {?>                                           
-                                                   <div class="col-6">
-                                                        <input class="ele-click-to-filter1" type="checkbox"?>  
+                                                   <div class="col-6 p-2">
+                                                        <input class="ele-click-to-filter1" type="checkbox" name="dmkhuvuc_id" value="<?=$kv['khuvuc']?>"?>  
                                                             <?= $kv['khuvuc']; ?>  
                                                    </div>
                                                     <?php
@@ -263,10 +263,10 @@ use yii\helpers\ArrayHelper;
                                     </a>
                                     <ul class="collapse list-unstyled pl-4 pr-2" id="size-dropdown">
                                         <li class="size-text">                                 
-                                            <?php foreach($listDmdientich as $dt) {?>                                           
+                                            <?php foreach($listDmdientich as $dmDientich) {?>                                           
                                                <div class="p-1">
-                                                    <input class="ele-click-to-filter2" type="radio" name=""?>  
-                                                        <?= $dt['dientich']; ?>  
+                                                    <input class="ele-click-to-filter2" type="radio" name="dmdientich_id" value="<?=$dmDientich['dientich']?>"?>  
+                                                        <?= $dmDientich['dientich']; ?>  
                                                </div>
                                                 <?php
                                                 }
@@ -289,10 +289,10 @@ use yii\helpers\ArrayHelper;
                                     </a>
                                     <ul class="collapse list-unstyled pl-4 pr-2" id="price-dropdown">
                                         <li class="price-text">                                 
-                                            <?php foreach($listDmgia as $gia) {?>                                           
+                                            <?php foreach($listDmgia as $dmGia) {?>                                           
                                                <div class="p-1">
-                                                    <input class="ele-click-to-filter3" type="radio"?>  
-                                                        <?= $gia['mucgia']; ?>  
+                                                    <input class="ele-click-to-filter3" type="radio" name="dmgia_id" value="<?=$dmGia['mucgia']?>"?>  
+                                                        <?= $dmGia['mucgia']; ?>  
                                                </div>
                                                 <?php
                                                 }
@@ -315,10 +315,10 @@ use yii\helpers\ArrayHelper;
                                     </a>
                                     <ul class="collapse list-unstyled pl-4 pr-2" id="utilities-dropdown">
                                         <li class="utilities-text">                                 
-                                            <?php foreach($listTienich as $ti) {?>                                           
+                                            <?php foreach($listDmtienich as $dmTienich) {?>                                           
                                                <div class="p-1">
-                                                    <input class="ele-click-to-filter4" type="checkbox"?>  
-                                                        <?= $ti['ten']; ?>  
+                                                    <input class="ele-click-to-filter4" type="checkbox" name="tienich_id" value="<?=$dmTienich['tienich']?>"?>  
+                                                        <?= $dmTienich['tienich']; ?>  
                                                </div>
                                                 <?php
                                                 }

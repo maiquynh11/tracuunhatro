@@ -2,6 +2,7 @@
 
 use app\models\Dmkhuvuc;
 use app\models\VNhatroDmdoituong;
+use app\models\VNhatroDmtienich;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -42,20 +43,14 @@ $khuvucs = Dmkhuvuc::find()->where(['khuvuc' => $model->id]);
             'gia',
             [
                 'attribute' => 'dmkhuvuc_id',
-                'format' => 'html',
-                'value' =>  $khuvucs
-            ],
-            [
-                'attribute' => 'dmdoituong_id',
-                'content' => function($model) {
-                    $listDmDoituong = VNhatroDmdoituong::find()->where(['nhatro_id' => $model->id])->all();
-                    $result = "";
-                    foreach ($listDmDoituong as $dmDoituong) {
-                        $result .= $dmDoituong->ten . '</br>';
+                'value' => function($model) {
+                    $listDmKhuvuc = app\models\Dmkhuvuc::find()->where(['id' => $model->dmkhuvuc_id])->all();
+                    foreach ($listDmKhuvuc as $dmKhuvuc) {
+                        return $dmKhuvuc->khuvuc;
                     }
-                    return Html::tag('span', $result, []);
-                },
+                }, 
             ],
+          
             [
                 'attribute' => 'status',
                 'format' => 'html',
@@ -64,6 +59,18 @@ $khuvucs = Dmkhuvuc::find()->where(['khuvuc' => $model->id]);
                         'class' => $model->status ? 'badge badge-success' : 'badge badge-danger',                     
                     ]);
                 }
+            ],
+            [
+                'label' => 'Tiện ích',
+                'attribute' => 'dmtienich_id',
+                'value' => function($model) {
+                    $listDmTienich = VNhatroDmtienich::find()->where(['nhatro_id' => $model->id])->all();
+                    $result = "";
+                    foreach ($listDmTienich as $dmTienich) {
+                        $result .= '- ' .$dmTienich->tienich .' ';
+                    }
+                    return $result;
+                }   
             ],
             // 'doituong_id',
             // 'thanhvien_id',

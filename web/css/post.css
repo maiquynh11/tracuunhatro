@@ -93,3 +93,7 @@
 .dientichs {
     width: 30px !important;
 }
+.border-post {
+    box-shadow: 0px 0px 4px 0px var(--border-color);
+    background-color: white;
+}
