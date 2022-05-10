@@ -104,42 +104,5 @@ use yii\helpers\ArrayHelper;
             </div>
     <?php ActiveForm::end(); ?>
 </div>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
-   integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
-   crossorigin=""/>
-<script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
-   integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
-   crossorigin=""></script>
-<script>
-    var map = L.map('map').setView([10.824784072964595, 106.71169543218959], 11);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    var markerLatLng = L.marker([10.824784072964595, 106.71169543218959], {
-        draggable: true
-    });
-    markerLatLng.addTo(map);
-
-    function updateLatLngFieldWithMarker() {
-        var latlng = markerLatLng.getLatLng();
-        $('#fieldLat').val(latlng.lat);
-        $('#fieldLng').val(latlng.lng)
-    }
-
-    function updateMarketWithLatLngField() {
-        let lat = $('#fieldLat').val();
-        let lng = $('#fieldLng').val()
-        markerLatLng.setLatLng(L.latLng(lat, lng));  
-    }
-
-    updateLatLngFieldWithMarker();
-    markerLatLng.on('dragend', function(event) {
-        updateLatLngFieldWithMarker();
-    })
-
-    $('#fieldLat, #fieldLng').on('change', function() {
-        updateMarketWithLatLngField();
-    })
 </script>
