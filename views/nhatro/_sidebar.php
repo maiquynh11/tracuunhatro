@@ -10,7 +10,7 @@
 </div>
 <ul class="list-unstyled components">
     <li>
-        <a href="<?=Yii::$app->homeUrl?>binhluan/create">
+        <a href="<?=Yii::$app->homeUrl?>nhatro/index">
             <i class="fa-solid fa-paste pr-2 "></i>Quản lý bài đăng
         </a>    
     </li>

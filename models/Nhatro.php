@@ -74,7 +74,7 @@ class Nhatro extends \yii\db\ActiveRecord
             'lng' => 'Lng',
             'created_at' => 'Ngày tạo',
             'update_at' => 'Update Time',
-            'status' => 'Trạng thái',
+            'status' => '',
         ];
     }
     public function getDmkhuvuc() {

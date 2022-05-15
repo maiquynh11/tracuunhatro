@@ -17,6 +17,7 @@ class VNhatroDmtienich extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public $listDmTienichID = [];
     public static function tableName()
     {
         return 'v_nhatro_dmtienich';
@@ -45,5 +46,37 @@ class VNhatroDmtienich extends \yii\db\ActiveRecord
             'tienich_id' => 'Tienich ID',
             'tienich' => 'Tienich',
         ];
+    }
+    public function loadTienich()
+    {
+        $this->listDmTienichID = [];
+        if (!empty($this->id)) {
+            $rows = VNhatroDmtienich::find()
+                ->select(['tienich_id'])
+                ->where(['nhatro_id' => $this->id])
+                ->asArray()
+                ->all();
+            foreach($rows as $row) {
+               $this->listDmTienichID[] = $row['list_dmtienich_id'];
+            }
+        }
+    }
+
+    /**
+     * save the post's categories (*3)
+     */
+    public function saveTienich()
+    {
+        /* clear the categories of the post before saving */
+        VNhatroDmtienich::deleteAll(['nhatro_id' => $this->id]);
+        if (is_array($this->listDmTienichID)) {
+            foreach($this->listDmTienichID as $dmTienichId) {
+                $nhatroDmTienich = new VNhatroDmtienich();
+                $nhatroDmTienich->nhatro_id = $this->id;
+                $nhatroDmTienich->dmTienichId = $dmTienichId;
+                $nhatroDmTienich->save();
+            }
+        }
+        /* Be careful, $this->listDmTienichID can be empty */
     }
 }

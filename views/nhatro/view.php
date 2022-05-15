@@ -72,7 +72,19 @@ $khuvucs = Dmkhuvuc::find()->where(['khuvuc' => $model->id]);
                     return $result;
                 }   
             ],
-            // 'doituong_id',
+            [
+                'label' => 'Đối tượng',
+                'attribute' => 'dmdoituong_id',
+                'value' => function($model) {
+                    $listDmDoituong = VNhatroDmdoituong::find()->where(['nhatro_id' => $model->id])->all();
+                    $result = "";
+                    foreach ($listDmDoituong as $dmDoituong) {
+                        $result .= '- ' .$dmDoituong->ten .' ';
+                    }
+                    return $result;
+                }   
+            ],
+            
             // 'thanhvien_id',
             // 'tienich_id',
             // 'lat',
@@ -80,5 +92,6 @@ $khuvucs = Dmkhuvuc::find()->where(['khuvuc' => $model->id]);
             // 'geom',
         ],
     ]) ?>
+    
 
 </div>

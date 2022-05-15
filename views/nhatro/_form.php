@@ -15,7 +15,7 @@ use yii\helpers\ArrayHelper;
 
 ?>
 <div class="nhatro-form">
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data'], ]); ?>
        <div class="post_form-create">
             <div class="row">
                 <div class="col-md-8 col-12">
@@ -73,7 +73,7 @@ use yii\helpers\ArrayHelper;
                                 <?php foreach($listDmDoituong as $key => $dmDoituong): ?>
                                     <div class="form-check">
                                         <label class="form-check-label p-1">
-                                            <input type="checkbox" class="form-check-input" name="list_dmdoituong_id[]" id="" value="<?= $dmDoituong->id ?>">
+                                            <input type="checkbox" class="form-check-input" select="" name="list_dmdoituong_id[]" id="" value="<?= $dmDoituong->id ?>">
                                             <?= $dmDoituong->ten ?>
                                         </label>
                                     </div>
@@ -94,15 +94,14 @@ use yii\helpers\ArrayHelper;
                                     <?php endforeach;?>
                                 </div>
                             </div> 
+                          
                         </div>
                    </div>
                 </div>
             </div>           
        </div>
        <div class="form-group">
-                <?= Html::submitButton('Đăng', ['class' => 'btn btn-success']) ?>
-            </div>
+            <?= Html::submitButton('Đăng', ['class' => 'btn btn-success']) ?>
+        </div>
     <?php ActiveForm::end(); ?>
 </div>
-
-</script>

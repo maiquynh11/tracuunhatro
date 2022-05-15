@@ -20,7 +20,7 @@ class NhatroDmtienich extends \yii\db\ActiveRecord
     {
         return 'nhatro_dmtienich';
     }
-
+    public $listDmTienichID = [];
     /**
      * {@inheritdoc}
      */
@@ -43,4 +43,6 @@ class NhatroDmtienich extends \yii\db\ActiveRecord
             'nhatro_id' => 'Nhatro ID',
         ];
     }
+    
+   
 }

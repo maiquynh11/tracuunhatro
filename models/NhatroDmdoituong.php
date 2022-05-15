@@ -43,4 +43,5 @@ class NhatroDmdoituong extends \yii\db\ActiveRecord
             'id' => 'ID',
         ];
     }
+   
 }

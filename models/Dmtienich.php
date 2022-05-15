@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+use yii\helpers\ArrayHelper;
 
 use Yii;
 
@@ -41,5 +42,11 @@ class Dmtienich extends \yii\db\ActiveRecord
             'ma' => 'Ma',
             'tienich' => 'Tienich',
         ];
+    }
+    public static function getAvailableTienich()
+    {
+        $listDmTienich = self::find()->orderBy('tienich')->asArray()->all();
+        $items = ArrayHelper::map($listDmTienich, 'id', 'tienich');
+        return $items;
     }
 }

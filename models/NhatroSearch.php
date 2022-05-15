@@ -18,7 +18,7 @@ class NhatroSearch extends Nhatro
     {
         return [
             [['id', 'user_id'], 'integer'],
-            [['ma', 'dientich', 'diachi', 'geom', 'tieude', 'mota', 'lienhe', 'gia'], 'safe'],
+            [['ma', 'dientich', 'diachi', 'status', 'geom', 'tieude', 'mota', 'lienhe', 'gia'], 'safe'],
             [['lat', 'lng'], 'number'],
         ];
     }
@@ -73,7 +73,8 @@ class NhatroSearch extends Nhatro
             ->andFilterWhere(['ilike', 'tieude', $this->tieude])
             ->andFilterWhere(['ilike', 'mota', $this->mota])
             ->andFilterWhere(['ilike', 'lienhe', $this->lienhe])
-            ->andFilterWhere(['ilike', 'gia', $this->gia]);
+            ->andFilterWhere(['ilike', 'gia', $this->gia])
+            ->andFilterWhere(['ilike', 'status', $this->status]);
 
         return $dataProvider;
     }

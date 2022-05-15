@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="nhatro-index">
     <div class="row justify-content-between">
         <h6 class="pl-3 font-font-weight-bold">DANH SÁCH TIN ĐĂNG</h6>
-        <div class="d-flex">
+        <div class="d-flex mr-3">
             <div class="dropdown mr-2">
                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Lọc tin đăng
@@ -39,27 +39,28 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= GridView::widget([
                     'dataProvider' => $dataProvider,
                     'filterModel' => $searchModel,
-                    'tableOptions' => ['class' => 'table table-bordered table-striped table-condensed'],
+                    'tableOptions' => ['class' => 'table table-bordered table-condensed table-hover table-responsive'],
                     'columns' => [
                         ['class' => 'yii\grid\SerialColumn'],
                         [
-                            'label' => 'id',
+                            'label' => 'ID',
                             'attribute' => 'id',
-                            'contentOptions' => [
-                                'style' => 'width: 30px'
+                            'headerOptions' => [
+                                'style' => 'width: 50px'
                             ]
                         ],
+                        'tieude',
                         [
                             'attribute' => 'dientich',
                             'contentOptions' => [
-                                'style' => 'width: 70px'
+                                // 'style' => 'width: 70px'
                             ]
                         ],
                         'diachi',
                         // 'lat',
                         //'lng',
                         //'geom',
-                        'tieude',
+                       
                         [
                             'label' => 'Khu vực',
                             'attribute' => 'dmkhuvuc_id',
@@ -70,7 +71,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 }
                             }   
                         ],
+                        'gia',
                         [
+                            'label' => 'Đối tượng',
                             'attribute' => 'dmdoituong_id',
                             'content' => function($model) {
                                 $listDmDoituong = VNhatroDmdoituong::find()->where(['nhatro_id' => $model->id])->all();
@@ -82,6 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             },
                         ],
                         [
+                            'label' => 'Tiện ích',
                             'attribute' => 'dmtienich_id',
                             'content' => function($model) {
                                 $listDmTienich = VNhatroDmtienich::find()->where(['nhatro_id' => $model->id])->all();
@@ -93,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             }
                         ],
                         // 'mota',
-                        'gia',
+                      
                         [
                             'attribute' => 'status',
                             'content' => function($model) {  
@@ -115,26 +119,27 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         [
                             'class' => 'yii\grid\ActionColumn',
+                            'template' => '{view} {update} {delete} {duyet}',
                             'buttons' => [
-                            'view' => function($url, $model) {
-                                    return Html::a('', $url, ['class' => 'fa-solid fa-eye']);
+                                'view' => function($url, $model) {
+                                        return Html::a('', $url, ['class' => 'fa-solid fa-eye']);
+                                    },
+                                'update' => function($url, $model) {
+                                    return Html::a('', $url, ['class' => 'fa-solid fa-edit']);
                                 },
-                            'update' => function($url, $model) {
-                                return Html::a('', $url, ['class' => 'fa-solid fa-edit']);
-                            },
-                            'delete' => function($url, $model) {
-                                return Html::a('', $url, [
-                                    'class' => 'fa-solid fa-trash', 
-                                    'data-confirm' => 'Bạn có chắc chắn muốn xóa "' .$model->ma.'" không ? ',
-                                    'data-method' => 'post',
-                                ]);
-                            } ,
-                            'duyet' => function($url, $model) {
-                                return Html::a('', $url, [
-                                    'class' => 'fa-solid fa-pencil',
-                                    'data-method' => 'post',
-                                ]);
-                            }  
+                                'delete' => function($url, $model) {
+                                    return Html::a('', $url, [
+                                        'class' => 'fa-solid fa-trash', 
+                                        'data-confirm' => 'Bạn có chắc chắn muốn xóa "' .$model->ma.'" không ? ',
+                                        'data-method' => 'post',
+                                    ]);
+                                } ,
+                                'duyet' => function($url, $model) {
+                                    return Html::a('', $url, [
+                                        'class' => 'fa-solid fa-pencil',
+                                        
+                                    ]);
+                                }  
                             ]
                         ],
                     ],

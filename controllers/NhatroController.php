@@ -13,6 +13,7 @@ use app\models\Dmdientich;
 use app\models\Dmgia;
 use app\models\Dmkhuvuc;
 use app\models\NhatroDmdoituong;
+// use app\models\DmtienichNhatro;
 use app\models\Dmdoituong;
 use app\models\Dmtienich;
 use app\models\NhatroDmtienich;
@@ -20,8 +21,10 @@ use app\models\Tienich;
 use app\models\VNhatro;
 use app\models\VNhatroDmdoituong;
 use app\models\VNhatroDmtienich;
+
 use yii\data\ActiveDataProvider;
 use yii\helpers\VarDumper;
+use yii\helpers\ArrayHelper;
 
 /**
  * NhatroController implements the CRUD actions for Nhatro model.
@@ -108,6 +111,7 @@ class NhatroController extends Controller
                     $nhatroDmTienich->tienich_id = $dmTienichId;
                     $nhatroDmTienich->save();
                 }
+              
                 Yii::$app->session->addFlash('success', 'Đã đăng !');
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -135,22 +139,39 @@ class NhatroController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', [
-                'id' => $model->id
-            ]
-            ]);
+        $model = $this->findModel($id);                                 
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->save()) {
+                NhatroDmdoituong::deleteAll(['nhatro_id' => $model->id]);
+                $listDmDoituongId = Yii::$app->request->post('list_dmdoituong_id');
+                foreach ($listDmDoituongId as $dmDoituongId) {
+                    $nhatroDmDoituong = new NhatroDmdoituong();
+                    $nhatroDmDoituong->nhatro_id = $model->id;
+                    $nhatroDmDoituong->doituong_id = $dmDoituongId;
+                    $nhatroDmDoituong->save();
+                } 
+                NhatroDmtienich::deleteAll(['nhatro_id' => $model->id]);
+                $listDmTienichId = Yii::$app->request->post('list_dmtienich_id');      
+                foreach ($listDmTienichId as $dmTienichId) {
+                    $nhatroDmTienich = new NhatroDmtienich();
+                    $nhatroDmTienich->nhatro_id = $model->id;
+                    $nhatroDmTienich->tienich_id = $dmTienichId;
+                    $nhatroDmTienich->save();
+                }             
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
         $listDmKhuvuc = Dmkhuvuc::find()->all();
         $listDmDoituong = Dmdoituong::find()->all();
-        $listDmTienich = Dmtienich::find()->all();
+        // $listDmTienich = Dmtienich::find()->all();
         return $this->render('update', [
-            'model' => $model,
+            'model' => $model, 
             'listDmKhuvuc' => $listDmKhuvuc,
             'listDmDoituong' => $listDmDoituong,
-            'listDmTienich' => $listDmTienich,
+            'listDmTienich' => Dmtienich::getAvailableTienich(),
         ]);
+
+       
     }
 
     /**
@@ -167,8 +188,15 @@ class NhatroController extends Controller
         return $this->redirect(['index']);
     }
     public function actionDuyet($id) {
+        
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index', 'id' => $model->id]);
+        }
+
         return $this->render('duyet', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
@@ -187,4 +215,5 @@ class NhatroController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+   
 }

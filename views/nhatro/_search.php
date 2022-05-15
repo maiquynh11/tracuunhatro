@@ -27,6 +27,8 @@ use yii\widgets\ActiveForm;
         <div class="col-6"><?php echo $form->field($model, 'tieude') ?></div>
     
         <div class="col-6"><?php echo $form->field($model, 'gia') ?></div>
+
+        <div class="col-6"><?php echo $form->field($model, 'status') ?></div>
    </div>
 
 
