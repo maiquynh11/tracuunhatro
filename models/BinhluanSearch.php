@@ -17,8 +17,8 @@ class BinhluanSearch extends Binhluan
     public function rules()
     {
         return [
-            [['id', 'noidung'], 'safe'],
-            [['thanhvien_id', 'nhatro_id'], 'integer'],
+            [['id', 'user_id', 'nhatro_id', 'parent_id'], 'integer'],
+            [['noidung', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -58,12 +58,17 @@ class BinhluanSearch extends Binhluan
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'thanhvien_id' => $this->thanhvien_id,
+            'id' => $this->id,
+            'user_id' => $this->user_id,
             'nhatro_id' => $this->nhatro_id,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+            'parent_id' => $this->parent_id,
         ]);
 
-        $query->andFilterWhere(['ilike', 'id', $this->id])
-            ->andFilterWhere(['ilike', 'noidung', $this->noidung]);
+        $query->andFilterWhere(['ilike', 'noidung', $this->noidung])
+            ->andFilterWhere(['ilike', 'created_by', $this->created_by])
+            ->andFilterWhere(['ilike', 'updated_by', $this->updated_by]);
 
         return $dataProvider;
     }

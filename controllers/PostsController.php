@@ -11,6 +11,8 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Nhatro;
 use app\models\Binhluan;
+use yii\widgets\ActiveForm;
+use yii\web\NotFoundHttpException;
 
 class PostsController extends Controller 
 {
@@ -19,19 +21,33 @@ class PostsController extends Controller
         return $this->render('index');
     }
     public function actionView($id) {  
-       $nhatro = Nhatro::find()->all();
-       $model = Nhatro::findOne(['id' => $id]);
-       return $this->render('view', ['model' => $model]);
+        $model = Nhatro::findOne(['id' => $id]);
+
+        ////////////////////
+        if (Yii::$app->request->isPost && !Yii::$app->user->isGuest) {
+            $binhluan = new Binhluan();
+            $binhluan->load(Yii::$app->request->post());
+            $binhluan->user_id = Yii::$app->user->id;
+            $binhluan->save();
+        }
+
+        $listBinhluan = Binhluan::find()->where(['nhatro_id' => $model->id])->all();
+
+        return $this->render('view', ['model' => $model, 'listBinhluan' => $listBinhluan]);
     }
-    public function actionCreate() {
-        
+    public function actionDelete($id) {
+        $binhluan = $this->findModel($id);
+        if ($binhluan->belongsTo(Yii::$app->user->id) || $binhluan->nhatro->belongsTo(Yii::$app->user->id)){
+            $binhluan->delete;
+            return ['success' => true];
+        }
     }
-    public function actionShow() {
-        $post=$this->loadPost();
-        $this->render('show',array(
-            'post'=>$post,
-            'comments'=>$post->comments,
-        ));
+    protected function findModel($id)
+    {
+        if (($model = Binhluan::findOne(['id' => $id])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
-     
 }

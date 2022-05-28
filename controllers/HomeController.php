@@ -17,6 +17,7 @@ use app\models\Dmkhuvuc;
 use app\models\HomeSearchForm;
 use app\models\FilterBoxForm;
 use app\models\Nhatro;
+use app\models\Binhluan;
 use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
 
@@ -85,15 +86,20 @@ class HomeController extends Controller
         $listDmtienich = Dmtienich::find()->all();
         $listDmkhuvuc = Dmkhuvuc::find()->all();
         $listDmdientich = Dmdientich::find()->all();
+        $listBinhluan = new Binhluan();
         $homeSearchForm->load(Yii::$app->request->get());
         if (isset($homeSearchForm->query)) {
             $queryNhatro->orWhere(['ilike', 'tieude', $homeSearchForm->query])->orWhere(['ilike', 'gia', $homeSearchForm->query])->orWhere(['ilike', 'diachi', $homeSearchForm->query]);
         }
         $listNhatro = $queryNhatro->all();
 
-        return $this->render('index', compact("homeSearchForm", "listNewPost", "filterBoxForm", "listDmgia", "listDmtienich", "listDmdientich", "listDmkhuvuc", "listNhatro"));
+        return $this->render('index', compact("homeSearchForm", "listNewPost", "filterBoxForm", "listDmgia", "listDmtienich", "listDmdientich", "listDmkhuvuc", "listNhatro", "listBinhluan"));
     }
+    public function actionShow($id) {
+        $listNhatro = Nhatro::find()->where(['dmkhuvuc_id' => $id])->all();
+        return $this->render('show', compact("listNhatro"));
 
+    }
     /**
      * Login action.
      *
@@ -138,7 +144,6 @@ class HomeController extends Controller
 
         return $this->goHome();
     }
-
     /**
      * Displays contact page.
      *

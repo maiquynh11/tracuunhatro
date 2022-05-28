@@ -67,26 +67,37 @@ use yii\helpers\ArrayHelper;
                             <p class="text-bold">Diện tích</p>
                                 <?= $form->field($model, 'dientich')->textInput(['maxlength' => true])->label(false) ?>
                             </div>
-
                             <div class="col-12">
                                 <p class="text-bold">Đối tượng sử dụng</p>
+                                <?php $listNhatroDmdoituong = isset($listNhatroDmdoituong) ? $listNhatroDmdoituong : []?>
                                 <?php foreach($listDmDoituong as $key => $dmDoituong): ?>
+                                    <?php 
+                                    // input duoc check khi dmDoituong->id bang voi bat ky doi tuong su dung nha tro
+                                        $checked = "";
+                                        foreach ($listNhatroDmdoituong as $nhatroDmdoituong) {
+                                            if ($nhatroDmdoituong->doituong_id == $dmDoituong->id) {
+                                                $checked = "checked";
+                                                break;
+                                            }
+                                        }
+                                    ?>
                                     <div class="form-check">
                                         <label class="form-check-label p-1">
-                                            <input type="checkbox" class="form-check-input" select="" name="list_dmdoituong_id[]" id="" value="<?= $dmDoituong->id ?>">
+                                            <input type="checkbox" <?= $checked ?> class="form-check-input" name="list_dmdoituong_id[]" id="" value="<?= $dmDoituong->id ?>">
                                             <?= $dmDoituong->ten ?>
                                         </label>
                                     </div>
                                 <?php endforeach; ?>
-                            </div>   
+                            </div> 
                             <div class="col-12 pt-2">
                                 <p class="text-bold pt-2">Tiện ích</p>
                                 <div class="row pl-2">
+                                    <?php $listDmTienichIdOfNhatro = isset($listDmTienichIdOfNhatro) ? $listDmTienichIdOfNhatro : []?>
                                     <?php foreach($listDmTienich as $key => $dmTienich):?>            
                                         <div class="col-6 p-1">
                                             <div class="form-check">
                                                 <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input" name="list_dmtienich_id[]" id="" value="<?=$dmTienich->id?>">
+                                                    <input type="checkbox" class="form-check-input" <?= in_array($dmTienich->id, $listDmTienichIdOfNhatro) ? "checked" : "" ?> name="list_dmtienich_id[]" id="" value="<?=$dmTienich->id?>">
                                                     <?= $dmTienich->tienich ?>
                                                 </label>
                                             </div>

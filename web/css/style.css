@@ -104,7 +104,8 @@ body {
   box-shadow: 0 0 26px rgba(0, 0, 0, 0.13);
 }
 .login-button {
-  padding: 10px 0;  
+  padding: 15px;
+  width: 100%;
 }
 .btn_login .nav-link {
   color: black;
@@ -115,7 +116,7 @@ body {
   color: black;
 }
 .form-groups {
-  text-align: center;
+  text-align: center !important;
 }
 .site-signup h5 {
   position: relative;
@@ -130,15 +131,15 @@ body {
   min-height: 400px;
   background-size: cover;
 }
-.banner-icon img{
-  z-index: 21212;
-}
 .banner_icon {
   position: absolute;
   top: 100px;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
+}
+#login-form .form-group {
+  justify-content: center !important;
 }
 .banner_text {
   position: absolute;
@@ -188,24 +189,23 @@ body {
   margin: auto;
   border: none;
   border-radius: 5px;
-  padding: 15px;
+  padding: 20px;
 }
 .form-control {
   font-size: 13px;
-  width: 200px;
-  height: 50px;
+  height: 60px !important;
 }
 .btn-search {
   top: 225px;
   padding: 8px 50px;
   border-radius: 5px;
-  background-color: var(--detail-color);
-  color: white;
+  background-color: var(--detail-color) !important;
+  color: white !important;
   outline: none !important;
   /* box-shadow: 0px 5px 5px 3px var(--border-color); */
 }
 .btn-search:hover {
-  color: var(--border-color);
+  color: var(--border-color) !important;
 }
 .keyword {
   width: 250px;
@@ -294,7 +294,7 @@ li {
   justify-content: space-between;
 }
 .form_ma {
-  margin: 8px;
+  margin: 8px !important;
   font-size: 13px;
 }
 .flex-item i {
@@ -323,6 +323,7 @@ select {
 }
 .post-rate {
   font-size: 15px;
+  padding-top: 12px;
 }
 .post-arrange a {
   color: var(--detail-color);
@@ -437,6 +438,11 @@ option[value=""][disabled] {
 .comment {
   padding-top: -50px;
 }
+.count-comment {
+  padding-top: 16px;
+  padding-left: 12px;
+  color: var(--title-color)
+}
 .post-address {
   padding-left: 20px;
 }
@@ -455,7 +461,7 @@ option[value=""][disabled] {
   flex-direction: column;
 }
 .icon-img {
-  /* color: var(--green-color); */
+  color: var(--title-color);
   opacity: 0.7;
   padding: 5px 8px 5px 0;
 }
@@ -834,8 +840,8 @@ body {
   display: none;
 
 }
-.comments-wrapper {
-  display: flex;
+.comments-wrapper .media{
+  padding-bottom: 20px;
 }
 .text-bold {
   font-weight: bold;

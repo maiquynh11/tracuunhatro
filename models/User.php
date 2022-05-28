@@ -1,6 +1,7 @@
 <?php
 namespace app\models;
 
+use phpDocumentor\Reflection\Types\Expression;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -44,7 +45,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+            // TimestampBehavior::className(),
         ];
     }
 
@@ -54,9 +55,9 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'firstname', 'lastname', 'email'], 'string'],
-            ['status', 'default', 'value' => self::STATUS_INACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+            [['status', 'created_at', 'updated_at'], 'default', 'value' => null],
+            [['status', 'created_at', 'updated_at'], 'integer'],
+            [['username', 'vaitro', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'verification_token', 'firstname', 'lastname'], 'string', 'max' => 255],
         ];
     }
 
@@ -211,8 +212,35 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+    public function beforeSave($insert)
+    {
+        if ($insert) {
+            $this->generateAuthKey();
+            $this->generatePasswordResetToken();
+            $this->created_at = new Expression('NOW()');
+            $this->setPassword($this->password_hash);
+        }
+        else {
+            $old_user = User::findOne($this->id);
+            if ($this->password_hash != $old_user->password_hash) {
+                $this->setPassword($this->password_hash);
+                $this->generateAuthKey();
+                $this->generatePasswordResetToken();
+                
+            }
+            $this->updated_at = new Expression('NOW()');
+        }     
+        return parent::beforeSave($insert);     
+    }
     public function getDisplayName() {
         $fullname = trim($this->firstname.' '.$this->lastname);
         return $fullname;
     }
+    public function getBinhluan() {
+        return $this->hasMany(Binhluan::class, ['binhluan_id', 'id']);
+    }
+    public function getNhatro() {
+        return $this->hasMany(Nhatro::class, ['nhatro_id', 'id']);
+    }
+
 }

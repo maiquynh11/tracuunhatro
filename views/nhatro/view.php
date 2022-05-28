@@ -38,7 +38,7 @@ $khuvucs = Dmkhuvuc::find()->where(['khuvuc' => $model->id]);
             'dientich',
             'diachi',
             'tieude',
-            'mota',
+            'mota:html',
             'lienhe',
             'gia',
             [
@@ -69,7 +69,7 @@ $khuvucs = Dmkhuvuc::find()->where(['khuvuc' => $model->id]);
                     foreach ($listDmTienich as $dmTienich) {
                         $result .= '- ' .$dmTienich->tienich .' ';
                     }
-                    return $result;
+                    return Html::tag('span', $result, []);
                 }   
             ],
             [
@@ -84,14 +84,17 @@ $khuvucs = Dmkhuvuc::find()->where(['khuvuc' => $model->id]);
                     return $result;
                 }   
             ],
-            
+            'createdBy.username',
+            'updatedBy.username',
             // 'thanhvien_id',
             // 'tienich_id',
             // 'lat',
             // 'lng',
             // 'geom',
+         
         ],
+      
+      
     ]) ?>
-    
 
 </div>

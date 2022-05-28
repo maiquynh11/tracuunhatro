@@ -1,5 +1,6 @@
 <?php
 
+use app\models\VNhatroDmkhuvuc;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Url;
 use yii\helpers\Html;
@@ -84,6 +85,7 @@ use yii\helpers\ArrayHelper;
                         <small class="pl-2 post-qtt"><span style="color: var(--detail-color)">1200 </span>bài
                             đăng
                         </small>
+                       
                     </div>
                 </div>
             </div>

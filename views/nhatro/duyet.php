@@ -46,6 +46,7 @@ $khuvucs = Dmkhuvuc::find()->where(['khuvuc' => $model->id]);
             ],
           
             [
+                'label' => 'Trạng thái',
                 'attribute' => 'status',
                 'format' => 'html',
                 'value' => function() use ($model) {
@@ -88,8 +89,8 @@ $khuvucs = Dmkhuvuc::find()->where(['khuvuc' => $model->id]);
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data'], ]); ?>  
     <div class="form-check">
         <!-- <p class="text-bold">Đồng ý duyệt tin</p> -->
-            <?= $form->field($model, 'status')->checkbox()->label('Duyệt tin đăng')?>  
+            <?= $form->field($model, 'status')->checkbox()->label('Phê duyệt')?>  
             <?= Html::submitButton('Duyệt tin', ['class' => 'btn btn-success']) ?>
         </div>
     <?php ActiveForm::end(); ?> 
-</div>
+</div>  

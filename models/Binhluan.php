@@ -7,10 +7,15 @@ use Yii;
 /**
  * This is the model class for table "binhluan".
  *
- * @property string $id
+ * @property int $id
  * @property string|null $noidung
- * @property int|null $thanhvien_id
+ * @property int|null $user_id
  * @property int|null $nhatro_id
+ * @property string|null $created_by
+ * @property string|null $updated_by
+ * @property string|null $created_at
+ * @property string|null $updated_at
+ * @property int|null $parent_id
  */
 class Binhluan extends \yii\db\ActiveRecord
 {
@@ -28,11 +33,11 @@ class Binhluan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id'], 'required'],
-            [['thanhvien_id', 'nhatro_id'], 'default', 'value' => null],
-            [['thanhvien_id', 'nhatro_id'], 'integer'],
-            [['id', 'noidung'], 'string', 'max' => 255],
-            [['id'], 'unique'],
+            [['user_id', 'nhatro_id', 'parent_id'], 'default', 'value' => null],
+            [['user_id', 'nhatro_id', 'parent_id'], 'integer'],
+            [['created_by', 'updated_by'], 'string'],
+            [['created_at', 'updated_at'], 'safe'],
+            [['noidung'], 'string', 'max' => 255],
         ];
     }
 
@@ -44,9 +49,30 @@ class Binhluan extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'noidung' => 'Noidung',
-            'thanhvien_id' => 'Thanhvien ID',
+            'user_id' => 'User ID',
             'nhatro_id' => 'Nhatro ID',
+            'created_by' => 'Created By',
+            'updated_by' => 'Updated By',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+            'parent_id' => 'Parent ID',
         ];
     }
-  
+    public function getCreatedBy()
+    {
+        return $this->hasOne(User::className(), ['id' => 'created_by']);
+    }
+
+    public function getParent()
+    {
+        return $this->hasOne(Binhluan::className(), ['id' => 'parent_id']);
+    }
+    // public function getBinhluans()
+    // {
+    //     return $this->hasMany(Binhluan::className(), ['parent_id' => 'id']);
+    // }
+    public function getNhatro()
+    {
+        return $this->hasOne(Nhatro::className(), ['id' => 'nhatro_id']);
+    }
 }

@@ -26,7 +26,11 @@ use Yii;
  * @property string|null $created_time
  * @property string|null $update_time
  * @property int|null $status
+ * @property User $createdBy
+ * @property User $updatedBy
  */
+
+ 
 
 class Nhatro extends \yii\db\ActiveRecord
 {
@@ -37,7 +41,19 @@ class Nhatro extends \yii\db\ActiveRecord
     {
         return 'nhatro';
     }
-
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                'class' => \yii\behaviors\TimestampBehavior::className(),
+                'attributes' => [
+                    \yii\db\ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    \yii\db\ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                'value' => new \yii\db\Expression('NOW()'),
+            ],
+        ];
+    }
     /**
      * {@inheritdoc}
      */
@@ -72,12 +88,41 @@ class Nhatro extends \yii\db\ActiveRecord
             'lat' => 'Lat',
             'geom' => 'Geom',
             'lng' => 'Lng',
-            'created_at' => 'Ngày tạo',
-            'update_at' => 'Update Time',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+            'created_by' => 'Created By',
+            'updated_by' => 'Updated By',
             'status' => '',
         ];
+    }
+
+    public function getCreatedBy()
+    {
+        return $this->hasOne(Yii::$app->user->identityClass, ['id' => 'created_by']);
+    }
+    public function getUpdatedBy()
+    {
+        return $this->hasOne(Yii::$app->user->identityClass, ['id' => 'updated_by']);
     }
     public function getDmkhuvuc() {
         return $this->hasOne(Dmkhuvuc::class, ['id', 'dmkhuvuc_id']);
     }
+    public function getBinhluan() {
+        return $this->hasMany(Binhluan::class, ['binhluan_id', 'id']);
+    }
+    public function getUser() {
+        return $this->hasOne(User::class, ['id', 'user_id']);
+    }
+    // public function beforeSave($insert)
+    // {
+    //     if (parent::beforeSave($insert)) {
+    //         if($insert)
+    //             $this->created_at = date('Y-m-d H:i:s');
+    //             $this->updated_at = date('Y-m-d H:i:s');
+    //         return true;
+    //     } 
+    //     else {
+    //     return false;
+    //     }
+    // }
 }

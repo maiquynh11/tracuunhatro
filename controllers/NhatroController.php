@@ -12,17 +12,20 @@ use app\models\Comment;
 use app\models\Dmdientich;
 use app\models\Dmgia;
 use app\models\Dmkhuvuc;
+use app\models\Binhluan;
 use app\models\NhatroDmdoituong;
 // use app\models\DmtienichNhatro;
 use app\models\Dmdoituong;
 use app\models\Dmtienich;
 use app\models\NhatroDmtienich;
+use app\models\User;
 use app\models\Tienich;
 use app\models\VNhatro;
 use app\models\VNhatroDmdoituong;
 use app\models\VNhatroDmtienich;
 
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\helpers\VarDumper;
 use yii\helpers\ArrayHelper;
 
@@ -35,20 +38,25 @@ class NhatroController extends Controller
      * @inheritDoc
      */
     public $layout = 'nhatro';
-    public function behaviors()
-    {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
-                    ],
-                ],
-            ]
-        );
+
+    public function actionGetlistjson() {
+        // json, ajax, vuejs
+        $q = Yii::$app->request->get('q');
+
+        $query = Nhatro::find()->where('1=1');
+        if (isset($q) && !empty($q)) {
+            $query->andWhere(['ilike', 'tieude', $q]);
+        }
+
+        $listNhatro = $query->select(['tieude', 'id', 'lat', 'lng'])->asArray()->all();
+        return json_encode($listNhatro);
     }
+
+    public function actionGetdetailjson($id) {
+        $nhatro = Nhatro::find()->where(['id' => $id])->asArray()->one();
+        return json_encode($nhatro);
+    }
+
     /**
      * Lists all Nhatro models.
      *
@@ -56,17 +64,17 @@ class NhatroController extends Controller
      */
     public function actionIndex()
     {
-        $listDmKhuvuc = Dmkhuvuc::find()->all();
         $searchModel = new NhatroSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-        $dataProvider = new ActiveDataProvider([
-            'query' => Nhatro::find(),
-            'pagination' => [
-                'pageSize' => 10,
-            ],
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->setPagination([
+            'pageSize' => 10,
+            'forcePageParam' => false,
+            'pageSizeParam' => false
+        ]);
+        $dataProvider->setSort([
+            'defaultOrder' => ['id' => SORT_ASC],
         ]);
         return $this->render('index', [
-            'listDmKkhuvuc' => $listDmKhuvuc,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -82,10 +90,12 @@ class NhatroController extends Controller
      */
     public function actionView($id)
     {
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
+
     /**
      * Creates a new Nhatro model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -128,6 +138,7 @@ class NhatroController extends Controller
             'listDmKhuvuc' => $listDmKhuvuc,
             'listDmDoituong' => $listDmDoituong,
             'listDmTienich' => $listDmTienich,
+           
         ]);
     }
     /**
@@ -161,19 +172,30 @@ class NhatroController extends Controller
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }
+        // De tim danh sach doi tuong cua nha tro, nhatro -> nhatroDmdoituong -> doituong.
+        // Tim trong bang Dmdoituong nhatro_id = $id
+        // Dua danh sach len view
+        // nhatro - doituong => ddddx
+
+        $listNhatroDmDoituong = NhatroDmdoituong::find()->where(['nhatro_id' => $id])->all();
+        $listNhatroDmTienich = NhatroDmtienich::find()->where(['nhatro_id' => $id])->all();
+        $listDmTienichIdOfNhatro = [];
+        foreach ($listNhatroDmTienich as $nhatroDmTienich) {
+            array_push($listDmTienichIdOfNhatro, $nhatroDmTienich->tienich_id);
+        }
+        
         $listDmKhuvuc = Dmkhuvuc::find()->all();
         $listDmDoituong = Dmdoituong::find()->all();
-        // $listDmTienich = Dmtienich::find()->all();
+        $listDmTienich = Dmtienich::find()->all();
         return $this->render('update', [
             'model' => $model, 
             'listDmKhuvuc' => $listDmKhuvuc,
             'listDmDoituong' => $listDmDoituong,
-            'listDmTienich' => Dmtienich::getAvailableTienich(),
+            'listDmTienich' => $listDmTienich,
+            'listNhatroDmdoituong' => $listNhatroDmDoituong,
+            'listDmTienichIdOfNhatro' => $listDmTienichIdOfNhatro,
         ]);
-
-       
     }
-
     /**
      * Deletes an existing Nhatro model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -184,7 +206,6 @@ class NhatroController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
     }
     public function actionDuyet($id) {
@@ -194,12 +215,10 @@ class NhatroController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index', 'id' => $model->id]);
         }
-
         return $this->render('duyet', [
             'model' => $model,
         ]);
     }
-
     /**
      * Finds the Nhatro model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -212,7 +231,6 @@ class NhatroController extends Controller
         if (($model = Nhatro::findOne(['id' => $id])) !== null) {
             return $model;
         }
-
         throw new NotFoundHttpException('The requested page does not exist.');
     }
    

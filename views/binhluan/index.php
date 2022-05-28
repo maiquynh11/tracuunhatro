@@ -30,11 +30,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'noidung',
-            'thanhvien_id',
+            'user_id',
             'nhatro_id',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Binhluan $model, $key, $index, $column) {
+                'urlCreator' => function ($action, \app\models\Binhluan $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

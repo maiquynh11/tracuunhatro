@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $form->field($model, 'password')->passwordInput() ?>
             <div class="form-groups">
                 <span>Quên mật khẩu ?</span>
-                <?= Html::a('Reset it', ['site/request-password-reset']) ?>
+                <?= Html::a('Reset it', ['home/request-password-reset']) ?>
             </div>
             <div class="form-groups">
                 <span> Bạn chưa có tài khoản ?</span>

@@ -9,16 +9,12 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="binhluan-form">
-
-    <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'id')->textInput(['maxlength' => true]) ?>
+    <?php $form = ActiveForm::begin([
+         'id' => 'comment-form' ,
+         'enableAjaxValidation' => true ,
+    ]);?>
 
     <?= $form->field($model, 'noidung')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'thanhvien_id')->textInput() ?>
-
-    <?= $form->field($model, 'nhatro_id')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
