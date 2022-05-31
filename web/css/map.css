@@ -1,0 +1,143 @@
+body {
+  font-family: "Mallory Book", sans-serif, FontAwesome !important;
+  font-size: 13px !important;
+  line-height: 25px;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white !important;
+  color: #373737;
+}
+@font-face {
+  font-family: "Mallory Book";
+  src: url("../font/Mallory-Dfonts.org/Mallory/Mallory Book.ttf");
+}
+.navbar {
+ margin-bottom: 10px;
+}
+.sidebar-map {
+  background-color: #fafafa;
+  display: block;
+  position: relative;
+  min-height: 100vh;
+  overflow: auto;
+  height: 100vh;
+  padding: 0 !important;
+  /* top: 60px; */
+}
+.sidebar-map::-webkit-scrollbar {
+  width: 5px;
+}
+.sidebar-map::-webkit-scrollbar-track {
+  background-color: #eeeeee;
+}
+.sidebar-map::-webkit-scrollbar-thumb {
+  background-color: #bdbdbd;
+}
+#map, #app {
+  height: 100%;
+}
+#map {
+  min-height: 100vh;
+}
+.marker-nhatro {
+  /* width: 30px;
+  height: 30px;
+  border: 1px solid red; */
+}
+.main-map {
+  padding: 0;
+}
+.marker-tieude {
+  display: none;
+  width: 50;
+  height: 30px;
+  background-color: red;
+}
+
+.marker-vitri {
+  font-size: 22px;
+  color: rgb(255, 66, 78);
+}
+/* marker-nhatro:hover .marker-tieude {
+  display: block;
+} */
+.nhatro-box {
+  display: block;
+  padding: 10px;
+}
+.nhatro-list {
+  /* padding: 20px 0; */
+  border-bottom: 1px solid #eeeeee;
+
+}
+.nhatro-tieude {
+  font-weight: bold;
+  color: #046582;
+  padding-bottom: 3px;
+}
+.nhatro-gia {
+  color: rgb(255, 66, 78);
+  font-size: 16px;
+  font-weight: bold;
+}
+.nhatro-diachi {
+  padding-bottom: 3px;
+}
+.nhatro-search {
+  /* padding-left: 15px; */
+  padding: 5px;
+  background-color: rgb(26, 148, 255);
+  width: 100%;
+  
+
+}
+.nhatro-search input {
+  padding: 10px;
+  border: none;
+  border-radius: none;
+  width: 100%;
+}
+.img-icon {
+  color: #046582;
+  /* color: white !important; */
+}
+.nhatro-search_form {
+  display: flex;
+  border: none
+}
+.nhatro-btn-search, .nhatro-btn-clear {
+  text-align: center;
+  cursor: pointer;
+  /* background-color: rgb(26, 148, 255); */
+  /* padding-top: 12 px; */
+}
+.nhatro-btn-search i {
+  padding:  17px 15px;
+}
+.nhatro-btn-clear i {
+  border-left: 1px solid #e0e0e0;
+  padding:  15px;
+}
+.nhatro-btn-clear i {
+  font-size: 20px;
+  color: white
+}
+.nhatro-btn-search i {
+  font-size: 17px;
+  color: white
+}
+.nhatro-item {
+  padding: 20px 15px;
+}
+.nhatro-item:hover {
+  cursor: pointer;
+  background-color: #eeeeee;
+}
+.nhatro-item_return a {
+  padding-left: 10px;
+  padding-top: 5px;
+}
+.nhatro-item_return a:hover {
+  cursor: pointer;
+}

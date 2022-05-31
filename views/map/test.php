@@ -39,7 +39,6 @@
           width: 90px;
           height: 90px;
           border: 2px solid red;
-          /* border-radius: 50%; */
           background-color: blue;
         }
         .marker-tentram {

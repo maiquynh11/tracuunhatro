@@ -33,6 +33,7 @@ AppAsset::register($this);
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/map.css">
     <link rel="stylesheet" href="font/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.css">
     <link rel="stylesheet" href="font/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
@@ -67,7 +68,7 @@ AppAsset::register($this);
                             <a class="nav-link" href="#">Tin mới</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Bản đồ</a>
+                            <a class="nav-link" href="<?=Yii::$app->homeUrl?>map">Bản đồ</a>
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0  ml-auto">

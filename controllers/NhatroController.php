@@ -48,7 +48,7 @@ class NhatroController extends Controller
             $query->andWhere(['ilike', 'tieude', $q]);
         }
 
-        $listNhatro = $query->select(['tieude', 'id', 'lat', 'lng'])->asArray()->all();
+        $listNhatro = $query->select(['tieude', 'id', 'lat', 'lng', 'lienhe'])->asArray()->all();
         return json_encode($listNhatro);
     }
 
@@ -56,7 +56,6 @@ class NhatroController extends Controller
         $nhatro = Nhatro::find()->where(['id' => $id])->asArray()->one();
         return json_encode($nhatro);
     }
-
     /**
      * Lists all Nhatro models.
      *

@@ -69,7 +69,7 @@ $khuvucs = Dmkhuvuc::find()->where(['khuvuc' => $model->id]);
                     foreach ($listDmTienich as $dmTienich) {
                         $result .= '- ' .$dmTienich->tienich .' ';
                     }
-                    return Html::tag('span', $result, []);
+                    return $result;
                 }   
             ],
             [
