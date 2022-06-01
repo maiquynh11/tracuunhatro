@@ -56,6 +56,11 @@ class NhatroController extends Controller
         $nhatro = Nhatro::find()->where(['id' => $id])->asArray()->one();
         return json_encode($nhatro);
     }
+    public function actionGetfilterjson() {
+        $listTienich = Dmtienich::find()->asArray()->all();
+        return json_encode($listTienich);
+    }
+    
     /**
      * Lists all Nhatro models.
      *
@@ -180,7 +185,7 @@ class NhatroController extends Controller
         $listNhatroDmTienich = NhatroDmtienich::find()->where(['nhatro_id' => $id])->all();
         $listDmTienichIdOfNhatro = [];
         foreach ($listNhatroDmTienich as $nhatroDmTienich) {
-            array_push($listDmTienichIdOfNhatro, $nhatroDmTienich->tienich_id);
+            array_push($listDmTienichIdOfNhatro, $nhatroDmTienich->nhatro_id);
         }
         
         $listDmKhuvuc = Dmkhuvuc::find()->all();

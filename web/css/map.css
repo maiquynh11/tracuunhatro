@@ -112,6 +112,14 @@ body {
   /* background-color: rgb(26, 148, 255); */
   /* padding-top: 12 px; */
 }
+#nhatro-filter li {
+  list-style-type: none;
+}
+
+.filter-title {
+  font-weight: bold;
+  padding: 20px 10px;
+}
 .nhatro-btn-search i {
   padding:  17px 15px;
 }
@@ -141,3 +149,4 @@ body {
 .nhatro-item_return a:hover {
   cursor: pointer;
 }
+

@@ -19,14 +19,14 @@ body {
   color: #373737;
 }
 html::-webkit-scrollbar {
-  width: 5px;
+  width: 8px;
 }
 html::-webkit-scrollbar-thumb {
-  background-color: var(--main-color);
+  background-color: #bdbdbd;
 
 }
 html::-webkit-scrollbar-track {
-  background-color: #bdbdbd;
+  background-color: #eeeeee;
 }
 @font-face {
   font-family: "Mallory Book";

@@ -92,9 +92,9 @@ $khuvucs = Dmkhuvuc::find()->where(['khuvuc' => $model->id]);
             // 'lng',
             // 'geom',
          
-        ],
-      
-      
+        ], 
     ]) ?>
 
 </div>
+
+
