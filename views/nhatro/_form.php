@@ -95,17 +95,26 @@ use yii\helpers\ArrayHelper;
                                     <?php $listDmTienichIdOfNhatro = isset($listDmTienichIdOfNhatro) ? $listDmTienichIdOfNhatro : []?>
                                     <?php foreach($listDmTienich as $key => $dmTienich):?>            
                                         <div class="col-6 p-1">
+                                            <?php
+                                            // $checked = "";
+                                            // foreach ($listNhatroDmtienich as $nhatroDmtienich) {
+                                            //     if ($nhatroDmtienich->tienich_id == $dmTienich->id) {
+                                            //         $checked = "checked";
+                                            //         break;
+                                            //     }
+                                            // }
+                                            ?>
                                             <div class="form-check">
                                                 <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input" <?= in_array($dmTienich->id, $listDmTienichIdOfNhatro) ? "checked" : "" ?> name="list_dmtienich_id[]" id="" value="<?=$dmTienich->id?>">
+                                                    <input type="checkbox" class="form-check-input" <?= in_array($dmTienich->id, $listDmTienichIdOfNhatro)  ? "checked" : "" ?> name="list_dmtienich_id[]" id="" value="<?=$dmTienich->id?>">
                                                     <?= $dmTienich->tienich ?>
                                                 </label>
                                             </div>
                                         </div>
                                     <?php endforeach;?>
                                 </div>
-                            </div> 
-                          
+                                </div> 
+                            
                         </div>
                    </div>
                 </div>

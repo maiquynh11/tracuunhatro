@@ -2,7 +2,6 @@
 
 /** @var yii\web\View $this */
 /** @var string $content */
-
 use app\assets\AppAsset;
 use app\widgets\Alert;
 use yii\bootstrap4\Breadcrumbs;
@@ -70,25 +69,22 @@ AppAsset::register($this);
         </nav>
     </header>
     <main>
-    <!--  -->
-    <div class="wrapper container-fluid">
-       <div class="row">
-            <div id="sidebar_post" class="col-2 p-0">
-                <?=$this->render('@app/views/nhatro/_sidebar.php')?>
-            </div>
-            <div class="col-10 bg-light">
-                <?= Breadcrumbs::widget([
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                ]) ?>
-                    <?= Alert::widget() ?>
-                    <?= $content ?>
-            </div>
-       </div>
-    </div>   
+        <div class="wrapper container-fluid">
+        <div class="row">
+                <div id="sidebar_post" class="col-2 p-0">
+                    <?=$this->render('@app/views/nhatro/_sidebar.php')?>
+                </div>
+                <div class="col-10 bg-light">
+                    <?= Breadcrumbs::widget([
+                        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                    ]) ?>
+                        <?= Alert::widget() ?>
+                        <?= $content ?>
+                </div>
+        </div>
+        </div>   
     </main>
     <footer class="footer mt-auto py-3 text-muted">
-      
-        </div>
     </footer>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
     integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
@@ -96,6 +92,9 @@ AppAsset::register($this);
     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
     integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
     crossorigin="">
+    </script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
     </script>
     <?php $this->endBody() ?>
 </body>

@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = 'Cập nhật tin đăng';
         'listDmTienich' => $listDmTienich,
         'listNhatroDmdoituong' => $listNhatroDmdoituong,
         'listDmTienichIdOfNhatro' => $listDmTienichIdOfNhatro,
+        'listNhatroDmtienich' => $listNhatroDmtienich,
     ]) ?>
 
 </div>

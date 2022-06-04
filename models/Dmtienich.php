@@ -43,10 +43,4 @@ class Dmtienich extends \yii\db\ActiveRecord
             'tienich' => 'Tienich',
         ];
     }
-    public static function getAvailableTienich()
-    {
-        $listDmTienich = self::find()->orderBy('tienich')->asArray()->all();
-        $items = ArrayHelper::map($listDmTienich, 'id', 'tienich');
-        return $items;
-    }
 }

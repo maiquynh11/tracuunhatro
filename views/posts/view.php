@@ -176,19 +176,10 @@ use yii\widgets\ActiveForm;
                                                         <div class="comment-text">
                                                             <?= $binhluan->noidung ?>
                                                         </div>
-                                                    </div>   
-                                                  
-                                                    <button> 
-                                                        <a class="dropdown-item item-delete-comment" href="<?php echo \yii\helpers\Url::to(['posts/delete', 'id' => $model->id]) ?>">
-                                                            <i class="fas fa-trash"></i>
-                                                            Delete
-                                                        </a>
-                                                    </button>    
-                                                                                   
+                                                    </div>                                                
                                                 </div>
                                             <?php endforeach; ?>
-                                        </div>
-                                       
+                                        </div> 
                                     </div>
                                 </div>
                             </div>
@@ -198,7 +189,6 @@ use yii\widgets\ActiveForm;
                                 <!-- <i class="fa-solid fa-location-dot icon-img"></i> -->
                                 <span class="text-title">Bản đồ</span>
                                 <div class="map-box">
-
                                 </div>
                             </div>
                         </div>

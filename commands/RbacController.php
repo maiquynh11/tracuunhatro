@@ -37,13 +37,16 @@ class RbacController extends Controller {
         // $duyetNhatro->description = "Duyệt bài đăng";
         // $auth->add($duyetNhatro);
         $nhatroManager = $auth->createRole('manager-nhatro');
-        // $binhluanManager = $auth->createRole('manager-binhluan');
+        $binhluanManager = $auth->createRole('manager-binhluan');
         // $auth->add($binhluanManager);     
         
         $admin = $auth->createRole('admin');
 
 
-        $auth->addChild($admin, $nhatroManager);    
+        // $auth->addChild($admin, $nhatroManager);    
+
+        $auth->assign($nhatroManager, 2);
+        $auth->assign($admin, 1);
 
         // $auth->add($admin);
 

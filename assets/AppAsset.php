@@ -22,7 +22,7 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/style-media.css',
         'css/style.css',
-        'css/filter.css',
+        // 'css/filter.css',
         'font/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.css',
         'font/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css',
         'css/post.css',
@@ -35,6 +35,6 @@ class AppAsset extends AssetBundle
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        // 'yii\bootstrap4\BootstrapAsset',
+        'yii\bootstrap4\BootstrapAsset',
     ];
 }

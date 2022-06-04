@@ -69,7 +69,7 @@ $khuvucs = Dmkhuvuc::find()->where(['khuvuc' => $model->id]);
                     foreach ($listDmTienich as $dmTienich) {
                         $result .= '- ' .$dmTienich->tienich .' ';
                     }
-                    return $result;
+                    return Html::tag('', $result, []);
                 }   
             ],
             [
@@ -81,7 +81,7 @@ $khuvucs = Dmkhuvuc::find()->where(['khuvuc' => $model->id]);
                     foreach ($listDmDoituong as $dmDoituong) {
                         $result .= '- ' .$dmDoituong->ten .' ';
                     }
-                    return $result;
+                    return Html::tag('', $result, []);
                 }   
             ],
             'createdBy.username',
@@ -96,5 +96,3 @@ $khuvucs = Dmkhuvuc::find()->where(['khuvuc' => $model->id]);
     ]) ?>
 
 </div>
-
-

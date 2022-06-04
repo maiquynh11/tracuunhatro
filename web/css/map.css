@@ -112,14 +112,44 @@ body {
   /* background-color: rgb(26, 148, 255); */
   /* padding-top: 12 px; */
 }
+#nhatro-filter {
+  padding-top: 10px;
+}
 #nhatro-filter li {
   list-style-type: none;
 }
-
+.tienich-list, .doituong-list{
+  padding-left: 15px;
+}
 .filter-title {
   font-weight: bold;
-  padding: 20px 10px;
 }
+.filter-title i {
+  font-size: 10px;
+  margin-right: 8px;
+}
+#filter-view ul li a {
+  padding: 10px;
+  font-size: 1.1em;
+  display: block;
+}
+#filter-view li a:hover {
+  text-decoration: none;
+}
+#filter-view a[data-toggle="collapse"] {
+  position: relative;
+  text-decoration: none;
+}
+#filter-view ul li {
+  padding-left: 15px;
+}
+.tienich-items {
+  padding: 2px;
+}
+/* .tienich-items input[type=checkbox]{
+  margin:  5px 5px 0;
+
+} */
 .nhatro-btn-search i {
   padding:  17px 15px;
 }

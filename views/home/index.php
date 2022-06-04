@@ -227,7 +227,7 @@ use yii\helpers\ArrayHelper;
             <div class="content-filter bg-white">
                 <p class="text-title pl-3">BỘ LỌC NÂNG CAO</p>
                 <form id="formFilterSidebar1">
-                    <div class="filter-pad">
+                   
                         <div id="sidebar">                      
                             <ul class="list-unstyled components">          
                                 <li>
@@ -252,7 +252,7 @@ use yii\helpers\ArrayHelper;
                                 </li>
                             </ul>                   
                         </div>
-                    </div>
+                   
                 </form>
                 <form id="formFilterSidebar2">
                     <div class="filter-pad">

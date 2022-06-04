@@ -27,6 +27,7 @@ use yii\bootstrap4\NavBar;
         crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
         <!-- <link rel="stylesheet" href="./css/style.css"> -->
         <link rel="stylesheet" href="./css/map.css">
         <title>Document</title>
@@ -72,7 +73,7 @@ use yii\bootstrap4\NavBar;
                                     </a>
                                 </div>
                                 <div class="nhatro-box">
-                                    <div class="nhatro-tieude" href="<?=Yii::$app->homeUrl?>">{{selectedMarkerData.tieude}}</div>
+                                    <div class="nhatro-tieude">{{selectedMarkerData.tieude}}</div>
                                     <div class="nhatro-gia">
                                         {{selectedMarkerData.gia}}
                                     </div>
@@ -91,39 +92,33 @@ use yii\bootstrap4\NavBar;
                                 </div>
                             </div>
                         </div>                   
-                        <div id="nhatro-filter" class="tab-pane fade clear">
-                            <li class="">
-                                <a href="#tienich-dropdown" data-toggle="collapse" class="dropdown-toggle">
-                                    <span class="filter-title"><i class="fa-solid fa-angle-right mr-2"></i>TIỆN ÍCH</span>
-                                </a> 
-                                <ul clas="collapse list-unstyled" id="tienich-dropdown">
-                                    <div class="row">
-                                        <li class="tienich-text">
-                                            <div v-for="tienichs in listTienich">
-                                                <div class="col-md-6"> 
-                                                    <input type="checkbox" :value="tienichs.id"  @change="onChangeTienich(tienichs.id)">{{tienichs.tienich}}
-                                                </div>
+                        <div id="nhatro-filter" class="tab-pane fade ">
+                            <ul class="list-unstyled components">
+                                <div id="filter-view">
+                                    <li class="tienich-list">
+                                        <a href="#tienich-dropdown" data-toggle="collapse" class="dropdown-toggle">
+                                            <div class="filter-title">
+                                                <i class="fa-solid fa-angle-right mr-3"></i>TIỆN ÍCH
                                             </div>
-                                        </li>
-                                    </div>
-                                </ul> 
-                            </li>     
-                            <li class="">
-                                <a href="#doituong-dropdown" data-toggle="collapse" class="dropdown-toggle">
-                                    <span class="filter-title"><i class="fa-solid fa-angle-right mr-2"></i>ĐỐI TƯỢNG</span>
-                                </a> 
-                                <ul clas="collapse list-unstyled" id="doituong-dropdown">
-                                    <div class="row">
-                                        <li class="tienich-text">
-                                            <div v-for="tienichs in listTienich">
-                                                <div class=""> 
-                                                    <input type="checkbox" :value="tienichs.id"  @change="onChangeTienich(tienichs.id)">{{tienichs.tienich}}
-                                                </div>
+                                        </a> 
+                                        <ul class="collapse list-unstyled" id="tienich-dropdown">
+                                            <div class="row">
+                                                <li class="tienich-text">
+                                                    <div v-for="tienichs in listTienich" class="col-md-6">
+                                                        <div class="tienich-items"> 
+                                                            <input type="checkbox" :value="tienichs.id" @change="onChangeTienich(tienichs.id)"><span>{{tienichs.tienich}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div v-if="viewType == 'listSelectedTienich'">
+                                                        <button @click=" showListNhatroTienich()">Loc</button></div>
+                                                        {{listSelectedTienich.mota}}
+
+                                                </li>
                                             </div>
-                                        </li>
-                                    </div>
-                                </ul> 
-                            </li>                        
+                                        </ul> 
+                                    </li>     
+                                </div>
+                            </ul>         
                         </div>  
                     </div>   
                 </div>  
@@ -140,20 +135,20 @@ use yii\bootstrap4\NavBar;
                     selectedMarkerData: {},
                     sidebarViewType: "listNhatro", // "detailNhatro", "searchResultNhatro"   
                     listNhatro: [],
-                    viewTienich: "listTienich",
-                    isCheckAll: false,
                     listTienich: [],
+                    viewType: "listTienich",
                     listSelectedTienich: [],
                     searchData: {
                         searchText: ""
                     },
-                    checkedTienich: [],
+                    // checkedTienich: [],
                 },
                 mounted: async function() {
                     this.initMap();
                     this.loadMarkers();
                     this.loadListNhatro();
                     this.loadListTienich();
+                    // this.loadListNhatroCheckedTienich();
                 },
                 methods: {
                     initMap: function() {
@@ -188,7 +183,7 @@ use yii\bootstrap4\NavBar;
                         const response = await fetch(homeUrl + "nhatro/getdetailjson?id=" + id);
                         this.selectedMarkerData = await response.json();
                         this.sidebarViewType = "detailNhatro";
-                    },             
+                    },  
                     showListNhatro: function() {
                         this.sidebarViewType = "listNhatro";
                     },
@@ -218,25 +213,46 @@ use yii\bootstrap4\NavBar;
                         this.onChangeSearchData();
                     },
                     showListTienich: async function() {
-                        this.viewTienich = "listTienich";
+                        this.viewType = "listTienich";
                     },
                     loadListTienich: async function(id) {
                         const response = await fetch(homeUrl + "nhatro/getfilterjson?id=" + id);
                         this.listTienich = await response.json();
-                        this.viewTienich = "listTienich";
+                        this.viewType = "listTienich";
                     },
-                    onChangeTienich: function(id) {
-                        const idx = this.listSelectedTienich.indexOf(id);
+                    onChangeTienich: async function(id) {
+                        const idx = this.listSelectedTienich.indexOf(id);  
                         if (idx < 0) {
                             this.listSelectedTienich.push(id);
                         } else {
                             this.listSelectedTienich.splice(idx, 1);
                         }
-                        console.log(this.listSelectedTienich);
-                    }
-                    // checkedTienich: async function() {
-                    //     this.checkedTienich = 
-                    //}    
+                        this.showListNhatroTienich();
+                    },
+                    getListTienichAsParam: function() {
+                        let result = "";
+                        this.listSelectedTienich.forEach(e => {   // lập vòng lặp foreach đẩy kết quả trả về về biến e
+                            result += "&listTienichId[]=" + e; 
+                        })
+                        return result;
+                    },
+                    // getListDoituongAsParam: function() {
+                    //     let result = "";
+                    //     this.listSelectedDoituong.forEach(e => {
+                    //         result += "&listDoituongId[]=" + e;
+                    //     })
+                    //     return result;
+                    // },
+                    // showListNhatroDoituong: async function() {
+                    //     const response = await fetch(homeUrl + "nhatro/getlistjson?1=1" + this.getListDoituongAsParam());
+                    //     this.listNhatro = await response.json();
+                    //     this.sidebarViewType = "listNhatro";
+                    // },
+                    showListNhatroTienich: async function() {
+                        const response = await fetch(homeUrl + "nhatro/getlistjson?1=1" + this.getListTienichAsParam());
+                        this.listNhatro = await response.json();
+                        this.sidebarViewType = "listNhatro";
+                    },
                 }
             })
             

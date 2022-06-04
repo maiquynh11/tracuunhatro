@@ -35,19 +35,19 @@ class PostsController extends Controller
 
         return $this->render('view', ['model' => $model, 'listBinhluan' => $listBinhluan]);
     }
-    public function actionDelete($id) {
-        $binhluan = $this->findModel($id);
-        if ($binhluan->belongsTo(Yii::$app->user->id) || $binhluan->nhatro->belongsTo(Yii::$app->user->id)){
-            $binhluan->delete;
-            return ['success' => true];
-        }
-    }
-    protected function findModel($id)
-    {
-        if (($model = Binhluan::findOne(['id' => $id])) !== null) {
-            return $model;
-        }
+    // public function actionDelete($id) {
+    //     $binhluan = $this->findModel($id);
+    //     if ($binhluan->belongsTo(Yii::$app->user->id) || $binhluan->nhatro->belongsTo(Yii::$app->user->id)){
+    //         $binhluan->delete;
+    //         return ['success' => true];
+    //     }
+    // }
+    // protected function findModel($id)
+    // {
+    //     if (($model = Binhluan::findOne(['id' => $id])) !== null) {
+    //         return $model;
+    //     }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
-    }
+    //     throw new NotFoundHttpException('The requested page does not exist.');
+    // }
 }

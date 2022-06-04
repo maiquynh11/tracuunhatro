@@ -23,7 +23,6 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/fontawesome.min.css"
@@ -32,15 +31,15 @@ AppAsset::register($this);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/map.css">
-    <link rel="stylesheet" href="font/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.css">
-    <link rel="stylesheet" href="font/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
+    <!-- <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/map.css"> -->
+    <!-- <link rel="stylesheet" href="font/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.css">
+    <link rel="stylesheet" href="font/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css"> -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <?php $this->head() ?>
 </head>
-
 <body>
     <?php $this->beginBody() ?>
     <header>
@@ -116,17 +115,16 @@ AppAsset::register($this);
             </div>
         </nav>
     </header>
-    <main>
-       
-            <?= $content ?>
-       
+    <main> 
+        <?= $content ?>
     </main>
     <footer class="footer mt-auto py-3 text-muted">
-      
-        </div>
     </footer>
-
     <!-- <script src="font/OwlCarousel2-2.3.4/dist/JQuery3.3.1.js"></script> -->
+    <script src="font/OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+    </script>
       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
     integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
     crossorigin=""/>
@@ -208,6 +206,5 @@ AppAsset::register($this);
     </script>
     <?php $this->endBody() ?>
 </body>
-
 </html>
 <?php $this->endPage() ?>
