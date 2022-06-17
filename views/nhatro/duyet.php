@@ -89,7 +89,7 @@ $khuvucs = Dmkhuvuc::find()->where(['khuvuc' => $model->id]);
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data'], ]); ?>  
     <div class="form-check">
         <!-- <p class="text-bold">Đồng ý duyệt tin</p> -->
-            <?= $form->field($model, 'status')->checkbox()->label('Phê duyệt')?>  
+            <?= $form->field($model, 'status')->checkbox()->label('Approved')?>  
             <?= Html::submitButton('Duyệt tin', ['class' => 'btn btn-success']) ?>
         </div>
     <?php ActiveForm::end(); ?> 

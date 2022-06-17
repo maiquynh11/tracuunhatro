@@ -61,7 +61,7 @@ AppAsset::register($this);
                             <a class="nav-link" href="#">Tin mới</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Bản đồ</a>
+                            <a class="nav-link" href="<?=Yii::$app->homeUrl?>map">Bản đồ</a>
                         </li>
                     </ul>
                 </div>

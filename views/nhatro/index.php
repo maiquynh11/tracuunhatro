@@ -53,23 +53,23 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'dientich',
                 'contentOptions' => [
-                    // 'style' => 'width: 70px'
+                    'style' => 'width: 170px'
                 ]
             ],
             'diachi',
-            // 'lat',
-            //'lng',
-            //'geom',
-            [
-                'label' => 'Tài khoản',
-                'attribute' => 'user_id',
-                'value' => function($model) {
-                    $listUser = app\models\User::find()->where(['id' => $model->user_id])->all();
-                    foreach ($listUser as $user) {
-                        return $user->id;
-                    }
-                }
-            ],
+            'lat',
+            'lng',
+            'geom',
+            // [
+            //     'label' => 'Tài khoản',
+            //     'attribute' => 'user_id',
+            //     'value' => function($model) {
+            //         $listUser = app\models\User::find()->where(['id' => $model->user_id])->all();
+            //         foreach ($listUser as $user) {
+            //             return $user->id;
+            //         }
+            //     }
+            // ],
             [
                 'label' => 'Khu vực',
                 'attribute' => 'dmkhuvuc_id',

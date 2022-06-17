@@ -44,7 +44,7 @@ $khuvucs = Dmkhuvuc::find()->where(['khuvuc' => $model->id]);
             [
                 'attribute' => 'dmkhuvuc_id',
                 'value' => function($model) {
-                    $listDmKhuvuc = app\models\Dmkhuvuc::find()->where(['id' => $model->dmkhuvuc_id])->all();
+                    $listDmKhuvuc = Dmkhuvuc::find()->where(['id' => $model->dmkhuvuc_id])->all();
                     foreach ($listDmKhuvuc as $dmKhuvuc) {
                         return $dmKhuvuc->khuvuc;
                     }
@@ -69,7 +69,7 @@ $khuvucs = Dmkhuvuc::find()->where(['khuvuc' => $model->id]);
                     foreach ($listDmTienich as $dmTienich) {
                         $result .= '- ' .$dmTienich->tienich .' ';
                     }
-                    return Html::tag('', $result, []);
+                    return $result;
                 }   
             ],
             [
@@ -81,15 +81,15 @@ $khuvucs = Dmkhuvuc::find()->where(['khuvuc' => $model->id]);
                     foreach ($listDmDoituong as $dmDoituong) {
                         $result .= '- ' .$dmDoituong->ten .' ';
                     }
-                    return Html::tag('', $result, []);
+                    return $result;
                 }   
             ],
             'createdBy.username',
             'updatedBy.username',
             // 'thanhvien_id',
             // 'tienich_id',
-            // 'lat',
-            // 'lng',
+            'lat',
+            'lng',
             // 'geom',
          
         ], 

@@ -26,8 +26,8 @@ class HomeSearchForm extends Model
     {
         return [
             // rememberMe must be a boolean value
-            [['query', 'tienich_id'], 'string'],
-            [['dmdientich_id', 'dmgia_id', 'dmkhuvuc_id'], 'number'],
+            [['query'], 'string'],
+            [['dmdientich_id', 'dmgia_id', 'dmkhuvuc_id', 'tienich_id'], 'number'],
         ];
     }
 }

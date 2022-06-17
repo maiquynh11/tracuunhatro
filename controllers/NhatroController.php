@@ -90,39 +90,67 @@ use yii\helpers\ArrayHelper;
     
         public function actionGetlistjson() {
             // json, ajax, vuejs
+            $data = Yii::$app->request;
             $query = Nhatro::find()->where('1=1');
+            // $dmTienich = Dmtienich::find();
 
-            $q = Yii::$app->request->get('q');
+            $q = $data->get('q');
             if (isset($q) && !empty($q)) {
                 $query->andWhere(['ilike', 'tieude', $q]);
             }
-            // $listDoituongId = Yii::$app->request->get('listDoituongId');
-            // if ($listDoituongId && is_array($listDoituongId)) {
-            //     $listNhatroId = NhatroDmtienich::find()->where(['in', ])
-            // }
-            $listTienichId = Yii::$app->request->get('listTienichId');
-            if ($listTienichId && is_array($listTienichId)) {
-                $listNhatroId = NhatroDmtienich::find()->where(['in', 'tienich_id', $listTienichId])->select('id')->column();
-                $query->andWhere(['in', 'id', $listNhatroId]);
+            
+            
+            $listKhuvucId = $data->get('listKhuvucId');
+            if ($listKhuvucId && is_array($listKhuvucId)) {
+                $query->andWhere(['in','dmkhuvuc_id', $listKhuvucId]);
             }
+
+            $listDoituongId = $data->get('listDoituongId');
+            if ($listDoituongId && is_array($listDoituongId)) {
+                $listNhatroIdHaveDoituong = NhatroDmdoituong::find()->where(['in', 'doituong_id', $listDoituongId])->select('nhatro_id')->column();
+                $query->andWhere(['in', 'id', $listNhatroIdHaveDoituong]);
+            }
+
+            $listTienichId = $data->get('listTienichId');
+            if ($listTienichId && is_array($listTienichId)) {
+                $listNhatroIdHaveTienich = NhatroDmtienich::find()->where(['in', 'tienich_id', $listTienichId])->select('nhatro_id')->column();
+                $query->andWhere(['in', 'id', $listNhatroIdHaveTienich]); 
+            }
+
+            $geoFilterType = $data->get('geoFilterType');
+            if (isset($geoFilterType) && !empty($geoFilterType)) {
+                if ($geoFilterType == 'circle') {
+                    $lat = $data->get('lat');
+                    $lng = $data->get('lng');
+                    $radius = $data->get('radius');
+                    // 4326 latlng, 32648 metter => WGS84 UTM
+                    $query->andWhere("st_distance(st_transform(geom, 32648), st_transform(st_geomfromtext('POINT($lng $lat)', 4326), 32648)) <= $radius");
+                }
+            }
+
             $listNhatro = $query->asArray()->all();
             return json_encode($listNhatro);
         }
-        public function actionGetdetailjson($id) {
+        
+        public function actionGetdetailjson($id) {  
+            // $nhatro = Nhatro::find()->where(['id' => $id]); 
             $nhatro = Nhatro::find()->where(['id' => $id])->asArray()->one();
+            
             return json_encode($nhatro);
         }
-
-        public function actionGetfilterjson() {
+        public function actionGettienichjson() {
             $listTienich = Dmtienich::find()->asArray()->all();
+
             return json_encode($listTienich);
         }
-        
-        // public function actionGetdetailfilterjson($id) {
-        //     $listSelectedTienich = VListnhatroTienich::find()->where(['tienich_id' => $id])->asArray()->all();
-        //     return json_encode($listSelectedTienich);
-            
-        // } 
+        public function actionGetdoituongjson() {
+            $listDoituong = Dmdoituong::find()->asArray()->all();
+            return json_encode($listDoituong);
+        }
+        public function actionGetkhuvucjson() {
+            $listKhuvuc = Dmkhuvuc::find()->asArray()->all();
+            return json_encode($listKhuvuc);
+        }
         /**
          * Lists all Nhatro models.
          *
@@ -187,13 +215,14 @@ use yii\helpers\ArrayHelper;
                         $nhatroDmTienich->tienich_id = $dmTienichId;
                         $nhatroDmTienich->save();
                     }
-                  
+                    Yii::$app->db->createCommand("UPDATE nhatro.id SET geom = ST_GeomFromText('POINT(lng lat)', 4326) WHERE id = nhatro.id")->execute();          
+                   
                     Yii::$app->session->addFlash('success', 'Đã đăng !');
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
                 else {
                     Yii::$app->session->addFlash('danger', 'Không hợp lệ !');
-                    return $this->render('create', ['model' => $model,]);
+                    return $this->render('create', ['model' => $model->id]);
                 }
             }
             $listDmKhuvuc = Dmkhuvuc::find()->all();
@@ -234,7 +263,16 @@ use yii\helpers\ArrayHelper;
                         $nhatroDmTienich->nhatro_id = $model->id;
                         $nhatroDmTienich->tienich_id = $dmTienichId;
                         $nhatroDmTienich->save();
-                    }             
+                    }   
+                    // $lat = $model->lat;
+                    // $lng = $model->lng;
+                    ///// update nhatro where id=nhatro.id set geom = st_geomfromtext('POINT(lng lat)', 4326)'
+
+                    $id = $model->id;
+                    $lat = $model->lat;
+                    $lng = $model->lng;
+                    Yii::$app->db->createCommand("UPDATE nhatro SET geom = ST_GeomFromText('POINT($lat $lng)', 4326) WHERE id = '$id'")->execute();
+                    // Yii::$app->db->createCommand("UPDATE nhatro.id SET geom = ST_GeomFromText('POINT(lng lat)', 4326) WHERE id = nhatro.id")->execute();          
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
             }
@@ -258,9 +296,9 @@ use yii\helpers\ArrayHelper;
                 'listDmKhuvuc' => $listDmKhuvuc,
                 'listDmDoituong' => $listDmDoituong,
                 'listDmTienich' => $listDmTienich,
-                'listNhatroDmdoituong' => $listNhatroDmDoituong,
+                'listNhatroDmDoituong' => $listNhatroDmDoituong,
                 'listDmTienichIdOfNhatro' => $listDmTienichIdOfNhatro,
-                'listNhatroDmtienich' => $listNhatroDmTienich
+                'listNhatroDmTienich' => $listNhatroDmTienich
             ]);
         }
         /**
@@ -302,6 +340,5 @@ use yii\helpers\ArrayHelper;
                 return $model;
             }
             throw new NotFoundHttpException('The requested page does not exist.');
-        }
-       
+        }   
     }

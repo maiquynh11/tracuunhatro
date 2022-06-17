@@ -7,13 +7,14 @@ use Yii;
 /**
  * This is the model class for table "v_listnhatro_tienich".
  *
- * @property int|null $tienich_id
  * @property int|null $nhatro_id
+ * @property int|null $tienich_id
  * @property string|null $tieude
+ * @property int|null $id
  * @property string|null $mota
- * @property string|null $dientich
- * @property string|null $diachi
  * @property string|null $gia
+ * @property string|null $diachi
+ * @property string|null $dientich
  */
 class VListnhatroTienich extends \yii\db\ActiveRecord
 {
@@ -31,10 +32,10 @@ class VListnhatroTienich extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tienich_id', 'nhatro_id'], 'default', 'value' => null],
-            [['tienich_id', 'nhatro_id'], 'integer'],
+            [['nhatro_id', 'tienich_id', 'id'], 'default', 'value' => null],
+            [['nhatro_id', 'tienich_id', 'id'], 'integer'],
             [['mota'], 'string'],
-            [['tieude', 'dientich', 'diachi', 'gia'], 'string', 'max' => 255],
+            [['tieude', 'gia', 'diachi', 'dientich'], 'string', 'max' => 255],
         ];
     }
 
@@ -44,13 +45,14 @@ class VListnhatroTienich extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'tienich_id' => 'Tienich ID',
             'nhatro_id' => 'Nhatro ID',
+            'tienich_id' => 'Tienich ID',
             'tieude' => 'Tieude',
+            'id' => 'ID',
             'mota' => 'Mota',
-            'dientich' => 'Dientich',
-            'diachi' => 'Diachi',
             'gia' => 'Gia',
+            'diachi' => 'Diachi',
+            'dientich' => 'Dientich',
         ];
     }
 }

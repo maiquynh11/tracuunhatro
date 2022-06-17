@@ -77,7 +77,7 @@ class HomeController extends Controller
      */
     public function actionIndex()
     {
-
+        // $products = Nhatr::find()->published()->all();
         $listNewPost = Nhatro::find()->all();
         $homeSearchForm = new HomeSearchForm();
         $filterBoxForm = new FilterBoxForm();
@@ -92,7 +92,6 @@ class HomeController extends Controller
             $queryNhatro->orWhere(['ilike', 'tieude', $homeSearchForm->query])->orWhere(['ilike', 'gia', $homeSearchForm->query])->orWhere(['ilike', 'diachi', $homeSearchForm->query]);
         }
         $listNhatro = $queryNhatro->all();
-
         return $this->render('index', compact("homeSearchForm", "listNewPost", "filterBoxForm", "listDmgia", "listDmtienich", "listDmdientich", "listDmkhuvuc", "listNhatro", "listBinhluan"));
     }
     public function actionShow($id) {

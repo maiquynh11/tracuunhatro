@@ -65,6 +65,7 @@ class Nhatro extends \yii\db\ActiveRecord
             [['created_at', 'update_at'], 'safe'],
             [['status'], 'default', 'value' => null],
             [['status'], 'integer'],
+            [['dmkhuvuc_id','lat', 'lng', 'geom'], 'safe'],
             [['ma', 'tieude', 'gia', 'dientich', 'diachi', 'lienhe', 'user_id'], 'string', 'max' => 255],
         ];
     }
@@ -92,21 +93,21 @@ class Nhatro extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
-            'status' => '',
+            'status' => 'Approved',
         ];
     }
 
-    // public function getCreatedBy()
-    // {
-    //     return $this->hasOne(Yii::$app->user->identityClass, ['id' => 'created_by']);
-    // }
-    // public function getUpdatedBy()
-    // {
-    //     return $this->hasOne(Yii::$app->user->identityClass, ['id' => 'updated_by']);
-    // }
-    // public function getDmkhuvuc() {
-    //     return $this->hasOne(Dmkhuvuc::class, ['id', 'dmkhuvuc_id']);
-    // }
+    public function getCreatedBy()
+    {
+        return $this->hasOne(Yii::$app->user->identityClass, ['id' => 'created_by']);
+    }
+    public function getUpdatedBy()
+    {
+        return $this->hasOne(Yii::$app->user->identityClass, ['id' => 'updated_by']);
+    }
+    public function getDmkhuvuc() {
+        return $this->hasOne(Dmkhuvuc::class, ['id', 'dmkhuvuc_id']);
+    }
     // public function getBinhluan() {
     //     return $this->hasMany(Binhluan::class, ['binhluan_id', 'id']);
     // }

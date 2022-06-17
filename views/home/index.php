@@ -123,7 +123,7 @@ use yii\helpers\ArrayHelper;
                                         </div>
                                         <div class="flex-items position-relative">
                                             <div class="pl-2 text-bold pt-1">Mai Quỳnh</div>
-                                            <span class="text-time pl-2">2<span>&nbspgiờ trước</span></span>
+                                            <span class="text-time pl-2">2<span><?=$nhatro->updated_at?></span></span>
                                         </div>
                                     </div>
                                 </div>
@@ -227,115 +227,107 @@ use yii\helpers\ArrayHelper;
             <div class="content-filter bg-white">
                 <p class="text-title pl-3">BỘ LỌC NÂNG CAO</p>
                 <form id="formFilterSidebar1">
-                   
-                        <div id="sidebar">                      
-                            <ul class="list-unstyled components">          
-                                <li>
-                                    <a href="#area-dropdown" data-toggle="collapse" aria-expanded="false"
-                                        class="dropdown-toggle">
-                                        <span class="area-title">KHU VỰC</span>
-                                    </a>
-                                    <ul class="collapse list-unstyled pl-4 pr-2" id="area-dropdown">
-                                        <li class="area-text">                                 
-                                           <div class="row">
-                                                <?php foreach($listDmkhuvuc as $kv) {?>                                           
-                                                   <div class="col-6 p-2">
-                                                        <input class="ele-click-to-filter1" type="checkbox" name="dmkhuvuc_id" value="<?=$kv['khuvuc']?>"?>  
-                                                            <?= $kv['khuvuc']; ?>  
-                                                   </div>
-                                                    <?php
-                                                    }
-                                                    ?>  
-                                           </div> 
-                                        </li>
-                                    </ul>     
-                                </li>
-                            </ul>                   
-                        </div>
-                   
-                </form>
-                <form id="formFilterSidebar2">
-                    <div class="filter-pad">
-                        <div id="sidebar">                      
-                            <ul class="list-unstyled components">          
-                                <li>
-                                    <a href="#size-dropdown" data-toggle="collapse" aria-expanded="false"
-                                        class="dropdown-toggle">
-                                        <span class="size-title">DIỆN TÍCH</span>
-                                    </a>
-                                    <ul class="collapse list-unstyled pl-4 pr-2" id="size-dropdown">
-                                        <li class="size-text">                                 
-                                            <?php foreach($listDmdientich as $dmDientich) {?>                                           
-                                               <div class="p-1">
-                                                    <input class="ele-click-to-filter2" type="radio" name="dmdientich_id" value="<?=$dmDientich['dientich']?>"?>  
-                                                        <?= $dmDientich['dientich']; ?>  
-                                               </div>
+                    <div id="sidebar">                      
+                        <ul class="list-unstyled components">          
+                            <li>
+                                <a href="#area-dropdown" data-toggle="collapse" aria-expanded="false"
+                                    class="dropdown-toggle p-3">
+                                    <span class="area-title">KHU VỰC</span>
+                                </a>
+                                <ul class="collapse list-unstyled pl-4 pr-2" id="area-dropdown">
+                                    <li class="area-text">                                 
+                                        <div class="row">
+                                            <?php foreach($listDmkhuvuc as $kv) {?>                                           
+                                                <div class="col-6 p-2">
+                                                    <input class="ele-click-to-filter1" type="checkbox" name="dmkhuvuc_id" value="<?=$kv['khuvuc']?>"?>  
+                                                        <?= $kv['khuvuc']; ?>  
+                                                </div>
                                                 <?php
                                                 }
-                                                ?>   
-                                        </li>
-                                    </ul>     
-                                </li>
-                            </ul>                   
-                        </div>
+                                                ?>  
+                                        </div> 
+                                    </li>
+                                </ul>     
+                            </li>
+                        </ul>                   
+                    </div>
+                </form>
+                <form id="formFilterSidebar2">
+                    <div id="sidebar">                      
+                        <ul class="list-unstyled components">          
+                            <li>
+                                <a href="#size-dropdown" data-toggle="collapse" aria-expanded="false"
+                                    class="dropdown-toggle p-3">
+                                    <span class="size-title">DIỆN TÍCH</span>
+                                </a>
+                                <ul class="collapse list-unstyled pl-4 pr-2" id="size-dropdown">
+                                    <li class="size-text">                                 
+                                        <?php foreach($listDmdientich as $dmDientich) {?>                                           
+                                            <div class="p-1">
+                                                <input class="ele-click-to-filter2" type="radio" name="dmdientich_id" value="<?=$dmDientich['dientich']?>"?>  
+                                                    <?= $dmDientich['dientich']; ?>  
+                                            </div>
+                                            <?php
+                                            }
+                                            ?>   
+                                    </li>
+                                </ul>     
+                            </li>
+                        </ul>                   
                     </div>
                 </form>
                 <form id="formFilterSidebar3">
-                    <div class="filter-pad">
-                        <div id="sidebar">                      
-                            <ul class="list-unstyled components">          
-                                <li>
-                                    <a href="#price-dropdown" data-toggle="collapse" aria-expanded="false"
-                                        class="dropdown-toggle">
-                                        <span class="price-title">MỨC GIÁ</span>
-                                    </a>
-                                    <ul class="collapse list-unstyled pl-4 pr-2" id="price-dropdown">
-                                        <li class="price-text">                                 
-                                            <?php foreach($listDmgia as $dmGia) {?>                                           
-                                               <div class="p-1">
-                                                    <input class="ele-click-to-filter3" type="radio" name="dmgia_id" value="<?=$dmGia['mucgia']?>"?>  
-                                                        <?= $dmGia['mucgia']; ?>  
-                                               </div>
-                                                <?php
-                                                }
-                                                ?>   
-                                        </li>
-                                    </ul>     
-                                </li>
-                            </ul>                   
-                        </div>
+                    <div id="sidebar">                      
+                        <ul class="list-unstyled components">          
+                            <li>
+                                <a href="#price-dropdown" data-toggle="collapse" aria-expanded="false"
+                                    class="dropdown-toggle p-3">
+                                    <span class="price-title">MỨC GIÁ</span>
+                                </a>
+                                <ul class="collapse list-unstyled pl-4 pr-2" id="price-dropdown">
+                                    <li class="price-text">                                 
+                                        <?php foreach($listDmgia as $dmGia) {?>                                           
+                                            <div class="p-1">
+                                                <input class="ele-click-to-filter3" type="radio" name="dmgia_id" value="<?=$dmGia['mucgia']?>"?>  
+                                                    <?= $dmGia['mucgia']; ?>  
+                                            </div>
+                                            <?php
+                                            }
+                                            ?>   
+                                    </li>
+                                </ul>     
+                            </li>
+                        </ul>                   
                     </div>
                 </form>
                 <form id="formFilterSidebar4">
-                    <div class="filter-pad">
-                        <div id="sidebar">                      
-                            <ul class="list-unstyled components">          
-                                <li>
-                                    <a href="#utilities-dropdown" data-toggle="collapse" aria-expanded="false"
-                                        class="dropdown-toggle">
-                                        <span class="utilities-title">TIỆN ÍCH</span>
-                                    </a>
-                                    <ul class="collapse list-unstyled pl-4 pr-2" id="utilities-dropdown">
-                                        <li class="utilities-text">                                 
-                                            <?php foreach($listDmtienich as $dmTienich) {?>                                           
-                                               <div class="p-1">
-                                                    <input class="ele-click-to-filter4" type="checkbox" name="tienich_id" value="<?=$dmTienich['tienich']?>"?>  
-                                                        <?= $dmTienich['tienich']; ?>  
-                                               </div>
-                                                <?php
-                                                }
-                                                ?>   
-                                        </li>
-                                    </ul>     
-                                </li>
-                            </ul>                   
-                        </div>
+                    <div id="sidebar">                      
+                        <ul class="list-unstyled components">          
+                            <li>
+                                <a href="#utilities-dropdown" data-toggle="collapse" aria-expanded="false"
+                                    class="dropdown-toggle p-3">
+                                    <span class="utilities-title">TIỆN ÍCH</span>
+                                </a>
+                                <ul class="collapse list-unstyled pl-4 pr-2" id="utilities-dropdown">
+                                    <li class="utilities-text">                                 
+                                        <?php foreach($listDmtienich as $dmTienich) {?>                                           
+                                            <div class="p-1">
+                                                <input class="ele-click-to-filter4" type="checkbox" name="tienich_id" value="<?=$dmTienich['tienich']?>"?>  
+                                                    <?= $dmTienich['tienich']; ?>  
+                                            </div>
+                                            <?php
+                                            }
+                                            ?>   
+                                    </li>
+                                </ul>     
+                            </li>
+                        </ul>                   
                     </div>
                 </form>
             </div>
             <div class="post-new mt-3 pl-3 pr-3" style="background-color: white;">
                 <p class="text-title">TIN MỚI</p>
-                <?php foreach ($listNewPost as $newpost) : ?>
+                <?php foreach ($listNhatro as $nhatro) : ?>
                 <div class="card card_post-new">
                     <img class="card-img-top" src="img/room.jpg">
                     <div class="card-body">
@@ -346,13 +338,13 @@ use yii\helpers\ArrayHelper;
                                     <span class="pl-1 text-bold">maiquynh</span>
                                 </div>
                                 <small>
-                                    <i class="fa-solid fa-clock icon-img ml-2 mt-1"></i><span>2 phút trước</span>
+                                    <i class="fa-solid fa-clock icon-img ml-2 mt-1"></i><span><?=$nhatro->updated_at?></span>
                                 </small>
                             </div>
                             <div class="post-new_kc body-title pt-1">
-                                <?= Html::a(StringHelper::truncateWords($newpost->tieude, 12), ['/posts/view', 'id' => $newpost->id]) ?>
+                                <?= Html::a(StringHelper::truncateWords($nhatro->tieude, 12), ['/posts/view', 'id' => $nhatro->id]) ?>
                             </div>
-                            <span class="kc_nd"><?= StringHelper::truncateWords($newpost->mota, 20) ?>
+                            <span class="kc_nd"><?= StringHelper::truncateWords($nhatro->mota, 20) ?>
                             </span>
                         </div>
                     </div>

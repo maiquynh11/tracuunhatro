@@ -42,7 +42,7 @@ use yii\widgets\ActiveForm;
                                         <i class="fa-solid fa-calendar-check icon-img"></i>21/3/2022</span>
                                     </div>
                                     <div class="pb-1">
-                                        <i class="fa-solid fa-comment icon-img"></i>Binh luận: 0
+                                        <i class="fa-solid fa-comment icon-img"></i>Binh luận:<span class="ml-1"><?= sizeof($listBinhluan) ?></span>
                                     </div>
                                     <div class="pb-3">
                                         <i class="fa-solid fa-eye icon-img"></i>Lượt xem:
@@ -61,8 +61,8 @@ use yii\widgets\ActiveForm;
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-7 pt-4">
-                                <div class="font-weight-bold room-title pb-2">Thông tin phòng</div>
+                            <div class="col-7 pt-2">
+                                <div class="font-weight-bold room-title">Thông tin phòng</div>                            
                                 <div class="pb-1"><i class="fa-solid fa-location-dot icon-img"></i><?= $model->diachi ?>
                                 </div>
                                 <div class="pb-1"><i class="fa-solid fa-coins icon-img"></i><?= $model->gia ?></div>
@@ -136,13 +136,13 @@ use yii\widgets\ActiveForm;
                                     <p class="text-title">Mô tả</p>
                                     <p><?= $model->mota ?></p>
                                     <div class="comments border-title">
-                                        <div class="d-flex">
+                                        <div class="d-flex">    
                                             <div class="text-title">Bình luận</div>
                                             <span class="count-comment"><?= sizeof($listBinhluan) ?> bình luận</span>
                                         </div>
                                         <div class="create-comment mb-4 mt-4">
                                             <div class="media">
-                                                <img class="mr-3 avatar-cmt" src="../img/room.jpg" alt="">
+                                                <img class="mr-3 avatar-cmt mt-2" src="../img/room.jpg" alt="">
                                                 <div class="media-body">
                                                     <?php // \yii\widgets\Pjax::begin()
                                                         if (!Yii::$app->user->isGuest):
@@ -151,11 +151,11 @@ use yii\widgets\ActiveForm;
                                                         <textarea id="leave-comment" rows="1" class="form-control comment-input w-100" name="Binhluan[noidung]" placeholder="Viết bình luận"></textarea>
                                                         <input type="hidden" value="<?= $model->id ?>" name="Binhluan[nhatro_id]" />
                                                         <div class="action-buttons text-right mt-2">
-                                                            <button id="cancel-comment" class="btn btn-light btn-cancel">Cancel</button>
+                                                            <!-- <button id="cancel-comment" class="btn btn-light btn-cancel">Cancel</button> -->
                                                             <button id="submit-comment" type="submit" class="btn btn-primary btn-save">Comment</button>
                                                         </div>
                                                     </form>
-                                                    <?php //\yii\widgets\Pjax::end()z
+                                                    <?php //\yii\widgets\Pjax::end()
                                                         endif;
                                                     ?>
                                                 </div>
