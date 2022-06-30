@@ -31,8 +31,18 @@ use yii\bootstrap4\NavBar;
         <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script> -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="crossorigin=""/>
         <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin="" ></script>
+        <script src="./leaflet-gps-master/src/leaflet-gps.js"></script>
+        <link rel="stylesheet" href="./leaflet-gps-master/src/leaflet-gps.css"/>
+        <link rel="stylesheet" href="./leaflet-locationpicker-master/src/leaflet-locationpicker.css" />
         <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
+
+        <!-- <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.min.js'></script>
+        <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.mapbox.css' rel='stylesheet' />
+        <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/css/font-awesome.min.css' rel='stylesheet' /> -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/leaflet-gps"></script> -->
+        
+      
         <!-- <link rel="stylesheet" href="./css/style.css"> -->
         <link rel="stylesheet" href="./css/map.css">
         <title>Document</title>
@@ -47,6 +57,7 @@ use yii\bootstrap4\NavBar;
                     <img src="../img/lg1.png" alt="" width="100%">
                 </a>
                 <a class="nav-link" href="<?= Yii::$app->homeUrl ?>home">Home</a>
+                <a class="nav-link" href="<?= Yii::$app->homeUrl ?>map">Map</a>
             </nav>
             <div class="nhatro-main-map row">
                 <div class="sidebar-map col-md-4 pr-0">
@@ -57,7 +68,7 @@ use yii\bootstrap4\NavBar;
                                 <a @click="onChangeSearchData" class="nhatro-btn-search"><i class="fa-solid fa-search"></i></a>
                                 <a @click="clearSearchData" class="nhatro-btn-clear"><i class="fa-solid fa-xmark"></i></a>
                             </form>
-                        </div>
+                        </div>   
                         <div @click="showListNhatro()" class="list-nhatro">
                             <i class="fa-solid fa-angle-right arrow-icon-right mr-2"></i>
                             <span class="filter-text">DANH SÁCH TIN ĐĂNG</span>
@@ -150,10 +161,11 @@ use yii\bootstrap4\NavBar;
                             </div> 
                         </div> 
                         <div v-if="sidebarViewType == 'detailNhatro' && selectedMarkerData  .tieude">
-                            <div class="nhatro-item_return"> 
+                            <div class="nhatro-item_return d-flex justify-content-between"> 
                                 <a @click="showListNhatro()" class="pl-2">
-                                    <i class="fa-solid fa-arrow-left img-icon mr-2"></i>Quay về
+                                    <i class="fa-solid fa-arrow-left icons mr-1"></i>Quay về
                                 </a>
+                                <a class="nhatro-chitiet pr-2" :href="urlView + selectedMarkerData.id"><i class="fa-solid fa-angles-right mr-1 icons"></i>Xem chi tiết</a>
                             </div>
                             <div class="nhatro-box">
                                 <div class="nhatro-tieude">{{selectedMarkerData.tieude}}</div>
@@ -171,13 +183,70 @@ use yii\bootstrap4\NavBar;
                                 </div>
                                 <div class="nhatro-mota" v-html="selectedMarkerData.mota"></div>
                                 <div class="nhatro-lienhe">Liên hệ: {{selectedMarkerData.lienhe}}</div>
-                                <a class="nhatro-chitiet" :href="urlView + selectedMarkerData.id">Xem chi tiết</a>
+                              
+                                <div class="">
+                                    <p>Tìm các điểm thương mại gần đây</p>
+                                    <div class="diemthuongmai">
+                                        <form class="diemthuongmai-search_form">
+                                            <input type="text" v-model="searchDiemthuongmai.searchText" placeholder="Nhập khoảng cách "/> 
+                                            <a @click="onChangeSearchDTM" class="btn"><i class="fa-solid fa-search"></i></a>
+                                            <a @click=""><i class="fa-solid fa-xmark"></i></a>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div> 
                 </div>
-                <div class="main-map col-md-8">
-                    <div id="map"></div>
+                <div class="main-map col-md-8"> 
+                    <div id="map">
+                        <div class="overlay">
+                            <div class="bankinh-search">
+                                <form class="bankinh-search_form">
+                                    <input type="text" v-model="searchBankinh.searchText" placeholder="Nhập khoảng cách"/> 
+                                    <a @click="clearSearchBankinh"><i class="fa-solid fa-xmark"></i></a>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- <div class="nhatro-detail">
+                            <div v-if="sidebarViewType == 'detailNhatro' && selectedMarkerData  .tieude">
+                                <div class="nhatro-item_return d-flex justify-content-between"> 
+                                    <a @click="showListNhatro()" class="pl-2">
+                                        <i class="fa-solid fa-arrow-left icons mr-1"></i>Quay về
+                                    </a>
+                                    <a class="nhatro-chitiet pr-2" :href="urlView + selectedMarkerData.id"><i class="fa-solid fa-angles-right mr-1 icons"></i>Xem chi tiết</a>
+                                </div>
+                                <div class="nhatro-box">
+                                    <div class="nhatro-tieude">{{selectedMarkerData.tieude}}</div>
+                                    <div class="nhatro-gia">
+                                        {{selectedMarkerData.gia}}
+                                    </div>
+                                    <div class="nhatro-dientich">
+                                        <i class="fa-solid fa-ruler-combined img-icon mr-2"></i>
+                                        {{selectedMarkerData.dientich}}
+                                    </div>
+                                    <div class="nhatro-diachi">
+                                        <i class="fa-solid fa-location-dot img-icon mr-2"></i>
+                                        {{selectedMarkerData.diachi}}
+                                        <small class="ml-3">{{selectedMarkerData.lat}},{{selectedMarkerData.lng}}</small>
+                                    </div>
+                                    <div class="nhatro-mota" v-html="selectedMarkerData.mota"></div>
+                                    <div class="nhatro-lienhe">Liên hệ: {{selectedMarkerData.lienhe}}</div>
+                                
+                                    <div class="">
+                                        <p>Tìm các điểm thương mại gần đây</p>
+                                        <div class="diemthuongmai">
+                                            <form class="search-dtm_form">
+                                                <input type="text" v-model="searchDiemthuongmai.searchText" placeholder="Nhập khoảng cách "/> 
+                                                <a @click="onChangeSearchDTM" class="nhatro-btn-search"><i class="fa-solid fa-search"></i></a>
+                                                <a @click=""><i class="fa-solid fa-xmark"></i></a>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
                 </div> 
             </div>
         </div>  
@@ -189,6 +258,7 @@ use yii\bootstrap4\NavBar;
                     selectedMarkerData: {},
                     sidebarViewType: "listNhatro", // "detailNhatro", "searchResultNhatro"   
                     listNhatro: [],
+                    listDiemthuongmai: [],
                     listTienich: [],
                     listDoituong: [],
                     listKhuvuc: [],
@@ -198,6 +268,12 @@ use yii\bootstrap4\NavBar;
                     listSeclected: [],
                     searchData: {
                         searchText: ""
+                    },
+                    searchDiemthuongmai: {
+                        searchText: "",
+                    },
+                    searchBankinh: {
+                        searchText: "",
                     },
                     urlView: 'http://localhost:3000/posts/view?id='
                 },
@@ -215,14 +291,15 @@ use yii\bootstrap4\NavBar;
                     }
                 }, 
                 methods: {
-                    initMap: function() {
+                    initMap: async function() {
                         window.map = L.map('map').setView([10.796611153959889, 106.6668288839287], 13);
-                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {}).addTo(window.map);
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {}).addTo(window.map);    
                         window.nhatroLayer = L.layerGroup();
                         window.map.addLayer(window.nhatroLayer);
+                        window.map.addControl(new L.Control.Gps({marker: new L.Marker([0,0])}) );
                         this.initDrawControl();
                     },
-                    initDrawControl: async () => {
+                    initDrawControl: async function()  {
                         window.drawnItems = new L.FeatureGroup();
                         window.map.addLayer(window.drawnItems);
                         var drawControl = new L.Control.Draw({
@@ -245,19 +322,19 @@ use yii\bootstrap4\NavBar;
                                 window.drawnItems.addLayer(layer);
                                 // lat, lng, radius(m)
                                 const {_latlng, _mRadius} = layer;
-                                console.log(_mRadius);
+                                console.log(_latlng);
                                 // lazy code
                                 const response = await fetch(homeUrl + "nhatro/getlistjson?1=1" + `&lat=${_latlng.lat}&lng=${_latlng.lng}&radius=${_mRadius}&geoFilterType=circle`);
                                 this.listNhatro = await response.json();
                                 this.sidebarViewType = "listNhatro";
-                            }
+                            } 
                         });
                         window.map.on(L.Draw.Event.EDITED, async (e) => {   
                             var layers = e.layers;
                             layers.eachLayer(async (layer) => {
                                 if (layer._mRadius) {                                
                                     const {_latlng, _mRadius} = layer;
-                                    console.log(_mRadius);
+                                    // console.log(_mRadius);
                                     // lazy code
                                     const response = await fetch(homeUrl + "nhatro/getlistjson?1=1" + `&lat=${_latlng.lat}&lng=${_latlng.lng}&radius=${_mRadius}&geoFilterType=circle`);
                                     this.listNhatro = await response.json();
@@ -265,14 +342,74 @@ use yii\bootstrap4\NavBar;
                                 }
                             });
                         });
+                        var theMarker = {};
+                        window.map.on('click', async (e) => {    
+                            if (theMarker != undefined) {
+                                map.removeLayer(theMarker);
+                            }
+                            theMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(window.map);
+                                                                            
+                            let searchUrl = homeUrl + "nhatro/getlistjson?1=1" + `&lat=${e.latlng.lat}&lng=${e.latlng.lng}&geoFilterType=circle`;
+                   
+                            if (this.searchBankinh.searchText && this.searchBankinh.searchText != "") {
+                                searchUrl += "&radius=" + this.searchBankinh.searchText;
+                            }  
+                            var theRadius = this.searchBankinh.searchText;
+                            var radius = Number(theRadius);
+                            // console.log(radius);
+                            window.drawnItems.clearLayers();
+                            var circles = L.circle([e.latlng.lat, e.latlng.lng], radius
+                            );
+                            window.drawnItems.addLayer(circles); 
+                            const response = await fetch(searchUrl);
+                            this.listNhatro = await response.json();
+                           
+                            this.sidebarViewType = "listNhatro";
+                            // console.log(this.listNhatro);
+                        });    
+                        // window.map.on('click', async (e) => {    
+                        //     if (theMarker != undefined) {
+                        //         map.removeLayer(theMarker);
+                        //     }
+                        //     theMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(window.map);
+                                                                            
+                        //     let searchUrl = homeUrl + "nhatro/getlistdiemthuongmaijson?1=1" + `&lat=${e.latlng.lat}&lng=${e.latlng.lng}&geoFilterType=circle`;
+                   
+                        //     if (this.searchBankinh.searchText && this.searchBankinh.searchText != "") {
+                        //         searchUrl += "&radius=" + this.searchBankinh.searchText;
+                        //     }  
+                        //     var theRadius = this.searchBankinh.searchText;
+                        //     var radius = Number(theRadius);
+                        //     // console.log(radius);
+                        //     window.drawnItems.clearLayers();
+                        //     var circles = L.circle([e.latlng.lat, e.latlng.lng], radius);
+                        //     window.drawnItems.addLayer(circles); 
+                        //     const response = await fetch(searchUrl);
+                        //     this.listDiemthuongmai = await response.json();
+                        //     console.log(this.listDiemthuongmai);
+                            
+                        //     this.sidebarViewType = "listDiemthuongmai";
+                        // });    
+                    },
+                    onChangSearchDTM: async function() {
+                        let searchUrl = homeUrl + "nhatro/getdetailjson?id" + id + '&geom= ${geom} &geoFilterType=circle;'
+                        if (this.searchDiemthuongmai.searchText && this.searchDiemthuongmai.searchText != "") {
+                            searchUrl += "&bankinh" + this.searchDiemthuongmai.searchText;
+                        }
+                        const reponse = await fetch(searchUrl);
+                        this.listDiemthuongmai = await response.json();
+                        this.showListDiemthuongmai();
+                    },
+                    showListDiemthuongmai: async function() {
+                        this.sidebarViewType = "listDiemthuongmai";
                     },
                     loadMarkers: async function() {
                         const response = await fetch(homeUrl + "nhatro/getlistjson"); // callback
                         const data = await response.json(); 
                         data.forEach((item) => {
                             if (item.lat && item.lng) {
-                                const divIcon = L.divIcon({className: "marker-nhatro", html: `<i class="fa-solid fa-location-dot marker-vitri"></i>`});
-                                const marker = L.marker([item.lat, item.lng], {icon: divIcon});
+                                const divIcon = L.divIcon({className: "marker-nhatro", html: `<i class="fa-solid fa-house marker-vitri"></i>`});
+                                const marker = L.marker([item.lat, item.lng], {icon: divIcon}).bindPopup('<div class="">'+item.tieude+'</div>'+item.gia).openPopup();
                                 marker.data = item;
                                 marker.on('click', (event) => {
                                     this.onClickMarker(marker);
@@ -289,6 +426,7 @@ use yii\bootstrap4\NavBar;
                         const response = await fetch(homeUrl + "nhatro/getdetailjson?id=" + id);
                         this.selectedMarkerData = await response.json();
                         this.sidebarViewType = "detailNhatro";
+                        
                     },
                     showListNhatro: function() {
                         this.sidebarViewType = "listNhatro";
@@ -302,6 +440,14 @@ use yii\bootstrap4\NavBar;
                             window.map.flyTo([nhatro.lat, nhatro.lng], 18);
                         }
                         this.showNhatroDetail(nhatro.id);
+
+                    },
+                    clearSearchBankinh: function() {
+                        this.searchBankinh = {
+                            searchText: ""
+                        }
+                        window.drawnItems.clearLayers();
+                        this.showListNhatro();
                     },
                     onChangeSearchData: async function() {
                         let searchUrl = homeUrl + "nhatro/getlistjson?e=1"
@@ -311,7 +457,7 @@ use yii\bootstrap4\NavBar;
                         const response = await fetch(searchUrl); // callback
                         this.listNhatro = await response.json(); 
                         this.showListNhatro();
-                    },
+                    }, 
                     clearSearchData: function() {
                         this.searchData = {
                             searchText: ""

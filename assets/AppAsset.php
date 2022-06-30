@@ -25,13 +25,10 @@ class AppAsset extends AssetBundle
         'css/post.css',
         'font/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.css',
         'font/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css',
-       
         'css/map.css'
     ];
     public $js = [
-        'js/map.js',
         'js/script.js',
-        
         'font/OwlCarousel2-2.3.4/dist/owl.carousel.min.js',
     ];
     public $depends = [

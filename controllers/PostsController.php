@@ -75,44 +75,9 @@ class PostsController extends Controller
 
         return $this->render('view', ['model' => $model, 'listBinhluan' => $listBinhluan]);
     }
-    public function actionCreate() {
-        $model = new Nhatro();
-        if($model->load(Yii::$app->request->post())) {
-            if($model->save()) {
-               // Save doituong
-                $listDmDoituongId = Yii::$app->request->post('list_dmdoituong_id');
-                foreach ($listDmDoituongId as $dmDoituongId) {
-                    $nhatroDmDoituong = new NhatroDmdoituong();
-                    $nhatroDmDoituong->nhatro_id = $model->id;
-                    $nhatroDmDoituong->doituong_id = $dmDoituongId;
-                    $nhatroDmDoituong->save();
-                }
-                $listDmTienichId = Yii::$app->request->post('list_dmtienich_id');
-                foreach ($listDmTienichId as $dmTienichId) {
-                    $nhatroDmTienich = new NhatroDmtienich();
-                    $nhatroDmTienich->nhatro_id = $model->id;
-                    $nhatroDmTienich->tienich_id = $dmTienichId;
-                    $nhatroDmTienich->save();
-                }
-              
-                Yii::$app->session->addFlash('success', 'Đã đăng !');
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-            else {
-                Yii::$app->session->addFlash('danger', 'Không hợp lệ !');
-                return $this->render('create', ['model' => $model,]);
-            }
-        }
-        $listDmKhuvuc = Dmkhuvuc::find()->all();
-        $listDmDoituong = Dmdoituong::find()->all();
-        $listDmTienich = Dmtienich::find()->all();
-        return $this->render('create', [
-            'model' => $model, 
-            'listDmKhuvuc' => $listDmKhuvuc,
-            'listDmDoituong' => $listDmDoituong,
-            'listDmTienich' => $listDmTienich,
-           
-        ]);
+    public function actionShow($id) {
+        $listNhatro = Nhatro::find()->where(['dmkhuvuc_id' => $id])->all();
+        return $this->render('show', ['listNhatro' => $listNhatro]);
 
     }
     // public function actionDelete($id) {

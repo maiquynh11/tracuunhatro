@@ -56,6 +56,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             [['status', 'created_at', 'updated_at'], 'default', 'value' => null],
+            ['status', 'default', 'value' => self::STATUS_ACTIVE],
             [['status', 'created_at', 'updated_at'], 'integer'],
             [['username', 'vaitro', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'verification_token', 'firstname', 'lastname'], 'string', 'max' => 255],
         ];

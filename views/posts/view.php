@@ -11,7 +11,8 @@ use yii\widgets\ActiveForm;
     <div class="bg-white"">
     <div class=" container pt-3">
         <?php if ($model) : ?>
-            <div class="row">
+            <a href="<?=Yii::$app->homeUrl?>home" class="home-back"><i class="fa-solid fa-arrow-left mr-2"></i><?=$model->tieude?></a>
+            <div class="row mt-3">
                 <div class="col-md-5 col detail-post">
                     <div class="infor-post">
                         <div class="row">
@@ -185,12 +186,15 @@ use yii\widgets\ActiveForm;
                             </div>
                         </div>
                         <div class="col-md-5">
-                            <div class="post-map">
+                            <div id="mapView" class="post-map" style="min-height: 300px; width: 100%">
                                 <!-- <i class="fa-solid fa-location-dot icon-img"></i> -->
                                 <span class="text-title">Bản đồ</span>
                                 <div class="map-box">
                                 </div>
                             </div>
+                            <script>
+               
+                            </script>
                         </div>
                     </div>
                 </div>

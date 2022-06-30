@@ -62,10 +62,9 @@ class Nhatro extends \yii\db\ActiveRecord
         return [
             [['mota'], 'string'],
             [['lat', 'lng'], 'number'],
-            [['created_at', 'update_at'], 'safe'],
+            [['created_at', 'update_at','dmkhuvuc_id','lat', 'lng'], 'safe'],
             [['status'], 'default', 'value' => null],
             [['status'], 'integer'],
-            [['dmkhuvuc_id','lat', 'lng', 'geom'], 'safe'],
             [['ma', 'tieude', 'gia', 'dientich', 'diachi', 'lienhe', 'user_id'], 'string', 'max' => 255],
         ];
     }
@@ -83,7 +82,7 @@ class Nhatro extends \yii\db\ActiveRecord
             'dientich' => 'Diện tích',
             'diachi' => 'Địa chỉ',
             'lienhe' => 'Liên hệ',
-            'thanhvien_id' => 'Thành viên',   
+            'user_id' => 'Thành viên',   
             'dmkhuvuc_id' => 'Khu vực',
             'mota' => 'Mô tả',
             'lat' => 'Lat',

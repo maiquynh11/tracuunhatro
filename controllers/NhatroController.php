@@ -14,6 +14,7 @@ use app\models\Dmgia;
 use app\models\Dmkhuvuc;
 use app\models\Binhluan;
 use app\models\NhatroDmdoituong;
+use app\models\Diemthuongmai;
 // use app\models\DmtienichNhatro;
 use app\models\Dmdoituong;
 use app\models\Dmtienich;
@@ -55,9 +56,9 @@ use yii\helpers\ArrayHelper;
                             'allow' => true,
                             'roles' => ['@'],
                             'matchCallback' => function ($rule, $action) {
-                                if (Yii::$app->user->can('admin')) {
-                                    return true;
-                                }
+                                // if (Yii::$app->user->can('admin')) {
+                                //     return true;
+                                // }
                             }
                         ],
                     ],
@@ -123,19 +124,57 @@ use yii\helpers\ArrayHelper;
                     $lat = $data->get('lat');
                     $lng = $data->get('lng');
                     $radius = $data->get('radius');
-                    // 4326 latlng, 32648 metter => WGS84 UTM
+                    // 4326 latlng, 32648 metter => WGS84 UTM   
                     $query->andWhere("st_distance(st_transform(geom, 32648), st_transform(st_geomfromtext('POINT($lng $lat)', 4326), 32648)) <= $radius");
+                   
                 }
             }
 
+            
             $listNhatro = $query->asArray()->all();
             return json_encode($listNhatro);
         }
-        
+        public function actionGetlistdiemthuongmaijson() {
+            // $bankinh = Yii::$app->request->get('bankinh');
+            // $nhatroDiemthuongmai = Nhatro::find()->where([])->select('geom');
+            // $diemthuongmai = Diemthuongmai::find()->where("st_distance(st_transform(geom, 32648), st_transform($nhatroDiemthuongmai, 32648)) <= $bankinh");
+            $data = Yii::$app->request;
+            $q = Diemthuongmai::find()->where('1=1');
+
+            $geoFilterType = $data->get('geoFilterType');
+            if (isset($geoFilterType) && !empty($geoFilterType)) {
+                if ($geoFilterType == 'circle') {
+                    $lat = $data->get('lat');
+                    $lng = $data->get('lng');
+                    $radius = $data->get('radius');
+                    // 4326 latlng, 32648 metter => WGS84 UTM   
+                    $q->andWhere("st_distance(st_transform(geom, 32648), st_transform(st_geomfromtext('POINT($lng $lat)', 4326), 32648)) <= $radius");
+                }       
+
+            }
+            $listDiemthuongmai = $q->asArray()->all();
+
+            return json_encode($listDiemthuongmai);
+        }
         public function actionGetdetailjson($id) {  
-            // $nhatro = Nhatro::find()->where(['id' => $id]); 
+            // $data = Yii::$app->request;
+            // $q = Diemthuongmai::find()->where('1=1')->select('geom');
             $nhatro = Nhatro::find()->where(['id' => $id])->asArray()->one();
             
+            // // $geom->select('geom')->from()
+            // $bankinh = Yii::$app->request->get('bankinh');
+
+            // $geoFilterType = $data->get('geoFilterType');
+            // if (isset($geoFilterType) && !empty($geoFilterType)) {
+            //     if ($geoFilterType == 'circle') {
+            //         $geom = $data->get('geom');
+            //         $bankinh = $data->get('bankinh');
+            //         // 4326 latlng, 32648 metter => WGS84 UTM   
+            //         $nhatro->andWhere("st_distance(st_transform($q, 32648), st_transform(st_geomfromtext($geom), 4326), 32648)) <= $bankinh")->asArray();
+            //     }       
+
+            // }
+          
             return json_encode($nhatro);
         }
         public function actionGettienichjson() {
@@ -159,8 +198,11 @@ use yii\helpers\ArrayHelper;
         public function actionIndex()
         {
             $searchModel = new NhatroSearch();
+            // $query = Nhatro::find()->where(['user_id'=> Yii::$app->user->id]);
+            $query = Nhatro::find();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
             $dataProvider->setPagination([
+                // 'query' => $query,
                 'pageSize' => 10,
                 'forcePageParam' => false,
                 'pageSizeParam' => false
@@ -168,6 +210,17 @@ use yii\helpers\ArrayHelper;
             $dataProvider->setSort([
                 'defaultOrder' => ['id' => SORT_ASC],
             ]);
+            // $dataProvider = new ActiveDataProvider([
+            //     'query' => $query,
+            //     'pagination' => [
+            //         'pageSize' => 20,
+            //     ],
+            //     'sort' => [
+            //         'defaultOrder' => [
+            //             'id' => SORT_ASC,
+            //         ]
+            //     ],
+            // ]);
             return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
@@ -196,7 +249,7 @@ use yii\helpers\ArrayHelper;
          * @return string|\yii\web\Response
          */
         public function actionCreate()
-        {
+        { 
             $model = new Nhatro();
             if($model->load(Yii::$app->request->post())) {
                 if($model->save()) {
@@ -215,8 +268,10 @@ use yii\helpers\ArrayHelper;
                         $nhatroDmTienich->tienich_id = $dmTienichId;
                         $nhatroDmTienich->save();
                     }
-                    Yii::$app->db->createCommand("UPDATE nhatro.id SET geom = ST_GeomFromText('POINT(lng lat)', 4326) WHERE id = nhatro.id")->execute();          
-                   
+                    ///// update nhatro where id=nhatro.id set geom = st_geomfromtext('POINT(lng lat)', 4326)'
+                    // Yii::$app->db->createCommand("UPDATE nhatro.id SET geom = ST_GeomFromText('POINT(lng lat)', 4326) WHERE id = nhatro.id")->execute();          
+                  
+                  
                     Yii::$app->session->addFlash('success', 'Đã đăng !');
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
@@ -225,13 +280,13 @@ use yii\helpers\ArrayHelper;
                     return $this->render('create', ['model' => $model->id]);
                 }
             }
-            $listDmKhuvuc = Dmkhuvuc::find()->all();
             $listDmDoituong = Dmdoituong::find()->all();
+            $listDmKhuvuc = Dmkhuvuc::find()->all(); 
             $listDmTienich = Dmtienich::find()->all();
             return $this->render('create', [
                 'model' => $model, 
-                'listDmKhuvuc' => $listDmKhuvuc,
                 'listDmDoituong' => $listDmDoituong,
+                'listDmKhuvuc' => $listDmKhuvuc,
                 'listDmTienich' => $listDmTienich,
                
             ]);
@@ -263,16 +318,7 @@ use yii\helpers\ArrayHelper;
                         $nhatroDmTienich->nhatro_id = $model->id;
                         $nhatroDmTienich->tienich_id = $dmTienichId;
                         $nhatroDmTienich->save();
-                    }   
-                    // $lat = $model->lat;
-                    // $lng = $model->lng;
-                    ///// update nhatro where id=nhatro.id set geom = st_geomfromtext('POINT(lng lat)', 4326)'
-
-                    $id = $model->id;
-                    $lat = $model->lat;
-                    $lng = $model->lng;
-                    Yii::$app->db->createCommand("UPDATE nhatro SET geom = ST_GeomFromText('POINT($lat $lng)', 4326) WHERE id = '$id'")->execute();
-                    // Yii::$app->db->createCommand("UPDATE nhatro.id SET geom = ST_GeomFromText('POINT(lng lat)', 4326) WHERE id = nhatro.id")->execute();          
+                    }    
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
             }
@@ -326,6 +372,11 @@ use yii\helpers\ArrayHelper;
             return $this->render('duyet', [
                 'model' => $model,
             ]);
+        }
+        public function actionInfor()
+        {
+            // Yii::$app->user->login();
+            return $this->render('infor');
         }
         /**
          * Finds the Nhatro model based on its primary key value.

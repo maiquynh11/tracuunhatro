@@ -124,7 +124,9 @@ html::-webkit-scrollbar-track {
 }
 
 .signup-button {
+    margin-top: 10px;
     padding: 15px 0;
+    width: 100%;
 }
 
 .login-box,
@@ -289,12 +291,21 @@ li {
     /* color: var(--title-color); */
     font-family: "Mallory Bold";
 }
-
+.district-name a {
+    color: var(--text-color);
+}
+.district-name a:hover {
+    text-decoration: none;
+    color: var(--title-color);
+    transition-duration: 0.2s
+}
 #district-carousel .owl-carousel .owl-stage-outer {
-    padding-top: 20px;
+    padding-top: 5px;
     height: 150px;
 }
-
+.nhatro-district {
+    box-shadow: 0px 0px 4px 0px var(--border-color);
+}
 .img-circle img {
     border-radius: 50%;
     background-size: cover;
@@ -347,7 +358,10 @@ li {
     font-family: "Mallory Bold" !important;
     line-height: 1;
 }
-
+.text-titles {
+    font-size: 14px;
+    font-weight: bold;
+}
 .flex-box {
     display: flex;
     position: relative;
@@ -379,7 +393,15 @@ li {
 select {
     font-size: 13px !important;
 }
-
+.home-back {
+    color: var(--title-color);
+    font-size: 17px;
+    font-weight: bold;
+}
+.home-back:hover {
+    text-decoration: none;
+    color: var(--text-color);
+}
 
 /* district */
 
@@ -399,7 +421,7 @@ select {
 
 .post-rate {
     font-size: 15px;
-    padding-top: 10px;
+    /* padding-top: 10px;*/
 }
 
 .post-arrange a {
@@ -572,7 +594,10 @@ option[value=""][disabled] {
     opacity: 0.7;
     padding: 5px 5px 5px 0;
 }
-
+.icon-comment {
+    color: var(--title-color);
+    opacity: 0.7;
+}
 .btn-filter {
     background-color: var(--main-color);
     color: white;
@@ -741,7 +766,7 @@ margin-top: -18px;
     padding-left: 5px;
     font-size: 13px;
     font-family: "Helvetica-Bold";
-    color: #757575;
+    color: var(--text-color);
 }
 
 .utilities-title:hover,

@@ -25,18 +25,18 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/fontawesome.min.css"
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/fontawesome.min.css"
         integrity="sha512-8Vtie9oRR62i7vkmVUISvuwOeipGv8Jd+Sur/ORKDD5JiLgTGeBSkI3ISOhc730VGvA5VVQPwKIKlmi+zMZ71w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.0.7/css/star-rating.css" media="all" rel="stylesheet" type="text/css" /> 
+    <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.0.7/themes/krajee-svg/theme.css" media="all" rel="stylesheet" type="text/css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     
     <!-- <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/map.css"> -->
-    <!-- <link rel="stylesheet" href="font/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.css">
-    <link rel="stylesheet" href="font/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css"> -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <?php $this->head() ?>
 </head>
@@ -77,7 +77,7 @@ AppAsset::register($this);
                                         echo Html::a('Đăng tin', ['/home/login'], ['class'=>'btn btn_post']);
                                     }
                                     else {
-                                        echo Html::a('Đăng tin', ['/nhatro/index'], ['class'=>'btn btn_post']);
+                                        echo Html::a('Đăng tin', ['/nhatro/create'], ['class'=>'btn btn_post']);
                                     }
                                 ?>
                         </div>
@@ -99,10 +99,10 @@ AppAsset::register($this);
                                             ],
                                             [
                                                 'label' => 'Thông tin tài khoản',
-                                                'url' => ['/home/logout'],
-                                                'linkOptions' => [
-                                                    'data-method' => 'post'
-                                                ],
+                                                'url' => ['/nhatro/infor'],
+                                                // 'linkOptions' => [
+                                                //     'data-method' => 'post'
+                                                // ],
                                             ]
                                         ]
                                     ],
@@ -120,20 +120,35 @@ AppAsset::register($this);
     </main>
     <footer class="footer mt-auto py-3 text-muted">
     </footer>
-    <!-- <script src="font/OwlCarousel2-2.3.4/dist/JQuery3.3.1.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.0.7/js/star-rating.js" type="text/javascript"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.0.7/themes/krajee-svg/theme.js"></script>
+    <!-- optionally if you need translation for your language then include locale file as mentioned below (replace LANG.js with your locale specific file) -->
+    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.0.7/js/locales/LANG.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
         integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous">
     </script>
     <script src="font/OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
-    </script>
+    </script> -->
       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
     integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
     crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
     integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
     crossorigin="">
+    </script>
+     <script>
+        var mapView = L.map('mapView').setView([10.824784072964595, 106.71169543218959], 11);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(mapView);
+        var markerLatLng = L.marker([model.lat, model.lng], {
+            draggable: true,
+        });
+        markerLatLng.addTo(mapView);
     </script>
     <script src="font/OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
@@ -207,6 +222,7 @@ AppAsset::register($this);
         },
     });
     </script>
+    
     <?php $this->endBody() ?>
 </body>
 </html>

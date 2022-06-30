@@ -16,7 +16,7 @@ class HomeSearchForm extends Model
     public $dmdientich_id;
     public $dmgia_id;
     public $query;
-    public $tienich_id;
+    public $dmdoituong_id;
 
 
     /**

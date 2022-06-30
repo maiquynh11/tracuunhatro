@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signup container p-5">
     <div class="row justify-content-center ">
-        <div class="col-lg-5 signup-box">
+        <div class="col-6 signup-box">
             <h5><?= Html::encode($this->title) ?></h5>
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
             <div class="row">
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?= $form->field($model, 'password')->passwordInput() ?>
 
-            <div class="form-group pt-2">
+            <div class="form-groups pt-2">
                 <?= Html::submitButton('Đăng ký ', ['class' => 'btn btn-primary signup-button', 'name' => 'signup-button']) ?>
             </div>
             <div class="form-groups pt-2">

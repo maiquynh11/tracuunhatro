@@ -96,6 +96,39 @@ AppAsset::register($this);
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
     </script>
+    <script>
+        var map = L.map('map').setView([10.824784072964595, 106.71169543218959], 11);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var markerLatLng = L.marker([10.824784072964595, 106.71169543218959], {
+            draggable: true
+        });
+        markerLatLng.addTo(map);
+
+        function updateLatLngFieldWithMarker() {
+            var latlng = markerLatLng.getLatLng();
+            $('#fieldLat').val(latlng.lat);
+            $('#fieldLng').val(latlng.lng)
+        }
+
+        function updateMarketWithLatLngField() {
+            let lat = $('#fieldLat').val();
+            let lng = $('#fieldLng').val()
+            markerLatLng.setLatLng(L.latLng(lat, lng));  
+        }
+
+        updateLatLngFieldWithMarker();
+        markerLatLng.on('dragend', function(event) {
+            updateLatLngFieldWithMarker();
+        })
+
+        $('#fieldLat, #fieldLng').on('change', function() {
+            updateMarketWithLatLngField();
+        })
+    </script>
     <?php $this->endBody() ?>
 </body>
 

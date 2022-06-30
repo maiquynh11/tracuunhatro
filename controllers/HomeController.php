@@ -15,9 +15,11 @@ use app\models\Dmdientich;
 use app\models\Dmgia;
 use app\models\Dmkhuvuc;
 use app\models\HomeSearchForm;
+use app\models\NhatroDmdoituong;
 use app\models\FilterBoxForm;
 use app\models\Nhatro;
 use app\models\Binhluan;
+use app\models\Dmdoituong;
 use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
 
@@ -76,28 +78,32 @@ class HomeController extends Controller
      * @return string
      */
     public function actionIndex()
-    {
-        // $products = Nhatr::find()->published()->all();
-        $listNewPost = Nhatro::find()->all();
+    { 
+        $listNewPost = Nhatro::find()->where('status=1')->orderBy([
+            'updated_at' => SORT_DESC,
+        ])->all();
         $homeSearchForm = new HomeSearchForm();
         $filterBoxForm = new FilterBoxForm();
-        $queryNhatro = Nhatro::find();
+        $queryNhatro = Nhatro::find()->where('status=1');
         $listDmgia = Dmgia::find()->all();
         $listDmtienich = Dmtienich::find()->all();
+        $listDmdoituong = Dmdoituong::find()->all();
         $listDmkhuvuc = Dmkhuvuc::find()->all();
         $listDmdientich = Dmdientich::find()->all();
-        $listBinhluan = new Binhluan();
         $homeSearchForm->load(Yii::$app->request->get());
+        $listDoituongId = Yii::$app->request->get('listDoituongId');
+        if ($listDoituongId && is_array($listDoituongId)) {
+            $listNhatroIdHaveDoituong = NhatroDmdoituong::find()->where(['in', 'doituong_id', $listDoituongId])->select('nhatro_id')->column();
+            $queryNhatro->andWhere(['in', 'id', $listNhatroIdHaveDoituong]);
+        }
         if (isset($homeSearchForm->query)) {
             $queryNhatro->orWhere(['ilike', 'tieude', $homeSearchForm->query])->orWhere(['ilike', 'gia', $homeSearchForm->query])->orWhere(['ilike', 'diachi', $homeSearchForm->query]);
         }
+        if (Yii::$app->request->isPost && !Yii::$app->user->isGuest) {
+            $queryNhatro->user_id = Yii::$app->user->id;
+        }
         $listNhatro = $queryNhatro->all();
-        return $this->render('index', compact("homeSearchForm", "listNewPost", "filterBoxForm", "listDmgia", "listDmtienich", "listDmdientich", "listDmkhuvuc", "listNhatro", "listBinhluan"));
-    }
-    public function actionShow($id) {
-        $listNhatro = Nhatro::find()->where(['dmkhuvuc_id' => $id])->all();
-        return $this->render('show', compact("listNhatro"));
-
+        return $this->render('index', compact("homeSearchForm", "listNewPost", "filterBoxForm", "listDmgia", "listDmdientich", "listDmkhuvuc", "listNhatro", "listDmdoituong", "listDmtienich"));
     }
     /**
      * Login action.
@@ -143,6 +149,7 @@ class HomeController extends Controller
 
         return $this->goHome();
     }
+
     /**
      * Displays contact page.
      *
@@ -166,8 +173,8 @@ class HomeController extends Controller
      *
      * @return string
      */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
+    // public function actionShow()
+    // {
+    //     return $this->render('show');
+    // }
 }

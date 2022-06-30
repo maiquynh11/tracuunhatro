@@ -37,72 +37,6 @@ body {
 .navbar .nav-link:hover {
     color: var(--title-color)
 }
-
-
-/* 
-.btn_post,
-.btn_login,
-.btn_signup {
-    padding: 10px 15px !important;
-    font-family: "Mallory Bold" !important;
-    font-size: 13px !important;
-}
-
-.btn_signup,
-.btn_login {
-    border: 2 px solid var(--main-color) !important;
-    color: black;
-}
-
-.btn_login:hover {
-    background-color: var(--main-color);
-    transition-duration: 0.2s;
-}
-
-.badge-color {
-    background-color: var(--main-color);
-    color: white;
-}
-
-.btn_login-acc {
-    border: 2px solid var(--main-color) !important;
-    color: gray;
-    padding: 2px 5px;
-    font-size: 13px !important;
-}
-
-.btn_login-acc .dropdown-toggle {
-    font-size: 13px;
-    font-weight: bold;
-}
-
-.btn_login-acc .dropdown-toggle::after {
-    display: none;
-}
-
-.btn_login-acc:hover .dropdown-menu {
-    display: block;
-    font-size: 13px;
-    font-weight: bold;
-}
-
-.dropdown-menu .btn_login:hover .nav-link {
-    color: white;
-    transition-duration: 0.2s;
-}
-
-.btn_post {
-    background-color: var(--detail-color) !important;
-    color: white !important;
-    margin-right: 10px !important;
-}
-
-.btn_post:hover {
-    color: white;
-    background-color: var(--detail-color);
-    transition-duration: 0.2s;
-} */
-
 .sidebar-map {
     display: block;
     position: relative;
@@ -154,10 +88,9 @@ body {
     padding: 10px;
 }
 
-.nhatro-list {
+.nhatro-item {
     border-bottom: 1px solid #eeeeee;
 }
-
 .nhatro-tieude {
     font-weight: bold;
     color: #046582;
@@ -188,9 +121,9 @@ body {
     width: 100%;
 }
 
-.img-icon {
+/* .img-icon {
     color: #046582;
-}
+} */
 
 .nhatro-search_form {
     display: flex;
@@ -341,12 +274,34 @@ body {
 .nhatro-item {
     padding: 20px 15px;
 }
+.nhatro-item:active > .nhatro-detail{
+    display: block;
+}
 
 .nhatro-item:hover {
     cursor: pointer;
     background-color: #eeeeee;
 }
 
+.icons {
+    font-size: 10px;
+}
+.nhatro-item_return a:hover {
+    color: var(--detail-color);
+}
+/* .nhatro-detail {
+    display: block;
+    z-index: 323222;
+    position: absolute;
+    width: 300px;
+    height: 400px;
+    background-color: #eeeeee;
+    left: 10px;
+    border-radius: 10px;
+} */
+.nhatro-item_return a:active > div >.nhatro-detail{
+    display: none !important;
+}
 .nhatro-item_return a {
     padding-left: 10px;
     padding-top: 10px;
@@ -390,3 +345,27 @@ body {
     text-decoration: none;
     color: var(--title-color);
 }
+#map {
+    z-index: 1;
+    position: relative;
+}
+.overlay {
+    position: absolute;
+    right: 0px;
+    z-index: 2212;
+    background-color: var(--main-color);
+    pointer-events: auto;
+}
+.bankinh-search {
+    /* position: absolute; */
+    padding: 10px;
+    z-index: 99;
+
+}
+.bankinh-search input {
+    padding: 10px;
+    /* border: none; */
+    border-radius: none;
+    /* width: 100%; */
+}
+
